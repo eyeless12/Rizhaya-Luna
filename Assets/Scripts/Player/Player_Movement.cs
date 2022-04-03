@@ -1,66 +1,75 @@
 using System;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = System.Random;
+
+
 
 public class Player_Movement: MonoBehaviour
 {
     public float speed;
     public float jumpForce;
-    private float moveInput;
+    private Vector2 moveInput = Vector2.zero;
 
     private Rigidbody2D rb;
+    //private CharacterController controller;
     private bool facingRight = false;
 
     public Transform feetPos;
     public float checkRadius;
     public LayerMask whatIsGround;
-    private bool isGrounded;
     public float jumpTime;
     private float jumpTimeCounter;
     private bool isJumping;
+    private bool jumped;
     
 
     public void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        //controller = GetComponent<CharacterController>();
     }
 
-    public void Update()
-    {
-        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
+    private bool isGrounded => Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
 
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (isGrounded && context.performed)
         {
             isJumping = true;
             jumpTimeCounter = jumpTime;
-            rb.velocity = Vector2.up * jumpForce;
         }
 
-        if (Input.GetKey(KeyCode.Space) && isJumping)
+        if (context.canceled)
+            isJumping = false;
+    }
+    public void FixedUpdate()
+    {
+        rb.velocity = new Vector2(moveInput.x * speed, rb.velocity.y);
+        
+        if (!facingRight && moveInput.x > 0)
+            Flip();
+        else if (facingRight && moveInput.x < 0)
+            Flip();
+        
+        if (isJumping)
         {
             if (jumpTimeCounter > 0)
             {
-                rb.velocity = Vector2.up * jumpForce;
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce) ;
                 jumpTimeCounter -= Time.deltaTime;
             }
             else
                 isJumping = false;
         }
-
-        if (Input.GetKeyUp(KeyCode.Space))
-            isJumping = false;
-    }
-
-    public void FixedUpdate()
-    {
-        moveInput = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
         
-        if (!facingRight && moveInput > 0)
-            Flip();
-        else if (facingRight && moveInput < 0)
-            Flip();
+        //Input.GetKey(KeyCode.Space) if (Input.GetKeyUp(KeyCode.Space)) 
     }
 
     private void Flip()
