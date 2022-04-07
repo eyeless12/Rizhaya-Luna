@@ -33,12 +33,12 @@ public class Player_Movement: MonoBehaviour
 
     private bool isGrounded => Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
 
-    public void OnMove(InputAction.CallbackContext context)
+    public void Move(Vector2 move)
     {
-        moveInput = context.ReadValue<Vector2>();
+        moveInput = move;
     }
 
-    public void OnJump(InputAction.CallbackContext context)
+    public void Jump(InputAction.CallbackContext context)
     {
         if (isGrounded && context.performed)
         {
