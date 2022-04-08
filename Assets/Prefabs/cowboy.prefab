@@ -39,12 +39,14 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8147089474042636196}
-  - component: {fileID: 8147089474042636195}
-  - component: {fileID: 8147089474042636194}
-  - component: {fileID: 8147089474042636193}
-  - component: {fileID: 8147089474042636197}
-  m_Layer: 0
+
+  - component: {fileID: 5881834146419133825}
+  - component: {fileID: 5881834146419133830}
+  - component: {fileID: 5881834146419133824}
+  - component: {fileID: 5881834146419133831}
+  - component: {fileID: 5881834146419133828}
+  m_Layer: 13
+
   m_Name: cowboy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
