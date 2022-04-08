@@ -2,9 +2,6 @@ using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Random = System.Random;
-
-
 
 public class Player_Movement: MonoBehaviour
 {
@@ -22,8 +19,6 @@ public class Player_Movement: MonoBehaviour
     public float jumpTime;
     private float jumpTimeCounter;
     private bool isJumping;
-    private bool jumped;
-    
 
     public void Start()
     {
@@ -68,8 +63,6 @@ public class Player_Movement: MonoBehaviour
             else
                 isJumping = false;
         }
-        
-        //Input.GetKey(KeyCode.Space) if (Input.GetKeyUp(KeyCode.Space)) 
     }
 
     private void Flip()
