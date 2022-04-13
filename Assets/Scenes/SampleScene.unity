@@ -131,8 +131,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 419363088}
     m_Modifications:
     - target: {fileID: 7890157464338782225, guid: 6a97127f7a783884ca5910aeb5f30453, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 7890157464338782225, guid: 6a97127f7a783884ca5910aeb5f30453, type: 3}
       propertyPath: m_Name
       value: Spawnpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 7890157464338782225, guid: 6a97127f7a783884ca5910aeb5f30453, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7890157464338782226, guid: 6a97127f7a783884ca5910aeb5f30453, type: 3}
       propertyPath: m_RootOrder
