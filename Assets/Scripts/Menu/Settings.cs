@@ -12,7 +12,7 @@ public class Settings : MonoBehaviour
     public Dropdown resolutionDropdown; 
     private Resolution[] resolutions;
     private int currResolutionIndex;
-    public Canvas canvas;
+    private Canvas canvas;
 
     private void Start()
     {
@@ -29,6 +29,8 @@ public class Settings : MonoBehaviour
 
     public void GoToMain()
     {
+        if (!canvas.enabled)
+            return;
         canvas.enabled = false;
         GameObject.Find("MenuCanvas").GetComponent<Canvas>().enabled = true;
     }

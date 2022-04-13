@@ -1,9 +1,17 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    public bool isOpened;
+    private bool isOpened;
+    private Canvas canvas;
+
+    private void Start()
+    {
+        canvas = GetComponent<Canvas>();
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -11,13 +19,12 @@ public class Menu : MonoBehaviour
     }
     
     
-    private void ShowHideMenu()
+    public void ShowHideMenu()
     {
         if (GameObject.Find("SettingsCanvas").GetComponent<Canvas>().enabled)
             return;
-        
         isOpened = !isOpened;
-        GetComponent<Canvas>().enabled = isOpened;
+        canvas.enabled = isOpened;
     }
     
     public void GoToMain()

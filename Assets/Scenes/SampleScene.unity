@@ -522,7 +522,7 @@ GameObject:
   - component: {fileID: 118394895}
   - component: {fileID: 118394894}
   - component: {fileID: 118394893}
-  - component: {fileID: 118394892}
+  - component: {fileID: 118394897}
   m_Layer: 5
   m_Name: MenuCanvas
   m_TagString: Untagged
@@ -530,19 +530,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &118394892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 118394891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac80dcf3a6ad446f8a711c08c7ab064a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isOpened: 0
 --- !u!114 &118394893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -590,7 +577,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 118394891}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 519420031}
@@ -625,6 +612,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &118394897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118394891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac80dcf3a6ad446f8a711c08c7ab064a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &153999408
 GameObject:
   m_ObjectHideFlags: 0
@@ -3146,7 +3145,7 @@ GameObject:
   - component: {fileID: 1355329101}
   - component: {fileID: 1355329100}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3217,7 +3216,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 118394892}
+      - m_Target: {fileID: 118394897}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
         m_MethodName: GoToMain
         m_Mode: 1
@@ -3858,7 +3857,7 @@ GameObject:
   - component: {fileID: 1808173183}
   - component: {fileID: 1808173182}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: Settings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3929,7 +3928,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 118394892}
+      - m_Target: {fileID: 118394897}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
         m_MethodName: ShowSettings
         m_Mode: 1
@@ -4337,7 +4336,6 @@ MonoBehaviour:
   volume: 0
   audioMixer: {fileID: 0}
   resolutionDropdown: {fileID: 2129457731}
-  canvas: {fileID: 2064747002}
 --- !u!1 &2129457729
 GameObject:
   m_ObjectHideFlags: 0
