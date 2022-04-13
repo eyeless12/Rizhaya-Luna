@@ -1,21 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
 
 public class Menu : MonoBehaviour
 {
     public bool isOpened;
-
-    private void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -25,12 +13,21 @@ public class Menu : MonoBehaviour
     
     private void ShowHideMenu()
     {
+        if (GameObject.Find("SettingsCanvas").GetComponent<Canvas>().enabled)
+            return;
+        
         isOpened = !isOpened;
         GetComponent<Canvas>().enabled = isOpened;
     }
     
     public void GoToMain()
     {
-        SceneManager.LoadScene("Main Menu"); //Переход на сцену с названием Menu
+        SceneManager.LoadScene("Main Menu");
+    }
+
+    public void ShowSettings()
+    {
+        GetComponent<Canvas>().enabled = false;
+        GameObject.Find("SettingsCanvas").GetComponent<Canvas>().enabled = true;
     }
 }
