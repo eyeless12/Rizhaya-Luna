@@ -43,7 +43,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (_player)
         {
-            Debug.Log("Handler");
+            //Debug.Log("Handler");
             _player.Shoot(context);
         }
     }
