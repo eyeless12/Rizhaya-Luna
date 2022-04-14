@@ -20,9 +20,12 @@ public class Player_Movement: MonoBehaviour
     private float jumpTimeCounter;
     private bool isJumping;
 
+    private Fire inHands;
+
     public void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        inHands = GetComponentInChildren<Fire>();
         //controller = GetComponent<CharacterController>();
     }
 
@@ -68,8 +71,12 @@ public class Player_Movement: MonoBehaviour
     private void Flip()
     {
         facingRight = !facingRight;
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
+        transform.Rotate(0f, 180f, 0f);
+    }
+
+    public void Shoot(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            inHands.Shoot();
     }
 }

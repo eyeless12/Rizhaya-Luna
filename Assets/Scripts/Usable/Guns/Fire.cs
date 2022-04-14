@@ -5,20 +5,20 @@ using UnityEngine;
 
 public class Fire : MonoBehaviour
 {
-    [SerializeField] private GameObject PF_bullet;
+    [SerializeField] private GameObject pf_bullet;
     [SerializeField] private int spread = 1;
-    private Transform _initialBulletPoint;
+    [SerializeField] private Transform initialBulletPoint;
     private Transform _gun;
     private Vector2 _direction;
     
     private void Awake()
     {
-        _initialBulletPoint = GetComponentInChildren<Transform>();
+        // _initialBulletPoint = GetComponentInChildren<Transform>();
         _gun = GetComponent<Transform>();
     }
 
     public void Shoot()
     {
-        Instantiate(PF_bullet, _initialBulletPoint, false);
+        Instantiate(pf_bullet, initialBulletPoint.position, initialBulletPoint.rotation);
     }
 }

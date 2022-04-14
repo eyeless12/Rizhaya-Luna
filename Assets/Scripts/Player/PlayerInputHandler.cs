@@ -35,4 +35,13 @@ public class PlayerInputHandler : MonoBehaviour
         if (_player)
             _player.Jump(context);
     }
+
+    public void Shoot(InputAction.CallbackContext context)
+    {
+        if (_player)
+        {
+            Debug.Log("Handler");
+            _player.Shoot(context);
+        }
+    }
 }

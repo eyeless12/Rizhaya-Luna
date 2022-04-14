@@ -76,5 +76,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449a9246cf1f8d344b24d767895e74e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PF_bullet: {fileID: 3981763920355673881, guid: a752a8ef1fc4ea04f95940a3e875a666, type: 3}
+  pf_bullet: {fileID: 3981763920355673881, guid: a752a8ef1fc4ea04f95940a3e875a666, type: 3}
   spread: 1
+  initialBulletPoint: {fileID: 7641700992129395022}
