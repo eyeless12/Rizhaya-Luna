@@ -7,12 +7,17 @@ public class Player_Movement: MonoBehaviour
 {
     public float speed;
     public float jumpForce;
+    private bool _hands;
+    [SerializeField] private Transform handsTransform;
+    [SerializeField] private float pickupRange = 1f;
     private Vector2 moveInput = Vector2.zero;
 
     private Rigidbody2D rb;
     private bool facingRight = true;
 
     public Transform feetPos;
+    private BoxCollider2D _boxCollider;
+    [SerializeField] private GameObject feet;
     public float checkRadius;
     public LayerMask whatIsGround;
     public float jumpTime;
@@ -28,12 +33,14 @@ public class Player_Movement: MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         inHands = GetComponentInChildren<Fire>();
         _animationsController = GetComponent<Animations>();
+        _boxCollider = feet.GetComponent<BoxCollider2D>();
+        _hands = true;
         DontDestroyOnLoad(gameObject);
-        //controller = GetComponent<CharacterController>();
     }
 
-    private bool isGrounded => Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
+    private bool isGrounded => _boxCollider.IsTouchingLayers(whatIsGround.value);
 
+    // (feetPos.position, checkRadius, whatIsGround);
     public void Move(Vector2 move)
     {
         moveInput = move;
@@ -94,5 +101,24 @@ public class Player_Movement: MonoBehaviour
     {
         if (context.performed)
             inHands.Shoot();
+    }
+
+    public void Pickup()
+    {
+        var inRange = Physics2D.OverlapCircle(transform.position, pickupRange, LayerMask.GetMask("Weapon"));
+        if (inRange != null && _hands)
+        {
+            var weapon = inRange.GetComponent<Weapon>();
+            var weaponTransform = inRange.GetComponent<Transform>();
+            weaponTransform.SetParent(GetComponent<Transform>(), true);
+            weapon.SetOwner(gameObject);    
+            _hands = false;
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, pickupRange);
     }
 }

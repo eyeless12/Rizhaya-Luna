@@ -61,4 +61,12 @@ public class PlayerInputHandler : MonoBehaviour
         if (_playerMovement && context.canceled)
             _manager.SetReady(_playerInfo.playerIndex, false); 
     }
+
+    public void Pickup(InputAction.CallbackContext context)
+    {
+        if (_playerMovement && context.performed)
+        {
+            _playerMovement.Pickup();
+        }
+    }
 }

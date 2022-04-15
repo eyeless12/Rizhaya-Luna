@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     private PlayerInputManager _playerManager;
     private List<GameObject> _players;
     private List<GameObject> _spawnpoints;
+    private List<GameObject> _gunsOnSceneLoad;
     private List<GameObject> Spawnpoints
     {
         get => _spawnpoints;
@@ -21,14 +22,13 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         _playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerInputManager>();
         Spawnpoints = GameObject.FindGameObjectsWithTag("Spawnpoint").ToList();
-        _players = new List<GameObject>();
+        _gunsOnSceneLoad = GameObject.FindGameObjectsWithTag("Weapon").ToList();
     }
-    
+
     void Update()
     {
         if (_playerManager.playerCount > 0 && _ready.All(x => x is true))
             Load("level_01");
-        //Debug.Log(_players);
     }
 
     public void SetReady(int id, bool state)
@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     public void OnJoin()
     {
         _ready = new bool[_playerManager.playerCount];
+        _players = GameObject.FindGameObjectsWithTag("Player").ToList();
     }
 
     public void Load(string level)
