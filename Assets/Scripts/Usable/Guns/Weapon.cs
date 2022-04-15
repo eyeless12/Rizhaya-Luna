@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.U2D.Path;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -10,10 +9,12 @@ public class Weapon : MonoBehaviour
     private Transform _weaponTransform;
     private GameObject _owner;
     private Transform _inHandsPosition;
+    private Rigidbody2D _weaponPhysics;
 
     private void Start()
     {
         _weaponTransform = GetComponent<Transform>();
+        _weaponPhysics = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -34,10 +35,24 @@ public class Weapon : MonoBehaviour
         isTaken = true;
     }
 
-    public void DiscardOwner()
+    public void DiscardOwner(bool thrw)
     {
+        _weaponTransform.rotation = _inHandsPosition.rotation;
+        _weaponTransform.parent = null;
+        if (thrw) ThrowWeapon();
         _owner = null;
         isTaken = false;
-        _weaponTransform.parent = null;
     }
+
+    private void ThrowWeapon()
+    {
+        Debug.Log("Throw");
+        var owner = _owner.transform.parent.gameObject;
+        var velocity = owner.GetComponent<Rigidbody2D>().velocity;
+        var ownerTransform = owner.GetComponent<Transform>();
+        Debug.Log(ownerTransform.rotation.y);
+        var throwVector = new Vector2(1 * velocity.x, 1 * Math.Abs(velocity.x)) ;
+        _weaponPhysics.velocity = throwVector;
+    }
+
 }

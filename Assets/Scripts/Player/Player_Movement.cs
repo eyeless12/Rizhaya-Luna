@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -133,7 +134,7 @@ public class Player_Movement: MonoBehaviour
         var weapon = _hands.GetComponent<Weapon>();
         inHands = null;
         _hands = null;
-        weapon.DiscardOwner();
+        weapon.DiscardOwner(moveInput.x != 0);
     }
 
     private void OnDrawGizmosSelected()
