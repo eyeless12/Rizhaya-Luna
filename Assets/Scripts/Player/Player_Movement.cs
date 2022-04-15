@@ -10,8 +10,7 @@ public class Player_Movement: MonoBehaviour
     private Vector2 moveInput = Vector2.zero;
 
     private Rigidbody2D rb;
-    //private CharacterController controller;
-    private bool facingRight = false;
+    private bool facingRight = true;
 
     public Transform feetPos;
     public float checkRadius;
@@ -20,9 +19,15 @@ public class Player_Movement: MonoBehaviour
     private float jumpTimeCounter;
     private bool isJumping;
 
+    private Fire inHands;
+
+    private Animations _animationsController;
+
     public void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        inHands = GetComponentInChildren<Fire>();
+        _animationsController = GetComponent<Animations>();
         //controller = GetComponent<CharacterController>();
     }
 
@@ -47,6 +52,7 @@ public class Player_Movement: MonoBehaviour
     public void FixedUpdate()
     {
         rb.velocity = new Vector2(moveInput.x * speed, rb.velocity.y);
+        _animationsController.SetRunAnimation(moveInput.x);
         
         if (!facingRight && moveInput.x > 0)
             Flip();
@@ -68,8 +74,12 @@ public class Player_Movement: MonoBehaviour
     private void Flip()
     {
         facingRight = !facingRight;
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
+        transform.Rotate(0f, 180f, 0f);
+    }
+
+    public void Shoot(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            inHands.Shoot();
     }
 }

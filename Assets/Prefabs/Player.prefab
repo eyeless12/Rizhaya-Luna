@@ -94,6 +94,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f8a1c86c-6885-4e9a-adeb-595618fe7356
     m_ActionName: Player/Join[/Keyboard/enter,/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -890986844877045572}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: Shoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8d533768-1ef7-4124-97eb-4a939e4fe1de
+    m_ActionName: Player/Use[/Keyboard/g]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
