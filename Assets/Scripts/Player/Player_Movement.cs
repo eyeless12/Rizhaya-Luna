@@ -52,24 +52,36 @@ public class Player_Movement: MonoBehaviour
     }
     public void FixedUpdate()
     {
+        HandleRun();
+        HandleFlip();
+        HandleJump();
+    }
+
+    private void HandleRun()
+    {
         rb.velocity = new Vector2(moveInput.x * speed, rb.velocity.y);
         _animationsController.SetRunAnimation(moveInput.x);
+    }
+
+    private void HandleJump()
+    {
+        if (!isJumping) return;
+        if (jumpTimeCounter <= 0)
+        {
+            isJumping = false;
+            return;
+        }
         
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        jumpTimeCounter -= Time.deltaTime;
+    }
+
+    private void HandleFlip()
+    {
         if (!facingRight && moveInput.x > 0)
             Flip();
         else if (facingRight && moveInput.x < 0)
             Flip();
-        
-        if (isJumping)
-        {
-            if (jumpTimeCounter > 0)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce) ;
-                jumpTimeCounter -= Time.deltaTime;
-            }
-            else
-                isJumping = false;
-        }
     }
 
     private void Flip()

@@ -9,8 +9,7 @@ public class Fire : MonoBehaviour
     [SerializeField] private int spread = 1;
     [SerializeField] private Transform initialBulletPoint;
     private Transform _gun;
-    private Vector2 _direction;
-    
+
     private void Awake()
     {
         // _initialBulletPoint = GetComponentInChildren<Transform>();

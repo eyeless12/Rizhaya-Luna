@@ -7,61 +7,58 @@ using UnityEngine.Serialization;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-    private Player_Movement _player;
+    private Player_Movement _playerMovement;
     [SerializeField] private GameObject playerVariance;
-    private List<GameObject> _spawnpoints = new List<GameObject>();
     private GameManager _manager;
+    private GameObject _player;
     private PlayerInput _playerInfo;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        
-        _spawnpoints = GameObject.FindGameObjectsWithTag("Spawnpoint").ToList();
-        Debug.Log("Handler");
         _manager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _playerInfo = GetComponent<PlayerInput>();
-        
-        var start = _spawnpoints[Random.Range(0, _spawnpoints.Count)];
+
         _player = Instantiate(
-            playerVariance, 
-            start.transform.position, 
+            playerVariance,
+            transform.position,
             Quaternion.identity
-            ).GetComponent<Player_Movement>();
-        Destroy(start);
+        );
+        
+        _manager.SpawnPlayer(_player);
+        _playerMovement = _player.GetComponent<Player_Movement>();
     }
 
     public void Move(InputAction.CallbackContext context)
     {
-        if (_player)
+        if (_playerMovement)
         {
-            _player.Move(context.ReadValue<Vector2>());
+            _playerMovement.Move(context.ReadValue<Vector2>());
         }
             
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (_player)
-            _player.Jump(context);
+        if (_playerMovement)
+            _playerMovement.Jump(context);
     }
 
     public void Shoot(InputAction.CallbackContext context)
     {
-        if (_player)
+        if (_playerMovement)
         {
             //Debug.Log("Handler");
-            _player.Shoot(context);
+            _playerMovement.Shoot(context);
         }
     }
 
     public void Ready(InputAction.CallbackContext context)
     {
-        if (_player && context.performed)
+        if (_playerMovement && context.performed)
             _manager.SetReady(_playerInfo.playerIndex, true);
         
-        if (_player && context.canceled)
+        if (_playerMovement && context.canceled)
             _manager.SetReady(_playerInfo.playerIndex, false); 
     }
 }
