@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/TrainLevel.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/Sample.unity
     guid: c4a93c5f055584464b97de94d22324cb
   - enabled: 1
     path: Assets/Scenes/Main Menu.unity

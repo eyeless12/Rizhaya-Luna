@@ -22,6 +22,9 @@ public class Menu : MonoBehaviour
     
     public void ShowHideMenu()
     {
+        if (SceneManager.GetActiveScene().name == "Menu")
+            return;
+        
         if (GameObject.Find("SettingsCanvas").GetComponent<Canvas>().enabled)
             return;
         isOpened = !isOpened;
