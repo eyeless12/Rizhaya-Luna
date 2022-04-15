@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Ready",
+                    "type": "Button",
+                    "id": "4aa512e1-38c4-4026-80bf-bda9674b8f1a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -227,6 +236,28 @@
                     "processors": "",
                     "groups": "Gamepad 1",
                     "action": "Use",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "468b1c65-0bb8-4a0b-9661-77b14e76d3ae",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard 1",
+                    "action": "Ready",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d79eaabb-a36f-40fe-ad44-bb833d1b7047",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad 1",
+                    "action": "Ready",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -10,6 +10,7 @@ public class Menu : MonoBehaviour
     private void Start()
     {
         canvas = GetComponent<Canvas>();
+        DontDestroyOnLoad(gameObject);
     }
 
     void Update()

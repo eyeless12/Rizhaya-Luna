@@ -28,6 +28,7 @@ public class Player_Movement: MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         inHands = GetComponentInChildren<Fire>();
         _animationsController = GetComponent<Animations>();
+        DontDestroyOnLoad(gameObject);
         //controller = GetComponent<CharacterController>();
     }
 

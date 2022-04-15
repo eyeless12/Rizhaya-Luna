@@ -18,6 +18,7 @@ public class Settings : MonoBehaviour
     {
         AddResolutions();
         canvas = GetComponent<Canvas>();
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
