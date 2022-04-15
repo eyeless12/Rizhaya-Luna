@@ -7,13 +7,13 @@ public class Player_Movement: MonoBehaviour
 {
     public float speed;
     public float jumpForce;
-    private bool _hands;
+    private GameObject _hands;
     [SerializeField] private Transform handsTransform;
     [SerializeField] private float pickupRange = 1f;
     private Vector2 moveInput = Vector2.zero;
 
     private Rigidbody2D rb;
-    private bool facingRight = true;
+    public bool facingRight = true;
 
     public Transform feetPos;
     private BoxCollider2D _boxCollider;
@@ -31,10 +31,8 @@ public class Player_Movement: MonoBehaviour
     public void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        inHands = GetComponentInChildren<Fire>();
         _animationsController = GetComponent<Animations>();
         _boxCollider = feet.GetComponent<BoxCollider2D>();
-        _hands = true;
         DontDestroyOnLoad(gameObject);
     }
 
@@ -99,21 +97,43 @@ public class Player_Movement: MonoBehaviour
 
     public void Shoot(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && inHands)
             inHands.Shoot();
     }
 
-    public void Pickup()
+    public void Pickup_Drop()
     {
         var inRange = Physics2D.OverlapCircle(transform.position, pickupRange, LayerMask.GetMask("Weapon"));
-        if (inRange != null && _hands)
+        switch ((bool) _hands)
         {
-            var weapon = inRange.GetComponent<Weapon>();
-            var weaponTransform = inRange.GetComponent<Transform>();
-            weaponTransform.SetParent(GetComponent<Transform>(), true);
-            weapon.SetOwner(gameObject);    
-            _hands = false;
+            case false:
+                if (inRange != null) Pickup(inRange.gameObject);
+                break;
+            case true:
+                Drop();
+                break;
         }
+    }
+
+    private void Pickup(GameObject item)
+    {
+        var weapon = item.GetComponent<Weapon>();
+        if (weapon.isTaken) return;
+        
+        var weaponTransform = item.GetComponent<Transform>();
+        var owner = gameObject.transform.Find("Hands").gameObject;
+        weaponTransform.SetParent(owner.GetComponent<Transform>(), true);
+        weapon.SetOwner(owner, this);    
+        _hands = item;
+        inHands = weapon.GetComponent<Fire>();
+    }
+
+    private void Drop()
+    {
+        var weapon = _hands.GetComponent<Weapon>();
+        inHands = null;
+        _hands = null;
+        weapon.DiscardOwner();
     }
 
     private void OnDrawGizmosSelected()

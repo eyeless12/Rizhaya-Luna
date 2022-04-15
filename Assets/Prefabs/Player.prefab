@@ -130,7 +130,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: -890986844877045572}
         m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: Pickup
+        m_MethodName: Pickup_Drop
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
