@@ -6,13 +6,19 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed = 40f;
-    private Rigidbody2D rb;
+    
+    private Rigidbody2D _rb;
+    private Transform _transform;
+
     [NonSerialized] public Vector2 direction;
     [NonSerialized] public float lifetime;
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        rb.velocity = direction * speed ;
+        _rb = GetComponent<Rigidbody2D>();
+        _transform = GetComponent<Transform>();
+        
+        _rb.velocity = direction * speed ;
+        _transform.rotation = Quaternion.Euler(direction);
     }
 
     private void Update()
