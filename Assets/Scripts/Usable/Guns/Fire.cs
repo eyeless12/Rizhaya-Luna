@@ -79,7 +79,7 @@ public class Fire : MonoBehaviour
         var ownerPhysics = owner.GetComponent<Rigidbody2D>();
         var recoilVector = new Vector2(
              _weaponCharacteristics.recoil * _weaponCharacteristics.OwnerLookDirection.x * -1 , _weaponCharacteristics.recoil / 5);
-        Debug.Log(recoilVector);
+        //Debug.Log(recoilVector);
         ownerPhysics.AddForce(recoilVector, ForceMode2D.Force);
     }
 }
