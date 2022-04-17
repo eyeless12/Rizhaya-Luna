@@ -165,7 +165,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pf_bullet: {fileID: 3981763920355673881, guid: a752a8ef1fc4ea04f95940a3e875a666, type: 3}
-  spread: 1
   initialBulletPoint: {fileID: 7641700992129395022}
 --- !u!61 &-5315391368911426316
 BoxCollider2D:
@@ -180,7 +179,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.14050192, y: -0.0011388361}
+  m_Offset: {x: 0.024414979, y: -0.0011388361}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -191,7 +190,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.38646376, y: 0.2368452}
+  m_Size: {x: 0.42816693, y: 0.2368452}
   m_EdgeRadius: 0
 --- !u!50 &2440821904332524607
 Rigidbody2D:
@@ -227,3 +226,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTaken: 0
+  Spread: 12
+  SpreadWidth: 25
+  BulletThresholdTime: 0.25
+  power: 50
+  maxCapacity: 20
