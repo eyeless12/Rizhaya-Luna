@@ -126,6 +126,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 4aa512e1-38c4-4026-80bf-bda9674b8f1a
     m_ActionName: Player/Ready[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -890986844877045572}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: Use
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d71bf474-baa3-4709-b40d-276430b3cc95
+    m_ActionName: Player/Use 2[/Keyboard/g]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -144,4 +160,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerVariance: {fileID: 8147089474042636192, guid: 83908351ea0f34afea2441d5ccf2f249, type: 3}
-  gameManager: {fileID: 0}

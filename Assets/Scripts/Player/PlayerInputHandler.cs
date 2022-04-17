@@ -12,8 +12,7 @@ public class PlayerInputHandler : MonoBehaviour
     private List<GameObject> _spawnpoints = new List<GameObject>();
     private GameManager _manager;
     private PlayerInput _playerInfo;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         DontDestroyOnLoad(gameObject);

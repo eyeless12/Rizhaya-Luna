@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,22 +11,22 @@ public class Player_Movement: MonoBehaviour
 {
     public float speed;
     public float jumpForce;
-    private Vector2 moveInput = Vector2.zero;
+    private Vector2 _moveInput = Vector2.zero;
 
     private Rigidbody2D rb;
-    private bool facingRight = true;
+    private bool _facingRight = true;
 
     public Transform feetPos;
     public float checkRadius;
     public LayerMask whatIsGround;
     public float jumpTime;
-    private float jumpTimeCounter;
-    private bool isJumping;
+    private float _jumpTimeCounter;
+    private bool _isJumping;
 
     private Fire inHands;
-    private List<GameObject> overlaps;
 
     private Animations _animationsController;
+    private GameObject _overlapPicking = null!;
 
     public void Start()
     {
@@ -33,52 +34,51 @@ public class Player_Movement: MonoBehaviour
         inHands = GetComponentInChildren<Fire>();
         _animationsController = GetComponent<Animations>();
         DontDestroyOnLoad(gameObject);
-        //controller = GetComponent<CharacterController>();
     }
 
     private bool isGrounded => Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
 
     public void Move(Vector2 move)
     {
-        moveInput = move;
+        _moveInput = move;
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
         if (isGrounded && context.performed)
         {
-            isJumping = true;
-            jumpTimeCounter = jumpTime;
+            _isJumping = true;
+            _jumpTimeCounter = jumpTime;
         }
 
         if (context.canceled)
-            isJumping = false;
+            _isJumping = false;
     }
     public void FixedUpdate()
     {
-        rb.velocity = new Vector2(moveInput.x * speed, rb.velocity.y);
-        _animationsController.SetRunAnimation(moveInput.x);
+        rb.velocity = new Vector2(_moveInput.x * speed, rb.velocity.y);
+        _animationsController.SetRunAnimation(_moveInput.x);
         
-        if (!facingRight && moveInput.x > 0)
+        if (!_facingRight && _moveInput.x > 0)
             Flip();
-        else if (facingRight && moveInput.x < 0)
+        else if (_facingRight && _moveInput.x < 0)
             Flip();
         
-        if (isJumping)
+        if (_isJumping)
         {
-            if (jumpTimeCounter > 0)
+            if (_jumpTimeCounter > 0)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce) ;
-                jumpTimeCounter -= Time.deltaTime;
+                _jumpTimeCounter -= Time.deltaTime;
             }
             else
-                isJumping = false;
+                _isJumping = false;
         }
     }
 
     private void Flip()
     {
-        facingRight = !facingRight;
+        _facingRight = !_facingRight;
         transform.Rotate(0f, 180f, 0f);
     }
 
@@ -90,23 +90,20 @@ public class Player_Movement: MonoBehaviour
 
     public void Use(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && _overlapPicking != null)
         {
-            foreach (var obj in overlaps)
-            {
-                if (obj.CompareTag("Usable"))
-                    var a = (IUsable) obj;
-            }
+            var menu = _overlapPicking.GetComponent<ContextMenu>();
+            menu.OnUse();
         }
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        overlaps.Add(other.gameObject);
+        _overlapPicking = other.gameObject;
     }
-
+    
     public void OnTriggerExit2D(Collider2D other)
     {
-        overlaps.Remove(other.gameObject);
+        _overlapPicking = null!;
     }
 }
