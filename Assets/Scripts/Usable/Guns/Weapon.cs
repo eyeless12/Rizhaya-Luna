@@ -5,20 +5,20 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public bool isTaken;
+    [NonSerialized] public bool isTaken;
     public int Spread;
     public int SpreadWidth;
-    public float BulletThresholdTime = 0.25f;
-
-    public float power;
-    [SerializeField] private int maxCapacity;
+    public float BulletThresholdTime; 
+    public float recoil;
+    public float bulletLifetime;
+    public int maxCapacity;
 
     private Transform _weaponTransform;
     private Transform _inHandsPosition;
     private Rigidbody2D _weaponPhysics;
 
-    public Vector2 OwnerLookDirection => new Vector2(
-        Math.Sign(Owner.transform.rotation.y), 0);  
+    public Vector2 OwnerLookDirection => Math.Sign(Owner.transform.rotation.y) > 0 ?
+        Vector2.right : Vector2.left;
 
     public GameObject Hands { get; private set; }
     public GameObject Owner { get; private set; }

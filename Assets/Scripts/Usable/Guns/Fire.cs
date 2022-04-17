@@ -13,28 +13,31 @@ public class Fire : MonoBehaviour
     
     private float _shootTime;
     private bool _canShoot = true;
-    
+    private int _magazine;
 
     private void Awake()
     {
         _weaponCharacteristics = GetComponent<Weapon>();
         _gun = GetComponent<Transform>();
+        _magazine = _weaponCharacteristics.maxCapacity;
     }
 
     public void Shoot()
     {
-        if (!_canShoot) return;
+        if (!_canShoot || _magazine <= 0) return;
 
         foreach (var direction in GenerateDirections())
         {
             var bullet = Instantiate(pf_bullet, initialBulletPoint.position, initialBulletPoint.rotation)
                 .GetComponent<Bullet>();
-            //Debug.Log(direction);
             bullet.direction = direction;
+            bullet.lifetime = _weaponCharacteristics.bulletLifetime;
         }
-        //PerformRecoil();
+        
+        PerformRecoil();
         _canShoot = false;
         _shootTime = _weaponCharacteristics.BulletThresholdTime;
+        _magazine -= 1;
     }
 
     public void FixedUpdate()
@@ -44,11 +47,6 @@ public class Fire : MonoBehaviour
 
         if (_shootTime < 0)
             _canShoot = true;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        
     }
 
     private IEnumerable<Vector3> GenerateDirections()
@@ -64,7 +62,7 @@ public class Fire : MonoBehaviour
         for (var i = 1; i <= ways / 2; i++)
         {
             var random = new Random();
-            var offset = random.NextDouble();
+            var offset = (float)random.NextDouble() * 10;
             Debug.Log(offset);
             yield return Quaternion.Euler(0, 0, angle * i)
                          * _weaponCharacteristics.OwnerLookDirection;
@@ -80,7 +78,7 @@ public class Fire : MonoBehaviour
         var owner = _weaponCharacteristics.Owner;
         var ownerPhysics = owner.GetComponent<Rigidbody2D>();
         var recoilVector = new Vector2(
-             5500f, 5000f);
+             _weaponCharacteristics.recoil * _weaponCharacteristics.OwnerLookDirection.x * -1 , _weaponCharacteristics.recoil / 5);
         Debug.Log(recoilVector);
         ownerPhysics.AddForce(recoilVector, ForceMode2D.Force);
     }

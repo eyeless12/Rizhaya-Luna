@@ -225,9 +225,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7125a670d29cbf140ad21403b7e64523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTaken: 0
   Spread: 12
   SpreadWidth: 25
   BulletThresholdTime: 0.25
-  power: 50
-  maxCapacity: 20
+  recoil: 20000
+  bulletLifetime: 0.1
+  maxCapacity: 4
