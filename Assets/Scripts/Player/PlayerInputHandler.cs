@@ -64,4 +64,10 @@ public class PlayerInputHandler : MonoBehaviour
         if (_player && context.canceled)
             _manager.SetReady(_playerInfo.playerIndex, false); 
     }
+
+    public void Use(InputAction.CallbackContext context)
+    {
+        if (_player)
+            _player.Use(context);
+    }
 }

@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Unity;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -20,6 +23,7 @@ public class Player_Movement: MonoBehaviour
     private bool isJumping;
 
     private Fire inHands;
+    private List<GameObject> overlaps;
 
     private Animations _animationsController;
 
@@ -82,5 +86,27 @@ public class Player_Movement: MonoBehaviour
     {
         if (context.performed)
             inHands.Shoot();
+    }
+
+    public void Use(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            foreach (var obj in overlaps)
+            {
+                if (obj.CompareTag("Usable"))
+                    var a = (IUsable) obj;
+            }
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        overlaps.Add(other.gameObject);
+    }
+
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        overlaps.Remove(other.gameObject);
     }
 }

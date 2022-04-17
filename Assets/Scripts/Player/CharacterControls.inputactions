@@ -241,6 +241,17 @@
                 },
                 {
                     "name": "",
+                    "id": "2d998e63-7ec3-4147-a66e-f28c9c4a861a",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard 1",
+                    "action": "Use",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "468b1c65-0bb8-4a0b-9661-77b14e76d3ae",
                     "path": "<Keyboard>/r",
                     "interactions": "",
