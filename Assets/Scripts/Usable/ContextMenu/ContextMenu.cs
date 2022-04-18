@@ -18,7 +18,13 @@ public class ContextMenu : MonoBehaviour, IUsable
         objCanvas = canvas.GetComponent<Canvas>();
         _animator = GetComponent<Animator>();
     }
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            objCanvas.enabled = false;
+    }
+
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
