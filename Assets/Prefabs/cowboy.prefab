@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 8147089474042636197}
   - component: {fileID: 8730808474618362612}
   - component: {fileID: 4868171680611500358}
+  - component: {fileID: 314730636370416238}
   m_Layer: 13
   m_Name: cowboy
   m_TagString: Player
@@ -243,9 +244,9 @@ MonoBehaviour:
   jumpForce: 15
   handsTransform: {fileID: 2523479028238040740}
   pickupRange: 0.3
+  feet: {fileID: 8147089473430004266}
   facingRight: 1
   feetPos: {fileID: 8147089473430004267}
-  feet: {fileID: 8147089473430004266}
   checkRadius: 0.3
   whatIsGround:
     serializedVersion: 2
@@ -284,3 +285,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 8730808474618362612}
+--- !u!114 &314730636370416238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8147089474042636192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09b355fa6ef695d43b2a486e545276fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCollider: {fileID: 8147089474042636194}

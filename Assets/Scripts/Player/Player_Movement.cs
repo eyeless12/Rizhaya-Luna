@@ -11,6 +11,7 @@ public class Player_Movement: MonoBehaviour
     private GameObject _hands;
     [SerializeField] private Transform handsTransform;
     [SerializeField] private float pickupRange = 1f;
+    [SerializeField] private GameObject feet;
     private Vector2 moveInput = Vector2.zero;
 
     private Rigidbody2D rb;
@@ -18,7 +19,6 @@ public class Player_Movement: MonoBehaviour
 
     public Transform feetPos;
     private BoxCollider2D _boxCollider;
-    [SerializeField] private GameObject feet;
     public float checkRadius;
     public LayerMask whatIsGround;
     public float jumpTime;
@@ -26,14 +26,15 @@ public class Player_Movement: MonoBehaviour
     private bool isJumping;
 
     private Fire inHands;
-
     private Animations _animationsController;
+    private PlayerOnPlatform _playerOnPlatform;
 
     public void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         _animationsController = GetComponent<Animations>();
         _boxCollider = feet.GetComponent<BoxCollider2D>();
+        _playerOnPlatform = GetComponent<PlayerOnPlatform>();
         DontDestroyOnLoad(gameObject);
     }
 
@@ -94,6 +95,11 @@ public class Player_Movement: MonoBehaviour
     {
         facingRight = !facingRight;
         transform.Rotate(0f, 180f, 0f);
+    }
+
+    public void GoDownThroughPlatform()
+    {
+        _playerOnPlatform.Perform();
     }
 
     public void Shoot(InputAction.CallbackContext context)

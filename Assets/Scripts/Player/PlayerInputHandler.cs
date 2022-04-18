@@ -37,11 +37,20 @@ public class PlayerInputHandler : MonoBehaviour
         }
             
     }
+    
+    public void GoDownThroughPlatform(InputAction.CallbackContext context)
+    {
+        
+        if(_playerMovement && context.performed)
+            _playerMovement.GoDownThroughPlatform();
+        Debug.Log(context.action.name);
+    }
 
     public void Jump(InputAction.CallbackContext context)
     {
         if (_playerMovement)
             _playerMovement.Jump(context);
+        Debug.Log(context.action.name);
     }
 
     public void Shoot(InputAction.CallbackContext context)
