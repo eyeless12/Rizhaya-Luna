@@ -33,7 +33,9 @@ public class Menu : MonoBehaviour
     
     public void GoToMain()
     {
-        SceneManager.LoadScene("Main Menu");
+        if (SceneManager.GetActiveScene().name != "Menu") 
+            SceneManager.LoadScene("Menu");
+        canvas.enabled = false;
     }
 
     public void ShowSettings()

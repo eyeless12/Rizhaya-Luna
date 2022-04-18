@@ -10,9 +10,12 @@ public class ContextMenu : MonoBehaviour, IUsable
     private Animator _animator;
     private Player_Movement _player;
     [SerializeField] private GameObject canvas;
+    private Canvas objCanvas;
+    private static readonly int Inside = Animator.StringToHash("inside");
 
     private void Start()
     {
+        objCanvas = canvas.GetComponent<Canvas>();
         _animator = GetComponent<Animator>();
     }
     
@@ -20,7 +23,7 @@ public class ContextMenu : MonoBehaviour, IUsable
     {
         if (other.CompareTag("Player"))
         {
-            _animator.SetBool("inside", true);
+            _animator.SetBool(Inside, true);
         }
     }
 
@@ -28,13 +31,16 @@ public class ContextMenu : MonoBehaviour, IUsable
     {
         if (other.CompareTag("Player"))
         {
-            _animator.SetBool("inside", false);
+            _animator.SetBool(Inside, false);
+            objCanvas.enabled = false;
         }
     }
 
     public void OnUse()
     {
-        //Debug.Log("USED");
-        canvas.GetComponent<Canvas>().enabled = true;
+        if (objCanvas.enabled)
+            objCanvas.enabled = false;
+        else
+            canvas.GetComponent<Canvas>().enabled = true;
     }
 }
