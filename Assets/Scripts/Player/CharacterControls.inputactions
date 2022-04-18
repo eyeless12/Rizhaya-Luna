@@ -302,37 +302,26 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "One Modifier",
-                    "id": "0718ee3e-80b7-4eb0-9bc4-555ec383b926",
-                    "path": "OneModifier",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "GoDown[Platform]",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "binding",
-                    "id": "41dba5dd-a86a-44c1-b0d3-338e110048f1",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "GoDown[Platform]",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "modifier",
-                    "id": "197684a7-a1a3-4dc2-b10e-892c6ab7d53e",
+                    "name": "",
+                    "id": "681c9315-7f59-4bfb-9d35-533ba9f2e6b1",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard 1",
                     "action": "GoDown[Platform]",
                     "isComposite": false,
-                    "isPartOfComposite": true
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "55ecedaa-8073-4951-8a88-660b138ec361",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad 1",
+                    "action": "GoDown[Platform]",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
