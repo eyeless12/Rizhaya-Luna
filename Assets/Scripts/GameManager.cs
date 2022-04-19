@@ -7,11 +7,60 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private bool[] _ready = new bool[0];
+    public enum PlayerOGS
+    {
+        Unready,
+        Ready,
+        AFK
+    }
+
+    public enum PlayerIGS
+    {
+        Dead, 
+        Alive
+    }
+    
+    public struct PlayerInfo
+    {
+        public readonly GameObject Instance;
+        public readonly int ID;
+        public PlayerOGS OGS_State;
+        public PlayerIGS IGS_State;
+
+        public PlayerInfo(GameObject instance, int id, PlayerOGS ogs, PlayerIGS igs)
+        {
+            Instance = instance;
+            ID = id;
+            OGS_State = ogs;
+            IGS_State = igs;
+        }
+    }
+
+    public static class Players
+    {
+        public static readonly List<PlayerInfo> players = new();
+        public static void AddPlayer(GameObject instance)
+        {
+            if (instance == null) return;
+            players.Add(new PlayerInfo(instance, players.Count, PlayerOGS.Unready, PlayerIGS.Alive));
+        }
+        
+        public static void SetReady(int id, PlayerOGS state)
+        {
+            var player = Players.players.First(p => p.ID == id);
+            player.OGS_State = state;
+        }
+
+        public static bool IsAllReady => players.All(pi => pi.OGS_State == PlayerOGS.Ready);
+        public static int Count => players.Count;
+    }
+    
+    // private bool[] _ready = new bool[0];
     private PlayerInputManager _playerManager;
     private List<GameObject> _players;
     private List<GameObject> _spawnpoints;
     private List<GameObject> _gunsOnSceneLoad;
+    private bool _inProgress;
     private List<GameObject> Spawnpoints
     {
         get => _spawnpoints;
@@ -20,6 +69,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
+        _inProgress = false;
         _playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerInputManager>();
         Spawnpoints = GameObject.FindGameObjectsWithTag("Spawnpoint").ToList();
         _gunsOnSceneLoad = GameObject.FindGameObjectsWithTag("Weapon").ToList();
@@ -27,36 +77,32 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (_playerManager.playerCount > 0 && _ready.All(x => x is true))
+        if (Players.Count > 0 && _inProgress == false && Players.IsAllReady)
+        {
             Load("level_01");
-    }
-
-    public void SetReady(int id, bool state)
-    {
-        _ready[id] = state;
+            _inProgress = true;
+        }
     }
 
     public void OnJoin()
     {
-        _ready = new bool[_playerManager.playerCount];
-        _players = GameObject.FindGameObjectsWithTag("Player").ToList();
+        var players = GameObject.FindGameObjectsWithTag("Player").ToList();
+        foreach (var player in players)
+            if (!Players.players.Select(pi => pi.Instance).Contains(player))
+                Players.AddPlayer(player);
     }
 
     public void Load(string level)
     {
         SceneManager.LoadScene(level);
         _players = GameObject.FindGameObjectsWithTag("Player").ToList();
-        //Debug.Log(_players[0]);
         Spawnpoints = GameObject.FindGameObjectsWithTag("Spawnpoint").ToList();
         Debug.Log(Spawnpoints[0]);
-        //Debug.Log(Spawnpoints);
-        
+
         foreach (var player in _players)
         {
             SpawnPlayer(player);
-            //Debug.Log(player);
         }
-            
     }
 
     public void SpawnPlayer(GameObject player)
@@ -66,5 +112,4 @@ public class GameManager : MonoBehaviour
         player.GetComponent<Transform>().position = position;
         Spawnpoints.Remove(point);
     }
-    
 }

@@ -53,10 +53,10 @@ public class PlayerInputHandler : MonoBehaviour
     public void Ready(InputAction.CallbackContext context)
     {
         if (_playerMovement && context.performed)
-            _manager.SetReady(_playerInfo.playerIndex, true);
+            GameManager.Players.SetReady(_playerInfo.playerIndex, GameManager.PlayerOGS.Ready);
         
         if (_playerMovement && context.canceled)
-            _manager.SetReady(_playerInfo.playerIndex, false); 
+            GameManager.Players.SetReady(_playerInfo.playerIndex, GameManager.PlayerOGS.Unready); 
     }
     
     public void Pickup_Drop(InputAction.CallbackContext context)
