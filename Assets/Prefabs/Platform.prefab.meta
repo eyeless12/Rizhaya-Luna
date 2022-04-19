@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Prefabs/Platform.prefab.meta
 guid: 454337a3f2cde5d4880eb1625ef110a4
 PrefabImporter:
+=======
+guid: 751f0ae16976e4531b9041d3296c6f05
+DefaultImporter:
+>>>>>>> MoreLevels:Assets/Scenes/level_04.unity.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

@@ -77,5 +77,10 @@ public class PlayerInputHandler : MonoBehaviour
         {
             _playerMovement.Pickup_Drop();
         }
+
+    public void Use(InputAction.CallbackContext context)
+    {
+        if (_player)
+            _player.Use(context);
     }
 }

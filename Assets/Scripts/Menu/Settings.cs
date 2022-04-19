@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.UI; //Работа с интерфейсами
 using UnityEngine.SceneManagement; //Работа со сценами
@@ -25,11 +26,19 @@ public class Settings : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
+        {
             GoToMain();
+        }
     }
 
     public void GoToMain()
     {
+        if (SceneManager.GetActiveScene().name == "Menu")
+        {
+            canvas.enabled = false;
+            return;
+        }
+
         if (!canvas.enabled)
             return;
         canvas.enabled = false;
@@ -57,7 +66,7 @@ public class Settings : MonoBehaviour
     {
         resolutionDropdown.ClearOptions();
         resolutions = Screen.resolutions; 
-        List<string> options = new List<string> (); 
+        var options = new List<string> (); 
 
         for(var i = 0; i < resolutions.Length; i++)
         {

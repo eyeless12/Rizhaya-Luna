@@ -110,6 +110,8 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 8d533768-1ef7-4124-97eb-4a939e4fe1de
     m_ActionName: Player/Use[/Keyboard/g]
+    m_ActionId: d71bf474-baa3-4709-b40d-276430b3cc95
+    m_ActionName: Player/Use 2[/Keyboard/g]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: -890986844877045572}

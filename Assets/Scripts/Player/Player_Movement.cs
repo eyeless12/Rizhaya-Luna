@@ -1,5 +1,9 @@
+#nullable enable
 using System;
 using Unity.VisualScripting;
+using System.Collections.Generic;
+using System.Linq;
+using Unity;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,22 +16,23 @@ public class Player_Movement: MonoBehaviour
     [SerializeField] private Transform handsTransform;
     [SerializeField] private float pickupRange = 1f;
     [SerializeField] private GameObject feet;
-    private Vector2 moveInput = Vector2.zero;
-
+    
+    private Vector2 _moveInput = Vector2.zero;
     private Rigidbody2D rb;
-    public bool facingRight = true;
+    private bool _facingRight = true;
 
     public Transform feetPos;
     private BoxCollider2D _boxCollider;
     public float checkRadius;
     public LayerMask whatIsGround;
     public float jumpTime;
-    private float jumpTimeCounter;
-    private bool isJumping;
+    private float _jumpTimeCounter;
+    private bool _isJumping;
 
     private Fire inHands;
     private Animations _animationsController;
     private PlayerOnPlatform _playerOnPlatform;
+    private GameObject _overlapPicking = null!;
 
     public void Start()
     {
@@ -43,19 +48,19 @@ public class Player_Movement: MonoBehaviour
     // (feetPos.position, checkRadius, whatIsGround);
     public void Move(Vector2 move)
     {
-        moveInput = move;
+        _moveInput = move;
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
         if (isGrounded && context.performed)
         {
-            isJumping = true;
-            jumpTimeCounter = jumpTime;
+            _isJumping = true;
+            _jumpTimeCounter = jumpTime;
         }
 
         if (context.canceled)
-            isJumping = false;
+            _isJumping = false;
     }
     public void FixedUpdate()
     {
@@ -66,8 +71,8 @@ public class Player_Movement: MonoBehaviour
 
     private void HandleRun()
     {
-        rb.velocity = new Vector2(moveInput.x * speed, rb.velocity.y);
-        _animationsController.SetRunAnimation(moveInput.x);
+        rb.velocity = new Vector2(_moveInput.x * speed, rb.velocity.y);
+        _animationsController.SetRunAnimation(_moveInput.x);
     }
 
     private void HandleJump()
@@ -85,15 +90,15 @@ public class Player_Movement: MonoBehaviour
 
     private void HandleFlip()
     {
-        if (!facingRight && moveInput.x > 0)
+        if (!_facingRight && _moveInput.x > 0)
             Flip();
-        else if (facingRight && moveInput.x < 0)
+        else if (_facingRight && _moveInput.x < 0)
             Flip();
     }
 
     private void Flip()
     {
-        facingRight = !facingRight;
+        _facingRight = !_facingRight;
         transform.Rotate(0f, 180f, 0f);
     }
 
@@ -140,12 +145,31 @@ public class Player_Movement: MonoBehaviour
         var weapon = _hands.GetComponent<Weapon>();
         inHands = null;
         _hands = null;
-        weapon.DiscardOwner(moveInput.x != 0);
+        weapon.DiscardOwner(_moveInput.x != 0);
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, pickupRange);
+    }
+    
+    public void Use(InputAction.CallbackContext context)
+    {
+        if (context.performed && _overlapPicking != null)
+        {
+            var menu = _overlapPicking.GetComponent<ContextMenu>();
+            menu.OnUse();
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        _overlapPicking = other.gameObject;
+    }
+    
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        _overlapPicking = null!;
     }
 }
