@@ -77,10 +77,10 @@ public class PlayerInputHandler : MonoBehaviour
     
     public void Use(InputAction.CallbackContext context)
     {
-        if (_playerMovement)
+        if (_playerMovement && context.performed)
         {
-            _playerMovement.Use(context);
-            _playerMovement.Shoot(context);
+            _playerMovement.Use();
+            _playerMovement.Shoot();
         }
             
     }

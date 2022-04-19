@@ -44,8 +44,7 @@ public class Player_Movement: MonoBehaviour
     }
 
     private bool isGrounded => _boxCollider.IsTouchingLayers(whatIsGround.value);
-
-    // (feetPos.position, checkRadius, whatIsGround);
+    
     public void Move(Vector2 move)
     {
         _moveInput = move;
@@ -106,11 +105,10 @@ public class Player_Movement: MonoBehaviour
         _playerOnPlatform.Perform();
     }
 
-    public void Shoot(InputAction.CallbackContext context)
+    public void Shoot()
     {
-        if (context.performed && inHands)
+        if (inHands)
         {
-            Debug.Log("Shoot");
             inHands.Shoot();
         }
             
@@ -146,8 +144,8 @@ public class Player_Movement: MonoBehaviour
     private void Drop()
     {
         var weapon = _hands.GetComponent<Weapon>();
-        inHands = null;
-        _hands = null;
+        inHands = null!;
+        _hands = null!;
         weapon.DiscardOwner(_moveInput.x != 0);
     }
 
@@ -157,12 +155,11 @@ public class Player_Movement: MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, pickupRange);
     }
     
-    public void Use(InputAction.CallbackContext context)
+    public void Use()
     {
-        if (context.performed && _overlapPicking != null)
+        if (_overlapPicking != null)
         {
             var menu = _overlapPicking.GetComponent<ContextMenu>();
-            Debug.Log("Use");
             menu.OnUse();
         }
     }

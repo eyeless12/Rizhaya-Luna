@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -90,17 +89,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log($"Is all Ready : {Players.IsAllReady}");
-        Debug.Log($"Players count : {Players.Count}");
-        if (Players.players.Count == 1)
-        {
-            var player = Players.players.First();
-            Debug.Log($"Player-{player.ID} OGS: {player.OGS_State}");
-        }
-            
         if (InProgress == false && Players.Count > 0 && Players.IsAllReady)
         {
-            Debug.Log("SWITCH");
             StartCoroutine(_levelManager.LoadRandomLevel());
             InProgress = true;
         }
