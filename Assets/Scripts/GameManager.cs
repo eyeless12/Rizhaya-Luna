@@ -47,20 +47,25 @@ public class GameManager : MonoBehaviour
         
         public static void SetReady(int id, PlayerOGS state)
         {
-            var player = Players.players.First(p => p.ID == id);
+            var player = players.First(p => p.ID == id);
             player.OGS_State = state;
         }
 
         public static bool IsAllReady => players.All(pi => pi.OGS_State == PlayerOGS.Ready);
+        public static int AliveCount => players.Count(pi => pi.IGS_State == PlayerIGS.Alive);
+        public static GameObject[] Alive => players
+            .Where(pi => pi.IGS_State == PlayerIGS.Alive)
+            .Select(pi => pi.Instance)
+            .ToArray();
         public static int Count => players.Count;
     }
     
-    // private bool[] _ready = new bool[0];
     private PlayerInputManager _playerManager;
     private List<GameObject> _players;
     private List<GameObject> _spawnpoints;
     private List<GameObject> _gunsOnSceneLoad;
-    private bool _inProgress;
+    
+    public bool InProgress { get; private set; }
     private List<GameObject> Spawnpoints
     {
         get => _spawnpoints;
@@ -69,7 +74,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        _inProgress = false;
+        InProgress = false;
         _playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerInputManager>();
         Spawnpoints = GameObject.FindGameObjectsWithTag("Spawnpoint").ToList();
         _gunsOnSceneLoad = GameObject.FindGameObjectsWithTag("Weapon").ToList();
@@ -77,10 +82,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Players.Count > 0 && _inProgress == false && Players.IsAllReady)
+        if (InProgress == false && Players.Count > 0 && Players.IsAllReady)
         {
             Load("level_01");
-            _inProgress = true;
+            InProgress = true;
         }
     }
 
@@ -97,7 +102,6 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(level);
         _players = GameObject.FindGameObjectsWithTag("Player").ToList();
         Spawnpoints = GameObject.FindGameObjectsWithTag("Spawnpoint").ToList();
-        Debug.Log(Spawnpoints[0]);
 
         foreach (var player in _players)
         {

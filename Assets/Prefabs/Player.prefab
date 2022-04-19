@@ -114,22 +114,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: -890986844877045572}
         m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: Ready
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 4aa512e1-38c4-4026-80bf-bda9674b8f1a
-    m_ActionName: Player/Ready[/Keyboard/r]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: -890986844877045572}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
         m_MethodName: Pickup_Drop
         m_Mode: 0
         m_Arguments:
@@ -159,9 +143,21 @@ MonoBehaviour:
     m_ActionId: a69349b7-d219-45f4-92f5-4d661eb7c7b0
     m_ActionName: Player/GoDown[Platform][/Keyboard/s,/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 08733192-8951-412b-b2f7-b7979fb2b48a
-    m_ActionName: Player/Use 2[/Keyboard/g]
+      m_Calls:
+      - m_Target: {fileID: -890986844877045572}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: Ready
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8fde8b7f-2b96-4a68-a7a9-b2df60e490e9
+    m_ActionName: Player/Ready[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

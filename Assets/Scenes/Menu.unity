@@ -4169,6 +4169,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1986562320}
   - component: {fileID: 1986562319}
+  - component: {fileID: 1986562321}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4203,6 +4204,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1986562321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986562318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0357b817eab33ef4f89d7878d48fb7a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levels:
+  - {fileID: 102900000, guid: 5e6ce420fd0b02447af15adf919dc63a, type: 3}
+  - {fileID: 102900000, guid: df62bddc39924e14096a9ee07d4559fd, type: 3}
+  - {fileID: 102900000, guid: 690ea2ab0d1454671a7cc417df017e5d, type: 3}
+  - {fileID: 102900000, guid: 751f0ae16976e4531b9041d3296c6f05, type: 3}
+  - {fileID: 102900000, guid: 0985f4b4930fb4296982e1abba1e57a5, type: 3}
+  - {fileID: 102900000, guid: d1527a684fcb14575a5cf576e3c57cc5, type: 3}
+  - {fileID: 102900000, guid: 8dc8caee2ea64460abfaf3103d342a6b, type: 3}
+  - {fileID: 102900000, guid: b2a8950c741ba40e2aa70cd3e5d31f4c, type: 3}
+  - {fileID: 102900000, guid: acd0895b7667e487c8a7e49d62ecbb19, type: 3}
+  - {fileID: 102900000, guid: cb91960477e21432dbc4692d4ff32f4e, type: 3}
+  gameManager: {fileID: 1986562319}
 --- !u!1 &2013237650
 GameObject:
   m_ObjectHideFlags: 0

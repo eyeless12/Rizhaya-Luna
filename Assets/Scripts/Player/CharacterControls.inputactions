@@ -51,18 +51,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Ready",
+                    "name": "Pickup/Drop",
                     "type": "Button",
-                    "id": "4aa512e1-38c4-4026-80bf-bda9674b8f1a",
+                    "id": "889d0301-d6fd-4418-819e-d24ec8bb0e76",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pickup/Drop",
+                    "name": "Ready",
                     "type": "Button",
-                    "id": "889d0301-d6fd-4418-819e-d24ec8bb0e76",
+                    "id": "8fde8b7f-2b96-4a68-a7a9-b2df60e490e9",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -270,28 +270,6 @@
                 },
                 {
                     "name": "",
-                    "id": "468b1c65-0bb8-4a0b-9661-77b14e76d3ae",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard 1",
-                    "action": "Ready",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d79eaabb-a36f-40fe-ad44-bb833d1b7047",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad 1",
-                    "action": "Ready",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "0dfad98c-f65e-460f-892a-7679370082c9",
                     "path": "<Keyboard>/e",
                     "interactions": "",
@@ -331,6 +309,28 @@
                     "processors": "",
                     "groups": "Gamepad 1",
                     "action": "GoDown[Platform]",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c672a0bb-0105-4c54-bba2-574fea28942c",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard 1",
+                    "action": "Ready",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6b7aa499-e4cc-46ad-af34-b4fe673413bb",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad 1",
+                    "action": "Ready",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
