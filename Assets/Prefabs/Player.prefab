@@ -98,7 +98,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: -890986844877045572}
         m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: Shoot
+        m_MethodName: Use
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -110,8 +110,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 8d533768-1ef7-4124-97eb-4a939e4fe1de
     m_ActionName: Player/Use[/Keyboard/g]
-    m_ActionId: d71bf474-baa3-4709-b40d-276430b3cc95
-    m_ActionName: Player/Use 2[/Keyboard/g]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: -890986844877045572}
@@ -160,6 +158,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: a69349b7-d219-45f4-92f5-4d661eb7c7b0
     m_ActionName: Player/GoDown[Platform][/Keyboard/s,/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 08733192-8951-412b-b2f7-b7979fb2b48a
+    m_ActionName: Player/Use 2[/Keyboard/g]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

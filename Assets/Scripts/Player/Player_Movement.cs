@@ -38,7 +38,7 @@ public class Player_Movement: MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         _animationsController = GetComponent<Animations>();
-        _boxCollider = feet.GetComponent<BoxCollider2D>();
+        _boxCollider = GetComponent<BoxCollider2D>();
         _playerOnPlatform = GetComponent<PlayerOnPlatform>();
         DontDestroyOnLoad(gameObject);
     }
@@ -77,15 +77,14 @@ public class Player_Movement: MonoBehaviour
 
     private void HandleJump()
     {
-        if (!isJumping) return;
-        if (jumpTimeCounter <= 0)
+        if (!_isJumping) return;
+        if (_jumpTimeCounter <= 0)
         {
-            isJumping = false;
+            _isJumping = false;
             return;
         }
-        
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        jumpTimeCounter -= Time.deltaTime;
+        _jumpTimeCounter -= Time.deltaTime;
     }
 
     private void HandleFlip()
@@ -110,7 +109,11 @@ public class Player_Movement: MonoBehaviour
     public void Shoot(InputAction.CallbackContext context)
     {
         if (context.performed && inHands)
+        {
+            Debug.Log("Shoot");
             inHands.Shoot();
+        }
+            
     }
 
     public void Pickup_Drop()
@@ -159,6 +162,7 @@ public class Player_Movement: MonoBehaviour
         if (context.performed && _overlapPicking != null)
         {
             var menu = _overlapPicking.GetComponent<ContextMenu>();
+            Debug.Log("Use");
             menu.OnUse();
         }
     }

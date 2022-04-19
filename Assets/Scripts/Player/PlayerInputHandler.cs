@@ -35,7 +35,6 @@ public class PlayerInputHandler : MonoBehaviour
         {
             _playerMovement.Move(context.ReadValue<Vector2>());
         }
-            
     }
     
     public void GoDownThroughPlatform(InputAction.CallbackContext context)
@@ -43,23 +42,12 @@ public class PlayerInputHandler : MonoBehaviour
         
         if(_playerMovement && context.performed)
             _playerMovement.GoDownThroughPlatform();
-        Debug.Log(context.action.name);
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
         if (_playerMovement)
             _playerMovement.Jump(context);
-        Debug.Log(context.action.name);
-    }
-
-    public void Shoot(InputAction.CallbackContext context)
-    {
-        if (_playerMovement)
-        {
-            //Debug.Log("Handler");
-            _playerMovement.Shoot(context);
-        }
     }
 
     public void Ready(InputAction.CallbackContext context)
@@ -77,10 +65,15 @@ public class PlayerInputHandler : MonoBehaviour
         {
             _playerMovement.Pickup_Drop();
         }
-
+    }
+    
     public void Use(InputAction.CallbackContext context)
     {
-        if (_player)
-            _player.Use(context);
+        if (_playerMovement)
+        {
+            _playerMovement.Use(context);
+            _playerMovement.Shoot(context);
+        }
+            
     }
 }
