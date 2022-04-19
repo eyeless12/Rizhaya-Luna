@@ -2028,7 +2028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NotificationBehavior: 2
-  m_MaxPlayerCount: -1
+  m_MaxPlayerCount: 4
   m_AllowJoining: 1
   m_JoinBehavior: 1
   m_PlayerJoinedEvent:
@@ -4227,6 +4227,7 @@ MonoBehaviour:
   - {fileID: 102900000, guid: b2a8950c741ba40e2aa70cd3e5d31f4c, type: 3}
   - {fileID: 102900000, guid: acd0895b7667e487c8a7e49d62ecbb19, type: 3}
   - {fileID: 102900000, guid: cb91960477e21432dbc4692d4ff32f4e, type: 3}
+  mainMenuLevel: {fileID: 102900000, guid: 249a95b45a97a1c468dedb3c2a0fbed5, type: 3}
   gameManager: {fileID: 1986562319}
 --- !u!1 &2013237650
 GameObject:

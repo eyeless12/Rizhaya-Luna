@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
         Alive
     }
     
-    public struct PlayerInfo
+    public class PlayerInfo
     {
         public readonly GameObject Instance;
         public readonly int ID;
@@ -39,7 +39,8 @@ public class GameManager : MonoBehaviour
     public static class Players
     {
         public static readonly List<PlayerInfo> players = new();
-        public static void AddPlayer(GameObject instance)
+
+        private static void AddPlayer(GameObject instance)
         {
             if (instance == null) return;
             players.Add(new PlayerInfo(instance, players.Count, PlayerOGS.Unready, PlayerIGS.Alive));
@@ -49,6 +50,18 @@ public class GameManager : MonoBehaviour
         {
             var player = players.First(p => p.ID == id);
             player.OGS_State = state;
+            Debug.Log(player.OGS_State);
+        }
+
+        public static void UpdatePlayers()
+        {
+            var playersOnScene = GameObject.FindGameObjectsWithTag("Player").ToList();
+            foreach (var player in playersOnScene)
+                if (!players.Select(pi => pi.Instance).Contains(player))
+                {
+                    AddPlayer(player);
+                    Debug.Log("ADDED");
+                }
         }
 
         public static bool IsAllReady => players.All(pi => pi.OGS_State == PlayerOGS.Ready);
@@ -61,59 +74,46 @@ public class GameManager : MonoBehaviour
     }
     
     private PlayerInputManager _playerManager;
-    private List<GameObject> _players;
-    private List<GameObject> _spawnpoints;
+    private LevelManager _levelManager;
     private List<GameObject> _gunsOnSceneLoad;
-    
+    private bool _newConnected;
+
     public bool InProgress { get; private set; }
-    private List<GameObject> Spawnpoints
-    {
-        get => _spawnpoints;
-        set => _spawnpoints = new List<GameObject>(value);
-    }
     void Start()
     {
         DontDestroyOnLoad(gameObject);
         InProgress = false;
+        _newConnected = false;
         _playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerInputManager>();
-        Spawnpoints = GameObject.FindGameObjectsWithTag("Spawnpoint").ToList();
-        _gunsOnSceneLoad = GameObject.FindGameObjectsWithTag("Weapon").ToList();
+        _levelManager = GetComponent<LevelManager>();
     }
 
     void Update()
     {
+        Debug.Log($"Is all Ready : {Players.IsAllReady}");
+        Debug.Log($"Players count : {Players.Count}");
+        if (Players.players.Count == 1)
+        {
+            var player = Players.players.First();
+            Debug.Log($"Player-{player.ID} OGS: {player.OGS_State}");
+        }
+            
         if (InProgress == false && Players.Count > 0 && Players.IsAllReady)
         {
-            Load("level_01");
+            Debug.Log("SWITCH");
+            StartCoroutine(_levelManager.LoadRandomLevel());
             InProgress = true;
+        }
+
+        if (_newConnected)
+        {
+            Players.UpdatePlayers();
+            _newConnected = false;
         }
     }
 
     public void OnJoin()
     {
-        var players = GameObject.FindGameObjectsWithTag("Player").ToList();
-        foreach (var player in players)
-            if (!Players.players.Select(pi => pi.Instance).Contains(player))
-                Players.AddPlayer(player);
-    }
-
-    public void Load(string level)
-    {
-        SceneManager.LoadScene(level);
-        _players = GameObject.FindGameObjectsWithTag("Player").ToList();
-        Spawnpoints = GameObject.FindGameObjectsWithTag("Spawnpoint").ToList();
-
-        foreach (var player in _players)
-        {
-            SpawnPlayer(player);
-        }
-    }
-
-    public void SpawnPlayer(GameObject player)
-    {
-        var point = Spawnpoints[Random.Range(0, Spawnpoints.Count)];
-        var position = point.transform.position;
-        player.GetComponent<Transform>().position = position;
-        Spawnpoints.Remove(point);
+        _newConnected = true;
     }
 }

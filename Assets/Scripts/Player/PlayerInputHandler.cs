@@ -10,13 +10,18 @@ public class PlayerInputHandler : MonoBehaviour
     private Player_Movement _playerMovement;
     [SerializeField] private GameObject playerVariance;
     private GameManager _manager;
+    private LevelManager _levelManager;
     private GameObject _player;
     private PlayerInput _playerInfo;
     
-    void Start()
+    void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        _manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        
+        var manager = GameObject.Find("GameManager");
+        _manager = manager.GetComponent<GameManager>();
+        _levelManager = manager.GetComponent<LevelManager>();
+        
         _playerInfo = GetComponent<PlayerInput>();
 
         _player = Instantiate(
@@ -25,7 +30,7 @@ public class PlayerInputHandler : MonoBehaviour
             Quaternion.identity
         );
         
-        _manager.SpawnPlayer(_player);
+        _levelManager.SpawnPlayer(_player);
         _playerMovement = _player.GetComponent<Player_Movement>();
     }
 
@@ -53,7 +58,10 @@ public class PlayerInputHandler : MonoBehaviour
     public void Ready(InputAction.CallbackContext context)
     {
         if (_playerMovement && context.performed)
+        {
             GameManager.Players.SetReady(_playerInfo.playerIndex, GameManager.PlayerOGS.Ready);
+        }
+            
         
         if (_playerMovement && context.canceled)
             GameManager.Players.SetReady(_playerInfo.playerIndex, GameManager.PlayerOGS.Unready); 
