@@ -226,8 +226,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Spread: 12
-  SpreadWidth: 25
+  SpreadWidth: 20
   BulletThresholdTime: 0.25
   recoil: 20000
-  bulletLifetime: 0.1
+  bulletLifetime: 0.13
   maxCapacity: 4

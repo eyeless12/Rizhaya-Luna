@@ -29,7 +29,7 @@ public class Player_Movement: MonoBehaviour
     private float _jumpTimeCounter;
     private bool _isJumping;
 
-    private Fire inHands;
+    private Fire handsAction;
     private Animations _animationsController;
     private PlayerOnPlatform _playerOnPlatform;
     private GameObject _overlapPicking = null!;
@@ -107,9 +107,9 @@ public class Player_Movement: MonoBehaviour
 
     public void Shoot()
     {
-        if (inHands)
+        if (handsAction)
         {
-            inHands.Shoot();
+            handsAction.Shoot();
         }
             
     }
@@ -138,13 +138,13 @@ public class Player_Movement: MonoBehaviour
         weaponTransform.SetParent(owner.GetComponent<Transform>(), true);
         weapon.SetOwner(owner, this);    
         _hands = item;
-        inHands = weapon.GetComponent<Fire>();
+        handsAction = weapon.GetComponent<Fire>();
     }
 
     private void Drop()
     {
         var weapon = _hands.GetComponent<Weapon>();
-        inHands = null!;
+        handsAction = null!;
         _hands = null!;
         weapon.DiscardOwner(_moveInput.x != 0 || rb.velocity.y != 0);
     }
