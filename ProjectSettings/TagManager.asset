@@ -8,6 +8,7 @@ TagManager:
   - Weapon
   - Platform
   - Usable
+  - Bullet
   layers:
   - Default
   - TransparentFX
