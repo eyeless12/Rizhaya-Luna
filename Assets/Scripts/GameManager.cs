@@ -47,9 +47,15 @@ public class GameManager : MonoBehaviour
         
         public static void SetReady(int id, PlayerOGS state)
         {
-            var player = players.First(p => p.ID == id);
+            var player = players.First(pi => pi.ID == id);
             player.OGS_State = state;
             Debug.Log(player.OGS_State);
+        }
+
+        public static void SetIGS(GameObject player, PlayerIGS state)
+        {
+            var candidate = players.First(pi => pi.Instance == player);
+            candidate.IGS_State = state;
         }
 
         public static void UpdatePlayers()

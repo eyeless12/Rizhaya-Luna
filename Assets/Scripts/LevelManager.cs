@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour
     
     private bool LevelFinished => GameManager.Players.AliveCount == 1 && GameManager.Players.Count > 1;
     private float _timeToNextLevel = 3f;
+    private bool _loaded;
     
     private List<GameObject> _spawnPoints; 
     private List<GameObject> SpawnPointsOnScene => GameObject.FindGameObjectsWithTag("Spawnpoint").ToList();
@@ -26,9 +27,11 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Players.AliveCount == 1 && gameManager.InProgress && LevelFinished)
+        if (GameManager.Players.AliveCount == 1 && gameManager.InProgress 
+                                                && LevelFinished && _loaded)
         {
             StartCoroutine(LoadRandomLevel());
+            _loaded = false;
         }
     }
 
@@ -41,13 +44,16 @@ public class LevelManager : MonoBehaviour
 
     private void LoadLevel(string levelName)
     {
-        SceneManager.LoadScene(levelName);
+        SceneManager.LoadScene(levelName);  
         _spawnPoints = SpawnPointsOnScene;
 
         foreach (var player in GameManager.Players.players)
         {
+            player.IGS_State = GameManager.PlayerIGS.Alive;
             SpawnPlayer(player.Instance);
         }
+
+        _loaded = true;
     } 
     
     public void SpawnPlayer(GameObject player)
