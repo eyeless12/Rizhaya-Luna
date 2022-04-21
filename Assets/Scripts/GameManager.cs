@@ -82,6 +82,8 @@ public class GameManager : MonoBehaviour
     private LevelManager _levelManager;
     private List<GameObject> _gunsOnSceneLoad;
     private bool _newConnected;
+    private MultipleTargetCamera _camera;
+
 
     public bool InProgress { get; private set; }
     void Start()
@@ -91,6 +93,7 @@ public class GameManager : MonoBehaviour
         _newConnected = false;
         _playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerInputManager>();
         _levelManager = GetComponent<LevelManager>();
+        _camera = GameObject.FindWithTag("MainCamera").GetComponent<MultipleTargetCamera>();
     }
 
     void Update()
@@ -104,6 +107,7 @@ public class GameManager : MonoBehaviour
         if (_newConnected)
         {
             Players.UpdatePlayers();
+            _camera.players = new List<Transform>(Players.players.Select(pi => pi.Instance.GetComponent<Transform>())); 
             _newConnected = false;
         }
     }

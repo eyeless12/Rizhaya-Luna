@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -39,14 +40,16 @@ public class LevelManager : MonoBehaviour
     {
         var level = levels[Random.Range(0, levels.Count)];
         yield return new WaitForSeconds(_timeToNextLevel);
-        LoadLevel(level.name);
+        StartCoroutine(LoadLevel(level.name));
     }
 
-    private void LoadLevel(string levelName)
+    private IEnumerator LoadLevel(string levelName)
     {
-        SceneManager.LoadScene(levelName);  
+        SceneManager.LoadScene(levelName);
+        yield return new WaitForFixedUpdate();
+        
         _spawnPoints = SpawnPointsOnScene;
-
+        
         foreach (var player in GameManager.Players.players)
         {
             player.IGS_State = GameManager.PlayerIGS.Alive;
@@ -54,8 +57,8 @@ public class LevelManager : MonoBehaviour
         }
 
         _loaded = true;
-    } 
-    
+    }
+
     public void SpawnPlayer(GameObject player)
     {
         var point = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
