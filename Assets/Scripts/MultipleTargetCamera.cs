@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MultipleTargetCamera : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class MultipleTargetCamera : MonoBehaviour
     
     private Vector3 _velocity;
     private Camera _cam;
-    
+    public bool zoomEnabled; //FIX
+
     [SerializeField] private float smoothTime = .5f;
     [SerializeField] private float minZoom;
     [SerializeField] private float maxZoom;
@@ -22,11 +24,12 @@ public class MultipleTargetCamera : MonoBehaviour
         _cam = GetComponent<Camera>();
         players = new List<Transform>();
         DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += (arg0, mode) => zoomEnabled = true;
     }
 
     private void LateUpdate()
     {
-        if (players.Count == 0)
+        if (players.Count == 0 || !zoomEnabled)
             return;
         
         Move();
@@ -51,7 +54,7 @@ public class MultipleTargetCamera : MonoBehaviour
         var distance = bounds.size.x;
         
 
-        var newZoom = Mathf.Lerp(maxZoom, minZoom, distance / 10) / zoomCoefficient;
+        var newZoom = Mathf.Lerp(maxZoom, minZoom, distance / 50f) / zoomCoefficient;
         _cam.orthographicSize = Mathf.Lerp(_cam.orthographicSize, newZoom, Time.deltaTime);
     }
 

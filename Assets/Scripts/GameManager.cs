@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
@@ -102,6 +104,7 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(_levelManager.LoadRandomLevel());
             InProgress = true;
+            //_camera.zoomEnabled = true;
         }
 
         if (_newConnected)
