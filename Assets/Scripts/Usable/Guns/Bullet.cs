@@ -36,7 +36,9 @@ public class Bullet : MonoBehaviour
             Debug.Log($"{target.name} is dead!");
         }
         
-        if (other.CompareTag("Player") || other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        if (other.CompareTag("Player") 
+            || other.gameObject.layer == LayerMask.NameToLayer("Ground")
+            || other.CompareTag("Props"))
             Destroy(gameObject);
     }
 }

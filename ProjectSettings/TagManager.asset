@@ -9,6 +9,7 @@ TagManager:
   - Platform
   - Usable
   - Bullet
+  - Props
   layers:
   - Default
   - TransparentFX

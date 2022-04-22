@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 4868171680611500358}
   - component: {fileID: 314730636370416238}
   m_Layer: 13
-  m_Name: cowboy
+  m_Name: cowboy_3
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -196,7 +196,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e7fe00344b50e504bb84837831f89209, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

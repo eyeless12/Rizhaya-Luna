@@ -175,4 +175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 214d51205addd431caa50e9c84244d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerVariance: {fileID: 8147089474042636192, guid: 83908351ea0f34afea2441d5ccf2f249, type: 3}
+  playerVariance:
+  - {fileID: 8147089474042636192, guid: 83908351ea0f34afea2441d5ccf2f249, type: 3}
+  - {fileID: 8147089474042636192, guid: 2164b94de2ac933449874b5aa78d2163, type: 3}
+  - {fileID: 8147089474042636192, guid: 3ba1fbca8afe64846a818e048bce0432, type: 3}
+  - {fileID: 8147089474042636192, guid: 76b4f6675b459a8499f5a0147f985681, type: 3}

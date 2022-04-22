@@ -8,12 +8,22 @@ using UnityEngine.Serialization;
 public class PlayerInputHandler : MonoBehaviour
 {
     private Player_Movement _playerMovement;
-    [SerializeField] private GameObject playerVariance;
+    [SerializeField] private List<GameObject> playerVariance;
     private GameManager _manager;
     private LevelManager _levelManager;
     private GameObject _player;
     private PlayerInput _playerInfo;
-    
+
+    private GameObject RandomPlayerPrefab
+    {
+        get
+        {
+            var obj = playerVariance[Random.Range(0, playerVariance.Count)];
+            playerVariance.Remove(obj);
+            return obj;
+        }
+    }
+
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -25,7 +35,7 @@ public class PlayerInputHandler : MonoBehaviour
         _playerInfo = GetComponent<PlayerInput>();
 
         _player = Instantiate(
-            playerVariance,
+            RandomPlayerPrefab,
             transform.position,
             Quaternion.identity
         );

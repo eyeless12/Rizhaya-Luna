@@ -2,13 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = Unity.Mathematics.Random;
+using Random = UnityEngine.Random;
 
 public class Barrel : MonoBehaviour
 {
     [SerializeField] private List<GameObject> guns;
     private Transform _transform;
     private bool spawned;
+    
+    private GameObject RandomGun => guns[Random.Range(0, guns.Count)];
 
     private void Start()
     {
@@ -19,15 +21,11 @@ public class Barrel : MonoBehaviour
     {
         if(spawned)
             return;
+        
         if (!other.CompareTag("Bullet")) return;
-        Instantiate(RandomGun(), _transform.position, Quaternion.identity);
+        Debug.Log("BARREL");
+        Instantiate(RandomGun, _transform.position, Quaternion.identity);
         spawned = true;
         Destroy(gameObject);
-
-    }
-
-    private GameObject RandomGun()
-    {
-        return guns[Random.CreateFromIndex(1111).NextInt(guns.Count)];
     }
 }
