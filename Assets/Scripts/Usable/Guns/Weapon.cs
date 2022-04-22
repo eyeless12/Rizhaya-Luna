@@ -60,7 +60,7 @@ public class Weapon : MonoBehaviour
         var velocity = Owner.GetComponent<Rigidbody2D>().velocity;
         var ownerTransform = Owner.GetComponent<Transform>();
         Debug.Log(ownerTransform.rotation.y);
-        var throwVector = new Vector2(1 * velocity.x, 1 * Math.Abs(velocity.x)) ;
+        var throwVector = new Vector2(2 * velocity.x, 1 * Math.Abs(velocity.x)) ;
         _weaponPhysics.velocity = throwVector;
     }
 }

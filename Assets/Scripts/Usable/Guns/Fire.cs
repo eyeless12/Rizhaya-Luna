@@ -38,6 +38,7 @@ public class Fire : MonoBehaviour
         _canShoot = false;
         _shootTime = _weaponCharacteristics.BulletThresholdTime;
         _magazine -= 1;
+        Debug.Log(_magazine);
     }
 
     public void FixedUpdate()
@@ -58,6 +59,8 @@ public class Fire : MonoBehaviour
             ways -= 1;
         }
 
+        if (_weaponCharacteristics.Spread == 1) yield break;
+        
         var angle = _weaponCharacteristics.SpreadWidth / ways;
         for (var i = 1; i <= ways / 2; i++)
         {

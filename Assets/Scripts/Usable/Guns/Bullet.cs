@@ -29,7 +29,14 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log(other.name);
-        Destroy(gameObject);
+        if (other.CompareTag("Player"))
+        {
+            var target = other.gameObject;
+            GameManager.Players.SetIGS(target, GameManager.PlayerIGS.Dead);
+            Debug.Log($"{target.name} is dead!");
+        }
+        
+        if (other.CompareTag("Player") || other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            Destroy(gameObject);
     }
 }
