@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1365554643587044819}
   - component: {fileID: 1365554643587044816}
   - component: {fileID: 1365554643587044817}
-  - component: {fileID: 1365554643587044830}
   - component: {fileID: 502966671060094969}
   m_Layer: 0
   m_Name: weapon_barrell
@@ -76,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 854997025
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b22cc852dce95409da969d6d419aec7f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 53b18161fe2d14e91b121c87fad5bf9b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -113,27 +112,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!50 &1365554643587044830
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1365554643587044831}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 5
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 0
 --- !u!114 &502966671060094969
 MonoBehaviour:
   m_ObjectHideFlags: 0
