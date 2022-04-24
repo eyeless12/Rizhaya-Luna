@@ -13,17 +13,16 @@ public class Player_Movement: MonoBehaviour
     public float speed;
     public float jumpForce;
     private GameObject _hands;
-    [SerializeField] private Transform handsTransform;
-    [SerializeField] private float pickupRange = 1f;
-    [SerializeField] private GameObject feet;
     
+    [SerializeField] private float pickupRange = 1f;
+
     private Vector2 _moveInput = Vector2.zero;
     private Rigidbody2D rb;
     private bool _facingRight = true;
 
-    public Transform feetPos;
+    
     private BoxCollider2D _boxCollider;
-    public float checkRadius;
+    
     public LayerMask whatIsGround;
     public float jumpTime;
     private float _jumpTimeCounter;
@@ -157,11 +156,9 @@ public class Player_Movement: MonoBehaviour
     
     public void Use()
     {
-        if (_overlapPicking != null)
-        {
-            var menu = _overlapPicking.GetComponent<ContextMenu>();
-            menu.OnUse();
-        }
+        if (_overlapPicking == null) return;
+        var menu = _overlapPicking.GetComponent<ContextMenu>();
+        menu.OnUse();
     }
 
     public void OnTriggerEnter2D(Collider2D other)

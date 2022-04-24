@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -96,6 +97,7 @@ public class GameManager : MonoBehaviour
         _playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerInputManager>();
         _levelManager = GetComponent<LevelManager>();
         _camera = GameObject.FindWithTag("MainCamera").GetComponent<MultipleTargetCamera>();
+        //_playerManager.onPlayerJoined += input => Debug.Log(input.GetPrefabDefinition().name);
     }
 
     void Update()
