@@ -12,8 +12,9 @@ public class Player_Movement: MonoBehaviour
 {
     public float speed;
     public float jumpForce;
-    private GameObject _hands;
     
+    private GameObject _itemInHandsObj;
+    private GameObject _handsObject;
     [SerializeField] private float pickupRange = 1f;
 
     private Vector2 _moveInput = Vector2.zero;
@@ -28,7 +29,7 @@ public class Player_Movement: MonoBehaviour
     private float _jumpTimeCounter;
     private bool _isJumping;
 
-    private Fire handsAction;
+    private Item handsAction;
     private Animations _animationsController;
     private PlayerOnPlatform _playerOnPlatform;
     private GameObject _overlapPicking = null!;
@@ -39,6 +40,7 @@ public class Player_Movement: MonoBehaviour
         _animationsController = GetComponent<Animations>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _playerOnPlatform = GetComponent<PlayerOnPlatform>();
+        _handsObject = gameObject.transform.Find("Hands").gameObject;
         DontDestroyOnLoad(gameObject);
     }
 
@@ -108,15 +110,14 @@ public class Player_Movement: MonoBehaviour
     {
         if (handsAction)
         {
-            handsAction.Shoot();
+            handsAction.Use();
         }
-            
     }
 
     public void Pickup_Drop()
     {
-        var inRange = Physics2D.OverlapCircle(transform.position, pickupRange, LayerMask.GetMask("Weapon"));
-        switch ((bool) _hands)
+        var inRange = Physics2D.OverlapCircle(transform.position, pickupRange, LayerMask.GetMask("Items"));
+        switch ((bool) _itemInHandsObj)
         {
             case false:
                 if (inRange != null) Pickup(inRange.gameObject);
@@ -127,25 +128,24 @@ public class Player_Movement: MonoBehaviour
         }
     }
 
-    private void Pickup(GameObject item)
+    private void Pickup(GameObject candidate)
     {
-        var weapon = item.GetComponent<Weapon>();
-        if (weapon.isTaken) return;
+        var item = candidate.GetComponent<Item>();
+        if (item.IsTaken) return;
         
-        var weaponTransform = item.GetComponent<Transform>();
-        var owner = gameObject.transform.Find("Hands").gameObject;
-        weaponTransform.SetParent(owner.GetComponent<Transform>(), true);
-        weapon.SetOwner(owner, this);    
-        _hands = item;
-        handsAction = weapon.GetComponent<Fire>();
+        var itemTransform = item.GetComponent<Transform>();
+        itemTransform.SetParent(_handsObject.GetComponent<Transform>(), true);
+        item.SetOwner(_handsObject);
+        _itemInHandsObj = candidate;
+        handsAction = item;
     }
 
     private void Drop()
     {
-        var weapon = _hands.GetComponent<Weapon>();
+        var item = _itemInHandsObj.GetComponent<Item>();
         handsAction = null!;
-        _hands = null!;
-        weapon.DiscardOwner(_moveInput.x != 0 || rb.velocity.y != 0);
+        _itemInHandsObj = null!;
+        item.DiscardOwner(_moveInput.x != 0 || rb.velocity.y != 0);
     }
 
     private void OnDrawGizmosSelected()

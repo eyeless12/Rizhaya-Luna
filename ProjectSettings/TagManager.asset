@@ -10,6 +10,7 @@ TagManager:
   - Usable
   - Bullet
   - Props
+  - Throwable
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - 
   - Ground
   - Bullets & Misc
-  - Weapon
+  - Items
   - Player
   - 
   - 
