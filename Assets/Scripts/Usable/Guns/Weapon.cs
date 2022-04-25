@@ -12,6 +12,8 @@ public class Weapon : Item
     public float recoil;
     public float bulletLifetime;
     public int maxCapacity;
+    
+    [Range(0f , 1f)] [SerializeField] public float accuracy;
 
     private Fire _weaponAction;
 

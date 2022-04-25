@@ -13,9 +13,9 @@ public class Item : MonoBehaviour, IItem
     public Vector2 OwnerLookDirection => Math.Sign(Owner.transform.rotation.y) > 0 ?
         Vector2.right : Vector2.left;
     
-    private Transform _inHandsPosition;
-    private Transform _itemTransform;
-    private Rigidbody2D _itemPhysics;
+    protected Transform _inHandsPosition;
+    protected Transform _itemTransform;
+    protected Rigidbody2D _itemPhysics;
     
     public virtual void Start()
     {
@@ -27,7 +27,9 @@ public class Item : MonoBehaviour, IItem
     public virtual void Update()
     {
         if (IsTaken && Hands)
+        {
             _itemTransform.position = _inHandsPosition.position + handsOffset;
+        }
     }
 
     public void SetOwner(GameObject hands)
@@ -36,12 +38,14 @@ public class Item : MonoBehaviour, IItem
         Owner ??= hands.transform.parent.gameObject;
         _inHandsPosition = hands.GetComponent<Transform>();
         _itemTransform.rotation = _inHandsPosition.rotation;
+        _itemPhysics.freezeRotation = true;
         IsTaken = true; 
     }
 
     public void DiscardOwner(bool throwing)
     {
         _itemTransform.rotation = _inHandsPosition.rotation;
+        _itemPhysics.freezeRotation = false;
         _itemTransform.parent = null;
         if (throwing) Throw();
         Hands = null;

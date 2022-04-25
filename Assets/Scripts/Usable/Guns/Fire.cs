@@ -53,9 +53,13 @@ public class Fire : MonoBehaviour
     private IEnumerable<Vector3> GenerateDirections()
     {
         var ways = _weaponCharacteristics.Spread;
+        var random = new Random();
+
+        var offset = 1 / _weaponCharacteristics.accuracy;
         if (ways % 2 != 0)
         {
-            yield return _weaponCharacteristics.OwnerLookDirection;
+            yield return  Quaternion.Euler(0, 0, Math.Sign(random.Next(-1, 1)) * offset) 
+                          * _weaponCharacteristics.OwnerLookDirection;
             ways -= 1;
         }
 
@@ -64,8 +68,8 @@ public class Fire : MonoBehaviour
         var angle = _weaponCharacteristics.SpreadWidth / ways;
         for (var i = 1; i <= ways / 2; i++)
         {
-            var random = new Random();
-            var offset = (float)random.NextDouble() * 10;
+            
+            offset = (float)random.NextDouble() * 10;
             Debug.Log(offset);
             yield return Quaternion.Euler(0, 0, angle * i)
                          * _weaponCharacteristics.OwnerLookDirection;

@@ -185,6 +185,7 @@ MonoBehaviour:
   recoil: 20000
   bulletLifetime: 0.13
   maxCapacity: 4
+  accuracy: 1
 --- !u!61 &-5315391368911426316
 BoxCollider2D:
   m_ObjectHideFlags: 0

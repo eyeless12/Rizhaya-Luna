@@ -72,9 +72,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7741846280929128142}
   - component: {fileID: 5212990463681894787}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Gun
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,5 +109,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pf_bullet: {fileID: 3981763920355673881, guid: a752a8ef1fc4ea04f95940a3e875a666, type: 3}
-  spread: 1
   initialBulletPoint: {fileID: 7641700992129395022}
