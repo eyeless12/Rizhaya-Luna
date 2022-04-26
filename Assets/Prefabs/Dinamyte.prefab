@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2941300897249154512}
   - component: {fileID: 962062443186750722}
-  - component: {fileID: 3437703317213878486}
   - component: {fileID: 9101921474930005122}
+  - component: {fileID: 3437703317213878486}
   - component: {fileID: 5514141209826430513}
   - component: {fileID: 6934189863317624514}
   m_Layer: 12
@@ -51,6 +51,22 @@ MonoBehaviour:
   handsOffset: {x: 0, y: 0, z: 0}
   timeToAction: 5
   needsActivation: 1
+--- !u!114 &9101921474930005122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078327353732369745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19dea6f5634608d41863d7fc85c65bbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pf_bullet: {fileID: 3981763920355673881, guid: a752a8ef1fc4ea04f95940a3e875a666, type: 3}
+  projectilesCount: 45
+  projectilesLifetime: 0.08
+  explodeArea: 360
 --- !u!212 &3437703317213878486
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -103,20 +119,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &9101921474930005122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1078327353732369745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19dea6f5634608d41863d7fc85c65bbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectilesCount: 0
-  projectilesLifetime: 0
 --- !u!50 &5514141209826430513
 Rigidbody2D:
   serializedVersion: 4

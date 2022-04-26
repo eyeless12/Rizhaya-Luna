@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = System.Random;
+
 
 public class Fire : MonoBehaviour
 {
@@ -26,7 +26,11 @@ public class Fire : MonoBehaviour
     {
         if (!_canShoot || _magazine <= 0) return;
 
-        foreach (var direction in GenerateDirections())
+        foreach (var direction in Utils.GenerateDirections(
+            _weaponCharacteristics.Spread,
+            _weaponCharacteristics.SpreadWidth,
+            _weaponCharacteristics.accuracy,
+            _weaponCharacteristics.OwnerLookDirection))
         {
             var bullet = Instantiate(pf_bullet, initialBulletPoint.position, initialBulletPoint.rotation)
                 .GetComponent<Bullet>();
@@ -48,36 +52,6 @@ public class Fire : MonoBehaviour
 
         if (_shootTime < 0)
             _canShoot = true;
-    }
-
-    private IEnumerable<Vector3> GenerateDirections()
-    {
-        var ways = _weaponCharacteristics.Spread;
-        var random = new Random();
-
-        var offset = 1 / _weaponCharacteristics.accuracy;
-        if (ways % 2 != 0)
-        {
-            yield return  Quaternion.Euler(0, 0, Math.Sign(random.Next(-1, 1)) * offset) 
-                          * _weaponCharacteristics.OwnerLookDirection;
-            ways -= 1;
-        }
-
-        if (_weaponCharacteristics.Spread == 1) yield break;
-        
-        var angle = _weaponCharacteristics.SpreadWidth / ways;
-        for (var i = 1; i <= ways / 2; i++)
-        {
-            
-            offset = (float)random.NextDouble() * 10;
-            Debug.Log(offset);
-            yield return Quaternion.Euler(0, 0, angle * i)
-                         * _weaponCharacteristics.OwnerLookDirection;
-            yield return Quaternion.Euler(0, 0, -angle * i)
-                         * _weaponCharacteristics.OwnerLookDirection;
-        }
-            
-        
     }
 
     private void PerformRecoil()

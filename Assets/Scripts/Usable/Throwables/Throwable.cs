@@ -31,7 +31,6 @@ public class Throwable : Item
         if (_time < timeToAction) return;
         
         _throwableAction.Boom();
-        Destroy(gameObject);
     }
 
     public override void Use()
