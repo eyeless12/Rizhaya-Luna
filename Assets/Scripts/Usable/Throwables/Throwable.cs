@@ -8,6 +8,7 @@ public class Throwable : Item
 {
     [SerializeField] private float timeToAction;
     [SerializeField] private bool needsActivation;
+    [SerializeField] private Animator _animator;
     
     private bool _activated;
     private float _time;
@@ -15,6 +16,7 @@ public class Throwable : Item
 
     private Rigidbody2D _rb;
     private Transform _transform;
+    private static readonly int Activated = Animator.StringToHash("Activated");
 
     public override void Start()
     {
@@ -27,6 +29,7 @@ public class Throwable : Item
         base.Update();
         if (!_activated) return;
         
+        _animator.SetTrigger(Activated);
         _time += Time.deltaTime;
         if (_time < timeToAction) return;
         

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3437703317213878486}
   - component: {fileID: 5514141209826430513}
   - component: {fileID: 6934189863317624514}
+  - component: {fileID: -3096149765915874925}
   m_Layer: 12
   m_Name: Dinamyte
   m_TagString: Throwable
@@ -51,6 +52,7 @@ MonoBehaviour:
   handsOffset: {x: 0, y: 0, z: 0}
   timeToAction: 5
   needsActivation: 1
+  _animator: {fileID: -3096149765915874925}
 --- !u!114 &9101921474930005122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,3 +173,23 @@ PolygonCollider2D:
       - {x: 0.18974519, y: -0.5024551}
       - {x: 0.18728995, y: 0.05758989}
       - {x: 0.0625, y: 0.24978995}
+--- !u!95 &-3096149765915874925
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078327353732369745}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 85f8272fa276347439d29939425ebd28, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
