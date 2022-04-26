@@ -232,4 +232,4 @@ MonoBehaviour:
   recoil: 15000
   bulletLifetime: 0.35
   maxCapacity: 12
-  accuracy: 0.609
+  accuracy: 0.873
