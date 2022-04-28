@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using UnityEngine;
 
+//Класс кидаемого оружия
 public class Throwable : Item
 {
     [SerializeField] private float timeToAction;
@@ -12,7 +13,7 @@ public class Throwable : Item
     
     private bool _activated;
     private float _time;
-    private Explode _throwableAction;
+    private Explode _throwableAction; 
 
     private Rigidbody2D _rb;
     private Transform _transform;

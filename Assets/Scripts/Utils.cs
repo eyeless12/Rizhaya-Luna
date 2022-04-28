@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
+//Общий класс для вспомогательных функций
 public static class Utils
 {
+    //Разброс оружия
     public static IEnumerable<Vector3> GenerateDirections(int outputWays, int width, float outputAccuracy, Vector3 baseVector)
     {
         var ways = outputWays;

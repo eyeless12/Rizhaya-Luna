@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Usable
 {
+    
     public interface IItem
     {
         void SetOwner(GameObject hands);

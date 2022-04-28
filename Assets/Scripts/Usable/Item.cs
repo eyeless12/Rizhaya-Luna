@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Usable;
 
+//Общий класс всех предметов с набором необходимых методов
 public class Item : MonoBehaviour, IItem
 {
     [SerializeField] private Vector3 handsOffset;
@@ -62,7 +63,7 @@ public class Item : MonoBehaviour, IItem
         _itemPhysics.AddTorque(-5f * Math.Sign(OwnerLookDirection.x), ForceMode2D.Impulse);
         _itemPhysics.velocity = throwVector;
     }
-
+    
     public virtual void Use()
     {
         Debug.Log($"USED {gameObject.name}");
