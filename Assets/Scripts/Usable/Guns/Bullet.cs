@@ -33,7 +33,6 @@ public class Bullet : MonoBehaviour
         {
             var target = other.gameObject;
             GameManager.Players.SetIGS(target, GameManager.PlayerIGS.Dead);
-            Debug.Log($"{target.name} is dead!");
         }
         
         if (other.CompareTag("Player") 

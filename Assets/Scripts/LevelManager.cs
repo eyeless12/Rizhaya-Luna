@@ -34,6 +34,9 @@ public class LevelManager : MonoBehaviour
             StartCoroutine(LoadRandomLevel());
             _loaded = false;
         }
+
+        if (_spawnPoints.Count == 0)
+            _spawnPoints = SpawnPointsOnScene;
     }
 
     public IEnumerator LoadRandomLevel()

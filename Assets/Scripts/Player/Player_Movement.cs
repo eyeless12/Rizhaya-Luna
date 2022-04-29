@@ -20,7 +20,6 @@ public class Player_Movement: MonoBehaviour
     private Vector2 _moveInput = Vector2.zero;
     private Rigidbody2D rb;
     private bool _facingRight = true;
-
     
     private BoxCollider2D _boxCollider;
     
@@ -33,6 +32,8 @@ public class Player_Movement: MonoBehaviour
     private Animations _animationsController;
     private PlayerOnPlatform _playerOnPlatform;
     private GameObject _overlapPicking = null!;
+
+    public bool IsDead => !GameManager.Players.Alive.Contains(gameObject);
 
     public void Start()
     {
@@ -67,12 +68,23 @@ public class Player_Movement: MonoBehaviour
         HandleRun();
         HandleFlip();
         HandleJump();
+        HandleDead();
     }
 
     private void HandleRun()
     {
         rb.velocity = new Vector2(_moveInput.x * speed, rb.velocity.y);
         _animationsController.SetRunAnimation(_moveInput.x);
+    }
+
+    private void HandleDead()
+    {
+        _animationsController.SetDeadStatus(IsDead);
+    }
+
+    public void PerformDeadPhysics(float value)
+    {
+        
     }
 
     private void HandleJump()

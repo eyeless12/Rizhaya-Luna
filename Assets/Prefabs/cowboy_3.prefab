@@ -145,7 +145,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 10
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3fcd7b7212ddf5c41bc4f80ca3604429, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -242,11 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 9
   jumpForce: 15
-  handsTransform: {fileID: 2523479028238040740}
   pickupRange: 0.8
-  feet: {fileID: 8147089473430004266}
-  feetPos: {fileID: 8147089473430004267}
-  checkRadius: 0.3
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1024

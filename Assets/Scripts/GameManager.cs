@@ -72,10 +72,20 @@ public class GameManager : MonoBehaviour
                 }
         }
 
+        public static PlayerInfo GetPlayerByInstance(GameObject instance)
+        {
+            return players.First(p => p.Instance == instance);
+        }
+
         public static bool IsAllReady => players.All(pi => pi.OGS_State == PlayerOGS.Ready);
         public static int AliveCount => players.Count(pi => pi.IGS_State == PlayerIGS.Alive);
         public static GameObject[] Alive => players
             .Where(pi => pi.IGS_State == PlayerIGS.Alive)
+            .Select(pi => pi.Instance)
+            .ToArray();
+        
+        public static GameObject[] Dead => players
+            .Where(pi => pi.IGS_State == PlayerIGS.Dead)
             .Select(pi => pi.Instance)
             .ToArray();
         public static int Count => players.Count;
@@ -102,6 +112,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (InProgress == false)
+        {
+            StartCoroutine(ForceSpawnDeadPlayers());
+        }
         if (InProgress == false && Players.Count > 0 && Players.IsAllReady)
         {
             StartCoroutine(_levelManager.LoadRandomLevel());
@@ -115,6 +129,19 @@ public class GameManager : MonoBehaviour
             _camera.players = new List<Transform>(Players.players.Select(pi => pi.Instance.GetComponent<Transform>())); 
             _newConnected = false;
         }
+    }
+    
+    public IEnumerator ForceSpawnDeadPlayers()
+    {
+        yield return new WaitUntil(() => Players.AliveCount < Players.Count);
+        yield return new WaitForSeconds(2f);
+
+        foreach (var candidate in Players.Dead)
+        {
+            Players.GetPlayerByInstance(candidate).IGS_State = PlayerIGS.Alive;
+            _levelManager.SpawnPlayer(candidate); 
+        }
+            
     }
 
     public void OnJoin()
