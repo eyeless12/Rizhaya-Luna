@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private SceneAsset mainMenuLevel;
     [SerializeField] private GameManager gameManager;
     
-    private bool LevelFinished => GameManager.Players.AliveCount == 1 && GameManager.Players.Count > 1;
+    private bool LevelFinished => GameManager.Players.AliveCount <= 1 && GameManager.Players.Count > 1;
     private float _timeToNextLevel = 3f;
     private bool _loaded;
     
@@ -28,8 +28,7 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Players.AliveCount == 1 && gameManager.InProgress 
-                                                && LevelFinished && _loaded)
+        if (gameManager.InProgress && LevelFinished && _loaded)
         {
             StartCoroutine(LoadRandomLevel());
             _loaded = false;

@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
         //_playerManager.onPlayerJoined += input => Debug.Log(input.GetPrefabDefinition().name);
     }
 
-    void Update()
+    private void Update()
     {
         if (InProgress == false)
         {
@@ -120,7 +120,6 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(_levelManager.LoadRandomLevel());
             InProgress = true;
-            //_camera.zoomEnabled = true;
         }
 
         if (_newConnected)
@@ -130,18 +129,20 @@ public class GameManager : MonoBehaviour
             _newConnected = false;
         }
     }
-    
-    public IEnumerator ForceSpawnDeadPlayers()
+
+    private IEnumerator ForceSpawnDeadPlayers()
     {
-        yield return new WaitUntil(() => Players.AliveCount < Players.Count);
+        if (Players.AliveCount == Players.Count)
+            yield break;
+
         yield return new WaitForSeconds(2f);
 
         foreach (var candidate in Players.Dead)
         {
             Players.GetPlayerByInstance(candidate).IGS_State = PlayerIGS.Alive;
             _levelManager.SpawnPlayer(candidate); 
+            Debug.Log($"{candidate.name} force spawned");
         }
-            
     }
 
     public void OnJoin()
