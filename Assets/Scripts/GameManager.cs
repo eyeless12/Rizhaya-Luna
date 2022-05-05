@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
         foreach (var candidate in Players.Dead)
         {
             Players.GetPlayerByInstance(candidate).IGS_State = PlayerIGS.Alive;
-            _levelManager.SpawnPlayer(candidate); 
+            _levelManager.SpawnPlayer(candidate, SpawnMode.ForceSpawn); 
             Debug.Log($"{candidate.name} force spawned");
         }
     }

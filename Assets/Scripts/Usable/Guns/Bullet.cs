@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     
     private Rigidbody2D _rb;
     private Transform _transform;
+    private int _ground;
 
     [NonSerialized] public Vector2 direction;
     [NonSerialized] public float lifetime;
@@ -16,6 +17,8 @@ public class Bullet : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _transform = GetComponent<Transform>();
+
+        _ground = LayerMask.NameToLayer("Ground");
         
         _rb.velocity = direction * speed ;
         _transform.rotation = Quaternion.Euler(direction);
@@ -27,17 +30,13 @@ public class Bullet : MonoBehaviour
         lifetime -= Time.deltaTime;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            var target = other.gameObject;
-            GameManager.Players.SetIGS(target, GameManager.PlayerIGS.Dead);
-        }
+        var target = other.gameObject;
         
-        if (other.CompareTag("Player") 
-            || other.gameObject.layer == LayerMask.NameToLayer("Ground")
-            || other.CompareTag("Props"))
-            Destroy(gameObject);
-    }
+        if (target.CompareTag("Player"))
+            GameManager.Players.SetIGS(target, GameManager.PlayerIGS.Dead); 
+        
+        Destroy(gameObject);
+    }   
 }

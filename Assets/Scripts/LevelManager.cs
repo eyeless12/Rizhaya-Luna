@@ -1,12 +1,17 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
+
+public enum SpawnMode
+{
+    ForceSpawn,
+    SafeSpawn,
+    Default
+}
 
 public class LevelManager : MonoBehaviour
 {
@@ -55,17 +60,19 @@ public class LevelManager : MonoBehaviour
         foreach (var player in GameManager.Players.players)
         {
             player.IGS_State = GameManager.PlayerIGS.Alive;
-            SpawnPlayer(player.Instance);
+            SpawnPlayer(player.Instance, SpawnMode.Default);
         }
 
         _loaded = true;
     }
 
-    public void SpawnPlayer(GameObject player)
+    public void SpawnPlayer(GameObject player, SpawnMode mode)
     {
         var point = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
         var position = point.transform.position;
         player.GetComponent<Transform>().position = position;
-        _spawnPoints.Remove(point);
+        
+        if (mode == SpawnMode.Default) 
+            _spawnPoints.Remove(point);
     }
 }
