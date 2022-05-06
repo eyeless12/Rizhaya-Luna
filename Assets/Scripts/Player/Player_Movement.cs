@@ -7,6 +7,7 @@ using Unity;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player_Movement: MonoBehaviour
 {
@@ -42,6 +43,7 @@ public class Player_Movement: MonoBehaviour
         _boxCollider = GetComponent<BoxCollider2D>();
         _playerOnPlatform = GetComponent<PlayerOnPlatform>();
         _handsObject = gameObject.transform.Find("Hands").gameObject;
+
         DontDestroyOnLoad(gameObject);
     }
 

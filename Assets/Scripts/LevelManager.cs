@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
@@ -52,6 +53,7 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator LoadLevel(string levelName)
     {
+        yield return new WaitUntil(ClearMisc);
         SceneManager.LoadScene(levelName);
         yield return new WaitForFixedUpdate();
         
@@ -74,5 +76,14 @@ public class LevelManager : MonoBehaviour
         
         if (mode == SpawnMode.Default) 
             _spawnPoints.Remove(point);
+    }
+
+    private bool ClearMisc()
+    {
+        var misc = FindObjectsOfType<Item>();
+        foreach (var item in misc)
+            Destroy(item);
+
+        return true;
     }
 }

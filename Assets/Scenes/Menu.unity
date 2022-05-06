@@ -1763,9 +1763,9 @@ MonoBehaviour:
   offset: {x: 0, y: 0, z: -100}
   zoomEnabled: 0
   smoothTime: 0.15
-  minZoom: 40
-  maxZoom: 8
-  zoomCoefficient: 2.75
+  minZoom: 100
+  maxZoom: 20
+  zoomCoefficient: 5.72
 --- !u!1 &625648834
 GameObject:
   m_ObjectHideFlags: 0
@@ -4620,6 +4620,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
+  - {fileID: 102900000, guid: 5e6ce420fd0b02447af15adf919dc63a, type: 3}
+  - {fileID: 102900000, guid: df62bddc39924e14096a9ee07d4559fd, type: 3}
   - {fileID: 102900000, guid: 690ea2ab0d1454671a7cc417df017e5d, type: 3}
   mainMenuLevel: {fileID: 102900000, guid: 249a95b45a97a1c468dedb3c2a0fbed5, type: 3}
   gameManager: {fileID: 1986562319}
