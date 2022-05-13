@@ -182,7 +182,7 @@ MonoBehaviour:
   Spread: 12
   SpreadWidth: 70
   BulletThresholdTime: 0.25
-  recoil: 20000
+  recoil: 200
   bulletLifetime: 0.05
   maxCapacity: 4
   accuracy: 0.767

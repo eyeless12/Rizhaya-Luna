@@ -75,7 +75,13 @@ public class Player_Movement: MonoBehaviour
 
     private void HandleRun()
     {
-        rb.velocity = new Vector2(_moveInput.x * speed, rb.velocity.y);
+        var velocity = rb.velocity;
+        var velocityX = velocity.x / 2;
+        
+        velocityX = velocityX + _moveInput.x * speed; //FIX
+        velocity = new Vector2(velocityX, velocity.y);
+        
+        rb.velocity = velocity;
         _animationsController.SetRunAnimation(_moveInput.x);
     }
 

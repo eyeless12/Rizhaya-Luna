@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 854997025
-  m_SortingLayer: 4
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 20843637, guid: 7b2be5ec375616f40b60181d1e1cd047, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -229,7 +229,7 @@ MonoBehaviour:
   Spread: 1
   SpreadWidth: 0
   BulletThresholdTime: 0.1
-  recoil: 15000
+  recoil: 150
   bulletLifetime: 0.35
   maxCapacity: 12
   accuracy: 0.873

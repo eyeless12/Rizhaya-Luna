@@ -42,7 +42,6 @@ public class Fire : MonoBehaviour
         _canShoot = false;
         _shootTime = _weaponCharacteristics.BulletThresholdTime;
         _magazine -= 1;
-        Debug.Log(_magazine);
     }
 
     public void FixedUpdate()
@@ -59,8 +58,8 @@ public class Fire : MonoBehaviour
         var owner = _weaponCharacteristics.Owner;
         var ownerPhysics = owner.GetComponent<Rigidbody2D>();
         var recoilVector = new Vector2(
-             _weaponCharacteristics.recoil * _weaponCharacteristics.OwnerLookDirection.x * -1 , _weaponCharacteristics.recoil / 5);
+             _weaponCharacteristics.recoil * _weaponCharacteristics.OwnerLookDirection.x * -1 * 3 , _weaponCharacteristics.recoil / 2);
         //Debug.Log(recoilVector);
-        ownerPhysics.AddForce(recoilVector, ForceMode2D.Force);
+        ownerPhysics.AddForce(recoilVector, ForceMode2D.Impulse);
     }
 }

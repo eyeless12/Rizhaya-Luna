@@ -1,9 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
@@ -82,7 +82,16 @@ public class LevelManager : MonoBehaviour
     {
         var misc = FindObjectsOfType<Item>();
         foreach (var item in misc)
-            Destroy(item);
+        {
+            Debug.Log(item.name);
+            Destroy(item.gameObject);
+        }
+
+        foreach (var hands in GameManager.Players.players.Select(pi => pi.Instance.transform.Find("Hands")))
+        {
+            var item = hands.GetComponentInChildren<Item>();
+            if (item) item.Delete();
+        }
 
         return true;
     }

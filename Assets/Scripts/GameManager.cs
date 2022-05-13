@@ -1,10 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
@@ -93,6 +90,7 @@ public class GameManager : MonoBehaviour
     
     private PlayerInputManager _playerManager;
     private LevelManager _levelManager;
+    private GameObject _menuEventManager;
     private List<GameObject> _gunsOnSceneLoad;
     private bool _newConnected;
     private MultipleTargetCamera _camera;
@@ -105,6 +103,8 @@ public class GameManager : MonoBehaviour
         InProgress = false;
         _newConnected = false;
         _playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerInputManager>();
+        _menuEventManager = GameObject.Find("EventSystem");
+        DontDestroyOnLoad(_menuEventManager.gameObject);
         _levelManager = GetComponent<LevelManager>();
         _camera = GameObject.FindWithTag("MainCamera").GetComponent<MultipleTargetCamera>();
         //_playerManager.onPlayerJoined += input => Debug.Log(input.GetPrefabDefinition().name);
