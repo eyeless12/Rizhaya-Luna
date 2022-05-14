@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 854997025
-  m_SortingLayer: 4
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 1798946080, guid: 7b2be5ec375616f40b60181d1e1cd047, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -179,13 +179,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handsOffset: {x: 0, y: 0, z: 0}
-  Spread: 0
+  Spread: 1
   SpreadWidth: 0
-  BulletThresholdTime: 0
-  recoil: 2000
-  bulletLifetime: 0.5
+  BulletThresholdTime: 0.05
+  recoil: 50
+  bulletLifetime: 0.25
   maxCapacity: 30
-  accuracy: 1
+  accuracy: 0.982
 --- !u!61 &-5315391368911426316
 BoxCollider2D:
   m_ObjectHideFlags: 0

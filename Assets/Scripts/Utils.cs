@@ -16,13 +16,13 @@ public static class Utils
         var offset = 1 / outputAccuracy;
         if (ways % 2 != 0)
         {
-            yield return  Quaternion.Euler(0, 0, Math.Sign(random.Next(-1, 1)) * offset) 
+            yield return  Quaternion.Euler(0, 0, Math.Sign(random.Next(-1, 2)) * offset) 
                           * baseVector;
             ways -= 1;
         }
-
-        if (outputWays == 1) yield break;
         
+        if (outputWays == 1) yield break;
+
         var angle = width / ways;
         for (var i = 1; i <= ways / 2; i++)
         {
