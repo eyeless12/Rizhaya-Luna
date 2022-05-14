@@ -68,4 +68,9 @@ public class Item : MonoBehaviour, IItem
     {
         Debug.Log($"USED {gameObject.name}");
     }
+
+    public void Delete()
+    {
+        Destroy(gameObject);
+    }
 }

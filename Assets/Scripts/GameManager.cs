@@ -1,10 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
@@ -72,10 +69,20 @@ public class GameManager : MonoBehaviour
                 }
         }
 
+        public static PlayerInfo GetPlayerByInstance(GameObject instance)
+        {
+            return players.First(p => p.Instance == instance);
+        }
+
         public static bool IsAllReady => players.All(pi => pi.OGS_State == PlayerOGS.Ready);
         public static int AliveCount => players.Count(pi => pi.IGS_State == PlayerIGS.Alive);
         public static GameObject[] Alive => players
             .Where(pi => pi.IGS_State == PlayerIGS.Alive)
+            .Select(pi => pi.Instance)
+            .ToArray();
+        
+        public static GameObject[] Dead => players
+            .Where(pi => pi.IGS_State == PlayerIGS.Dead)
             .Select(pi => pi.Instance)
             .ToArray();
         public static int Count => players.Count;
@@ -83,6 +90,7 @@ public class GameManager : MonoBehaviour
     
     private PlayerInputManager _playerManager;
     private LevelManager _levelManager;
+    private GameObject _menuEventManager;
     private List<GameObject> _gunsOnSceneLoad;
     private bool _newConnected;
     private MultipleTargetCamera _camera;
@@ -95,18 +103,23 @@ public class GameManager : MonoBehaviour
         InProgress = false;
         _newConnected = false;
         _playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerInputManager>();
+        _menuEventManager = GameObject.Find("EventSystem");
+        DontDestroyOnLoad(_menuEventManager.gameObject);
         _levelManager = GetComponent<LevelManager>();
         _camera = GameObject.FindWithTag("MainCamera").GetComponent<MultipleTargetCamera>();
         //_playerManager.onPlayerJoined += input => Debug.Log(input.GetPrefabDefinition().name);
     }
 
-    void Update()
+    private void Update()
     {
+        if (InProgress == false)
+        {
+            StartCoroutine(ForceSpawnDeadPlayers());
+        }
         if (InProgress == false && Players.Count > 0 && Players.IsAllReady)
         {
             StartCoroutine(_levelManager.LoadRandomLevel());
             InProgress = true;
-            //_camera.zoomEnabled = true;
         }
 
         if (_newConnected)
@@ -114,6 +127,21 @@ public class GameManager : MonoBehaviour
             Players.UpdatePlayers();
             _camera.players = new List<Transform>(Players.players.Select(pi => pi.Instance.GetComponent<Transform>())); 
             _newConnected = false;
+        }
+    }
+
+    private IEnumerator ForceSpawnDeadPlayers()
+    {
+        if (Players.AliveCount == Players.Count)
+            yield break;
+
+        yield return new WaitForSeconds(2f);
+
+        foreach (var candidate in Players.Dead)
+        {
+            Players.GetPlayerByInstance(candidate).IGS_State = PlayerIGS.Alive;
+            _levelManager.SpawnPlayer(candidate, SpawnMode.ForceSpawn); 
+            Debug.Log($"{candidate.name} force spawned");
         }
     }
 
