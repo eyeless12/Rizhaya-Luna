@@ -70,7 +70,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8147089473430004266}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -242,11 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 9
   jumpForce: 15
-  handsTransform: {fileID: 2523479028238040740}
   pickupRange: 0.8
-  feet: {fileID: 8147089473430004266}
-  feetPos: {fileID: 8147089473430004267}
-  checkRadius: 0.3
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1024
