@@ -186,7 +186,7 @@ MonoBehaviour:
   verticalRecoil: 75
   bulletLifetime: 0.25
   maxCapacity: 30
-  accuracy: 0.982
+  accuracy: 0.226
 --- !u!61 &-5315391368911426316
 BoxCollider2D:
   m_ObjectHideFlags: 0
