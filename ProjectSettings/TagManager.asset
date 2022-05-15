@@ -21,7 +21,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Blocks
   - Ground
   - Bullets & Misc
   - Items
@@ -51,12 +51,12 @@ TagManager:
   - name: Structures
     uniqueID: 1548876609
     locked: 0
-  - name: Weapons
-    uniqueID: 854997025
-    locked: 0
   - name: Misc & Effects
     uniqueID: 1313141493
     locked: 0
   - name: Players
     uniqueID: 1688940549
+    locked: 0
+  - name: Weapons
+    uniqueID: 854997025
     locked: 0

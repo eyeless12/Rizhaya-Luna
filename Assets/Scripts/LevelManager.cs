@@ -16,8 +16,7 @@ public enum SpawnMode
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private List<SceneAsset> levels;
-    [SerializeField] private SceneAsset mainMenuLevel;
+    [SerializeField] private List<string> levels;
     [SerializeField] private GameManager gameManager;
     
     private bool LevelFinished => GameManager.Players.AliveCount <= 1 && GameManager.Players.Count > 1;
@@ -48,7 +47,7 @@ public class LevelManager : MonoBehaviour
     {
         var level = levels[Random.Range(0, levels.Count)];
         yield return new WaitForSeconds(_timeToNextLevel);
-        StartCoroutine(LoadLevel(level.name));
+        StartCoroutine(LoadLevel(level));
     }
 
     private IEnumerator LoadLevel(string levelName)

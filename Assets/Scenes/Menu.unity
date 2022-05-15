@@ -4914,8 +4914,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - {fileID: 102900000, guid: cb91960477e21432dbc4692d4ff32f4e, type: 3}
-  mainMenuLevel: {fileID: 102900000, guid: 249a95b45a97a1c468dedb3c2a0fbed5, type: 3}
+  - level_01
+  - level_02
+  - level_03
+  - level_04
   gameManager: {fileID: 1986562319}
 --- !u!1 &2013237650
 GameObject:
