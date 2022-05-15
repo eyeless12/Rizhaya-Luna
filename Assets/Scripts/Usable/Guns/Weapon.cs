@@ -13,6 +13,7 @@ public class Weapon : Item
     public float verticalRecoil;
     public float bulletLifetime;
     public int maxCapacity;
+    public bool canBeHold;
     
     [Range(0f , 1f)] [SerializeField] public float accuracy;
 

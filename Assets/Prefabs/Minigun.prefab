@@ -70,9 +70,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 854997025
+  m_SortingLayer: 4
+  m_SortingOrder: 1
   m_Sprite: {fileID: 919036227, guid: 7b2be5ec375616f40b60181d1e1cd047, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -96,7 +96,7 @@ GameObject:
   m_Layer: 0
   m_Name: BulletStartPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -108,7 +108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8553413815784113393}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.727, y: 0.057, z: 0}
+  m_LocalPosition: {x: 0.799, y: 0.024, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -181,11 +181,12 @@ MonoBehaviour:
   handsOffset: {x: 0, y: 0, z: 0}
   Spread: 1
   SpreadWidth: 70
-  BulletThresholdTime: 0.05
+  BulletThresholdTime: 0.1
   horizontalRecoil: 100
-  verticalRecoil: 100
+  verticalRecoil: 30
   bulletLifetime: 0.1
   maxCapacity: 100
+  canBeHold: 1
   accuracy: 0.199
 --- !u!61 &-5315391368911426316
 BoxCollider2D:

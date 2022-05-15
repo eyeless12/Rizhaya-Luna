@@ -15,6 +15,7 @@ public class Player_Movement: MonoBehaviour
     public float jumpForce;
     
     private GameObject _itemInHandsObj;
+    private Weapon _weaponInHands = null!;
     private GameObject _handsObject;
     [SerializeField] private float pickupRange = 1f;
 
@@ -28,6 +29,8 @@ public class Player_Movement: MonoBehaviour
     public float jumpTime;
     private float _jumpTimeCounter;
     private bool _isJumping;
+
+    private bool _shooting;
 
     private Item handsAction;
     private Animations _animationsController;
@@ -68,6 +71,7 @@ public class Player_Movement: MonoBehaviour
     public void FixedUpdate()
     {
         HandleRun();
+        HandleShoot();
         HandleFlip();
         HandleJump();
         HandleDead();
@@ -93,6 +97,15 @@ public class Player_Movement: MonoBehaviour
     public void PerformDeadPhysics(float value)
     {
         
+    }
+
+    private void HandleShoot()
+    {
+        if (!_shooting) return;
+        
+        handsAction.Use();
+        if (!_weaponInHands.canBeHold)
+            _shooting = false;
     }
 
     private void HandleJump()
@@ -126,12 +139,15 @@ public class Player_Movement: MonoBehaviour
         _playerOnPlatform.Perform();
     }
 
-    public void Shoot()
+    public void Shoot(InputAction.CallbackContext context)
     {
-        if (handsAction)
+        if (handsAction && context.performed)
         {
-            handsAction.Use();
+            _shooting = true;
         }
+
+        if (context.canceled)
+            _shooting = false;
     }
 
     public void Pickup_Drop()
@@ -157,6 +173,9 @@ public class Player_Movement: MonoBehaviour
         itemTransform.SetParent(_handsObject.GetComponent<Transform>(), true);
         item.SetOwner(_handsObject);
         _itemInHandsObj = candidate;
+
+        candidate.TryGetComponent(out _weaponInHands);
+        
         handsAction = item;
     }
 

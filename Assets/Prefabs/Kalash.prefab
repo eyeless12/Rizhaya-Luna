@@ -96,7 +96,7 @@ GameObject:
   m_Layer: 0
   m_Name: BulletStartPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -108,7 +108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8553413815784113393}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.818, y: 0.094, z: 0}
+  m_LocalPosition: {x: 0.724, y: 0.083, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -181,11 +181,12 @@ MonoBehaviour:
   handsOffset: {x: 0, y: 0, z: 0}
   Spread: 1
   SpreadWidth: 0
-  BulletThresholdTime: 0.05
-  horizontalRecoil: 100
-  verticalRecoil: 75
+  BulletThresholdTime: 0.2
+  horizontalRecoil: 75
+  verticalRecoil: 100
   bulletLifetime: 0.25
   maxCapacity: 30
+  canBeHold: 1
   accuracy: 0.226
 --- !u!61 &-5315391368911426316
 BoxCollider2D:

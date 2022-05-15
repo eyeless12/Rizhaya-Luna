@@ -89,11 +89,11 @@ public class PlayerInputHandler : MonoBehaviour
     
     public void Use(InputAction.CallbackContext context)
     {
-        if (_playerMovement && context.performed && !_playerMovement.IsDead)
+        //Debug.Log("PRESSED!");
+        if (_playerMovement && !_playerMovement.IsDead)
         {
+            _playerMovement.Shoot(context);
             _playerMovement.Use();
-            _playerMovement.Shoot();
         }
-            
     }
 }
