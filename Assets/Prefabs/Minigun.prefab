@@ -179,11 +179,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handsOffset: {x: 0, y: 0, z: 0}
-  Spread: 12
+  Spread: 1
   SpreadWidth: 70
   BulletThresholdTime: 0.05
-  recoil: 500
-  bulletLifetime: 0.05
+  horizontalRecoil: 100
+  verticalRecoil: 100
+  bulletLifetime: 0.1
   maxCapacity: 100
   accuracy: 0.199
 --- !u!61 &-5315391368911426316

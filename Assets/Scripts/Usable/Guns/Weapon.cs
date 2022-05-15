@@ -9,7 +9,8 @@ public class Weapon : Item
     public int Spread;
     public int SpreadWidth;
     public float BulletThresholdTime; 
-    public float recoil;
+    public float horizontalRecoil;
+    public float verticalRecoil;
     public float bulletLifetime;
     public int maxCapacity;
     
