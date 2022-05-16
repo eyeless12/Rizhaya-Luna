@@ -19,13 +19,12 @@ public class Bullet : MonoBehaviour
         _transform = GetComponent<Transform>();
 
         _ground = LayerMask.NameToLayer("Ground");
-        
-        _rb.velocity = direction * speed ;
         _transform.rotation = Quaternion.Euler(direction);
     }
 
     private void Update()
     {
+        _rb.velocity = direction * speed;
         if (lifetime < 0) Destroy(gameObject);
         lifetime -= Time.deltaTime;
     }
@@ -35,7 +34,13 @@ public class Bullet : MonoBehaviour
         var target = other.gameObject;
         
         if (target.CompareTag("Player"))
-            GameManager.Players.SetIGS(target, GameManager.PlayerIGS.Dead); 
+            GameManager.Players.SetIGS(target, GameManager.PlayerIGS.Dead);
+
+        if (target.CompareTag("Bullet_Collide_Block"))
+        {
+            direction = new Vector2(direction.x * -1, direction.y);
+            return;
+        }
         
         Destroy(gameObject);
     }   

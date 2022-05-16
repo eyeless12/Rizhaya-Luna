@@ -11,6 +11,7 @@ TagManager:
   - Bullet
   - Props
   - Throwable
+  - Bullet_Collide_Block
   layers:
   - Default
   - TransparentFX
