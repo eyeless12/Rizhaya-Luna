@@ -4914,10 +4914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - level_01
-  - level_02
-  - level_03
-  - level_04
+  - level_10
   gameManager: {fileID: 1986562319}
 --- !u!1 &2013237650
 GameObject:

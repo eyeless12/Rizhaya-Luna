@@ -5,6 +5,8 @@ using UnityEngine;
 using Usable;
 
 //Общий класс всех предметов с набором необходимых методов
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Collider2D))]
 public class Item : MonoBehaviour, IItem
 {
     [SerializeField] private Vector3 handsOffset;
@@ -58,10 +60,11 @@ public class Item : MonoBehaviour, IItem
         var velocity = Owner.GetComponent<Rigidbody2D>().velocity;
         var ownerTransform = Owner.GetComponent<Transform>();
         Debug.Log(ownerTransform.rotation.y);
-        var throwVector = new Vector2(2 * velocity.x, 1 * Math.Abs(velocity.x));
+        var throwVector = new Vector2(30 * velocity.x, 20 * Math.Abs(velocity.x));
         
         _itemPhysics.AddTorque(-5f * Math.Sign(OwnerLookDirection.x), ForceMode2D.Impulse);
-        _itemPhysics.velocity = throwVector;
+        //_itemPhysics.velocity = throwVector;
+        _itemPhysics.AddForce(throwVector, ForceMode2D.Impulse);
     }
     
     public virtual void Use()

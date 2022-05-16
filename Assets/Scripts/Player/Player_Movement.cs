@@ -96,7 +96,7 @@ public class Player_Movement: MonoBehaviour
 
     public void PerformDeadPhysics(float value)
     {
-        
+        Drop();
     }
 
     private void HandleShoot()
@@ -104,7 +104,7 @@ public class Player_Movement: MonoBehaviour
         if (!_shooting) return;
         
         handsAction.Use();
-        if (!_weaponInHands.canBeHold)
+        if (_weaponInHands && !_weaponInHands.canBeHold)
             _shooting = false;
     }
 
@@ -152,7 +152,7 @@ public class Player_Movement: MonoBehaviour
 
     public void Pickup_Drop()
     {
-        var inRange = Physics2D.OverlapCircle(transform.position, pickupRange, LayerMask.GetMask("Items"));
+        var inRange = Physics2D.OverlapCircle(transform.position, pickupRange, LayerMask.GetMask("Items", "Props"));
         switch ((bool) _itemInHandsObj)
         {
             case false:
@@ -181,9 +181,14 @@ public class Player_Movement: MonoBehaviour
 
     private void Drop()
     {
-        var item = _itemInHandsObj.GetComponent<Item>();
+        if (_itemInHandsObj == null) return;
+        
+        _itemInHandsObj.TryGetComponent<Item>(out var item);
+        if (item is null) return;
+        
         handsAction = null!;
         _itemInHandsObj = null!;
+        _weaponInHands = null!;
         item.DiscardOwner(_moveInput.x != 0 || rb.velocity.y != 0);
     }
 
