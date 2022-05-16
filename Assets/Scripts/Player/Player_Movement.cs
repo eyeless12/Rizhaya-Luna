@@ -101,10 +101,10 @@ public class Player_Movement: MonoBehaviour
 
     private void HandleShoot()
     {
-        if (!_shooting || _weaponInHands == null) return;
+        if (!_shooting || handsAction == null) return;
         
         handsAction.Use();
-        if (!_weaponInHands.canBeHold)
+        if (_weaponInHands && !_weaponInHands.canBeHold)
             _shooting = false;
     }
 
