@@ -69,6 +69,7 @@ MonoBehaviour:
   projectilesCount: 45
   projectilesLifetime: 0.08
   explodeArea: 360
+  explosion: {fileID: 1706401796092090676, guid: 741f1a365e76a5e47a193f0e82a30e2c, type: 3}
 --- !u!212 &3437703317213878486
 SpriteRenderer:
   m_ObjectHideFlags: 0

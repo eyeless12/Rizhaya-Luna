@@ -9,6 +9,7 @@ public class Explode : MonoBehaviour
     [SerializeField] private int projectilesCount;
     [SerializeField] private float projectilesLifetime;
     [SerializeField] private int explodeArea;
+    [SerializeField] private GameObject explosion;
 
     private Transform _tf;
     private Collider2D _collider;
@@ -23,7 +24,8 @@ public class Explode : MonoBehaviour
     public void Boom()
     {
         _collider.enabled = false;
-        
+        Instantiate(explosion, _tf.position, _tf.rotation);
+
         foreach (var direction in Utils.GenerateDirections(
             projectilesCount,
             explodeArea,
