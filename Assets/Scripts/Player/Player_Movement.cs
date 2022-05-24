@@ -1,13 +1,7 @@
 #nullable enable
-using System;
-using Unity.VisualScripting;
-using System.Collections.Generic;
 using System.Linq;
-using Unity;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class Player_Movement: MonoBehaviour
 {
