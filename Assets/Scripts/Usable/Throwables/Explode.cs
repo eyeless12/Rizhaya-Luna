@@ -9,6 +9,7 @@ public class Explode : MonoBehaviour
     [SerializeField] private GameObject explosion;
 
     private Transform _tf;
+    private bool _exploded;
     private Collider2D _collider;
     private Throwable _throwableCharacteristics;
 
@@ -20,7 +21,10 @@ public class Explode : MonoBehaviour
 
     public void Boom()
     {
+        if (_exploded) return;
+        
         _collider.enabled = false;
+        _exploded = true;
         Instantiate(explosion, _tf.position, _tf.rotation);
 
         foreach (var direction in Utils.GenerateDirections(

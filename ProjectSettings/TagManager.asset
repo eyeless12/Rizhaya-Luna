@@ -61,3 +61,6 @@ TagManager:
   - name: Weapons
     uniqueID: 854997025
     locked: 0
+  - name: Interface
+    uniqueID: 1559771879
+    locked: 0

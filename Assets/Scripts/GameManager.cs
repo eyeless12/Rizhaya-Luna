@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     {
         public readonly GameObject Instance;
         public readonly int ID;
+        public int Score;
         public PlayerOGS OGS_State;
         public PlayerIGS IGS_State;
 
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = instance;
             ID = id;
+            Score = 0;
             OGS_State = ogs;
             IGS_State = igs;
         }
@@ -68,6 +70,15 @@ public class GameManager : MonoBehaviour
                     Debug.Log("ADDED");
                 }
         }
+
+        public static void UpdateScores()
+        {
+            if (AliveCount != 1) return;
+            
+            var player = GetPlayerByInstance(Alive.First());
+            player.Score += 1;
+            Debug.Log($"Player {player.Instance} has {player.Score} score!");
+        } 
 
         public static PlayerInfo GetPlayerByInstance(GameObject instance)
         {

@@ -26,8 +26,7 @@ public static class Utils
         for (var i = 1; i <= ways / 2; i++)
         {
             
-            offset = (float)random.NextDouble() * 10;
-            Debug.Log(offset);
+            //offset = (float)random.NextDouble() * 10;
             yield return Quaternion.Euler(0, 0, angle * i)
                          * baseVector;
             yield return Quaternion.Euler(0, 0, -angle * i)

@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -35,12 +33,13 @@ public class LevelManager : MonoBehaviour
     {
         if (gameManager.InProgress && LevelFinished && _loaded)
         {
+            GameManager.Players.UpdateScores();
             StartCoroutine(LoadRandomLevel());
             _loaded = false;
         }
 
         if (_spawnPoints.Count == 0)
-            _spawnPoints = SpawnPointsOnScene;
+            _spawnPoints = new List<GameObject>(SpawnPointsOnScene);
     }
 
     public IEnumerator LoadRandomLevel()
@@ -56,7 +55,7 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(levelName);
         yield return new WaitForFixedUpdate();
         
-        _spawnPoints = SpawnPointsOnScene;
+        _spawnPoints = new List<GameObject>(SpawnPointsOnScene);
         
         foreach (var player in GameManager.Players.players)
         {
@@ -77,7 +76,7 @@ public class LevelManager : MonoBehaviour
             _spawnPoints.Remove(point);
     }
 
-    private bool ClearMisc()
+    private static bool ClearMisc()
     {
         var misc = FindObjectsOfType<Item>();
         foreach (var item in misc)
