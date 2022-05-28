@@ -3,14 +3,14 @@ using UnityEngine;
 public class Explode : MonoBehaviour
 {
     [SerializeField] private GameObject pf_bullet;
-    [SerializeField] private int projectilesCount;
+    [SerializeField] protected int projectilesCount;
     [SerializeField] private float projectilesLifetime;
-    [SerializeField] private int explodeArea;
-    [SerializeField] private GameObject explosion;
+    [SerializeField] protected int explodeArea;
+    [SerializeField] protected GameObject explosion;
 
-    private Transform _tf;
-    private bool _exploded;
-    private Collider2D _collider;
+    protected Transform _tf;
+    protected bool _exploded;
+    protected Collider2D _collider;
     private Throwable _throwableCharacteristics;
 
     private void Awake()
@@ -19,7 +19,7 @@ public class Explode : MonoBehaviour
         _collider = GetComponent<Collider2D>();
     }
 
-    public void Boom()
+    public virtual void Boom()
     {
         if (_exploded) return;
         

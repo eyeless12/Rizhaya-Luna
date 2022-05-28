@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 854997025
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 2002499375, guid: 7b2be5ec375616f40b60181d1e1cd047, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -180,11 +180,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handsOffset: {x: 0, y: 0, z: 0}
   Spread: 12
-  SpreadWidth: 70
+  SpreadWidth: 25
   BulletThresholdTime: 0.25
   horizontalRecoil: 100
   verticalRecoil: 400
-  bulletLifetime: 0.05
+  bulletLifetime: 0.08
   maxCapacity: 4
   canBeHold: 0
   accuracy: 0.767

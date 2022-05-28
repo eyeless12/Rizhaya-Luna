@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handsOffset: {x: 0, y: 0, z: 0}
-  timeToAction: 5
+  timeToAction: 3
   needsActivation: 1
   _animator: {fileID: -3096149765915874925}
 --- !u!114 &9101921474930005122
