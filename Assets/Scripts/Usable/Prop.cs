@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Prop : Item
 {
-    protected int Health;
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Bullet"))

@@ -27,7 +27,7 @@ public class Item : MonoBehaviour, IItem
         IsTaken = false;
     }
 
-    public virtual void Update()
+    protected virtual void Update()
     {
         if (IsTaken && Hands)
         {
@@ -63,7 +63,6 @@ public class Item : MonoBehaviour, IItem
         var throwVector = new Vector2(30 * velocity.x, 20 * Math.Abs(velocity.x));
         
         _itemPhysics.AddTorque(-5f * Math.Sign(OwnerLookDirection.x), ForceMode2D.Impulse);
-        //_itemPhysics.velocity = throwVector;
         _itemPhysics.AddForce(throwVector, ForceMode2D.Impulse);
     }
     

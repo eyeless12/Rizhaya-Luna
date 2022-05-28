@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Damagable : MonoBehaviour
+public class Damagable : Prop
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] protected int health;
+
+    protected override void Update()
     {
+        base.Update();
         
+        if (health < 0)
+            Destruction();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Destruction()
     {
-        
+        Destroy(gameObject);
+    }
+
+    protected override void OnBulletTrigger()
+    {
+        health -= 10;
     }
 }

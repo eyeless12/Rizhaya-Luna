@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6043170787575661008}
   - component: {fileID: 4390752780127119040}
   - component: {fileID: 3784768516856179163}
-  - component: {fileID: 4681670395620629136}
+  - component: {fileID: 1307862680192863089}
   m_Layer: 8
   m_Name: crate_wooden
   m_TagString: Props
@@ -134,7 +134,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4681670395620629136
+--- !u!114 &1307862680192863089
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,7 +143,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 639561848461477567}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 708b6c53a31f6174a8b7615e6cdb880d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ca90f51fea0a5441b0a9ebbed8ffe8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   handsOffset: {x: 0, y: 0, z: 0}
+  health: 100

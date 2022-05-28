@@ -7,14 +7,12 @@ public class Weapon_barrel : Prop
     [SerializeField] private List<GameObject> guns;
     private Transform _transform;
     private bool _spawned;
-    
     private GameObject RandomGun => guns[Random.Range(0, guns.Count)];
     protected override void OnBulletTrigger()
     {
         if(_spawned)
             return;
         
-        //Debug.Log("BARREL");
         Instantiate(RandomGun, _itemTransform.position, Quaternion.identity);
         _spawned = true;
         

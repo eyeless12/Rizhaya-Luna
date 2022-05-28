@@ -25,7 +25,7 @@ public class Throwable : Item
         _throwableAction = GetComponent<Explode>();
     }
 
-    public override void Update()
+    protected override void Update()
     {
         base.Update();
         if (!_activated) return;
