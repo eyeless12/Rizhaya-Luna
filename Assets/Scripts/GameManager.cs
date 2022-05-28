@@ -67,13 +67,14 @@ public class GameManager : MonoBehaviour
                 if (!players.Select(pi => pi.Instance).Contains(player))
                 {
                     AddPlayer(player);
-                    Debug.Log("ADDED");
                 }
         }
 
-        public static void UpdateScores()
+        public static IEnumerator UpdateScores()
         {
-            if (AliveCount != 1) return;
+            if (AliveCount != 1) yield break;
+            yield return new WaitForSeconds(2f);
+            if (AliveCount != 1) yield break;
             
             var player = GetPlayerByInstance(Alive.First());
             player.Score += 1;

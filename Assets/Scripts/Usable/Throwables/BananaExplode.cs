@@ -47,7 +47,6 @@ public class BananaExplode : Explode
 
     public void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("BANANA");
         if (!isCassette) return;
         
         if (other.gameObject.CompareTag("Props")

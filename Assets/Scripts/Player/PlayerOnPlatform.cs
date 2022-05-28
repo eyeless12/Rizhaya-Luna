@@ -19,7 +19,6 @@ public class PlayerOnPlatform : MonoBehaviour
         if (other.gameObject.CompareTag("Platform"))
         {
             _currentPlatforms.Add(other.gameObject);
-            Debug.Log("PLATFORM ENTERED");
         }
     }
 
@@ -39,6 +38,5 @@ public class PlayerOnPlatform : MonoBehaviour
         Physics2D.IgnoreCollision(playerCollider, platformCollider, true);
         yield return new WaitForSeconds(0.15f);
         Physics2D.IgnoreCollision(playerCollider, platformCollider, false);
-        Debug.Log("PLATFORM DISABLED");
     }
 }

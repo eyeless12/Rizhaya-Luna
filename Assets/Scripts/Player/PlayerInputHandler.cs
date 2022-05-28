@@ -75,7 +75,6 @@ public class PlayerInputHandler : MonoBehaviour
     
     public void Use(InputAction.CallbackContext context)
     {
-        //Debug.Log("PRESSED!");
         if (_playerMovement && !_playerMovement.IsDead)
         {
             _playerMovement.Shoot(context);

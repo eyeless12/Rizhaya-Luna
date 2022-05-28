@@ -33,7 +33,7 @@ public class LevelManager : MonoBehaviour
     {
         if (gameManager.InProgress && LevelFinished && _loaded)
         {
-            GameManager.Players.UpdateScores();
+            StartCoroutine(GameManager.Players.UpdateScores());
             StartCoroutine(LoadRandomLevel());
             _loaded = false;
         }
@@ -81,7 +81,6 @@ public class LevelManager : MonoBehaviour
         var misc = FindObjectsOfType<Item>();
         foreach (var item in misc)
         {
-            Debug.Log(item.name);
             Destroy(item.gameObject);
         }
 
