@@ -36,6 +36,7 @@ public class Fire : MonoBehaviour
         }
         
         PerformRecoil();
+        GameManager.CameraShake.ActivateShake(.1f, .1f);
         _canShoot = false;
         _shootTime = _weaponCharacteristics.BulletThresholdTime;
         _magazine -= 1;

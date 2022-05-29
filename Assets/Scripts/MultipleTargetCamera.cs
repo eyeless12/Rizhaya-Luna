@@ -11,14 +11,14 @@ public class MultipleTargetCamera : MonoBehaviour
     private Camera _cam;
     public bool zoomEnabled; //FIX
 
-    [SerializeField] private float smoothTime = .5f;
+    [SerializeField] private float smoothTime;
     [SerializeField] private float minZoom;
     [SerializeField] private float maxZoom;
     [SerializeField] private float zoomCoefficient;
 
     private void Start()
     {
-        _cam = GetComponent<Camera>();
+        _cam = GetComponentInChildren<Camera>();
         players = new List<Transform>();
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += (arg0, mode) => zoomEnabled = true;

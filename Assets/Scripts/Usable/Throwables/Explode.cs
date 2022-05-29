@@ -26,6 +26,7 @@ public class Explode : MonoBehaviour
         _collider.enabled = false;
         _exploded = true;
         Instantiate(explosion, _tf.position, _tf.rotation);
+        GameManager.CameraShake.ActivateShake(.5f, .5f);
 
         foreach (var direction in Utils.GenerateDirections(
             projectilesCount,

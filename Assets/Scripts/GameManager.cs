@@ -118,8 +118,9 @@ public class GameManager : MonoBehaviour
     private GameObject _menuEventManager;
     private List<GameObject> _gunsOnSceneLoad;
     private bool _newConnected;
-    private MultipleTargetCamera _camera;
-    
+    private MultipleTargetCamera _multipleTargetCamera;
+
+    public static Shake CameraShake;
     public static bool InProgress { get; private set; }
     
     void Start()
@@ -127,13 +128,15 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         InProgress = false;
         _newConnected = false;
+        
         _playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerInputManager>();
         _indicatorManager = GetComponent<IndicatorManager>();
         _menuEventManager = GameObject.Find("EventSystem");
-        DontDestroyOnLoad(_menuEventManager.gameObject);
         _levelManager = GetComponent<LevelManager>();
-        _camera = GameObject.FindWithTag("MainCamera").GetComponent<MultipleTargetCamera>();
-        //_playerManager.onPlayerJoined += input => Debug.Log(input.GetPrefabDefinition().name);
+        _multipleTargetCamera = GameObject.FindWithTag("CameraHolder").GetComponentInChildren<MultipleTargetCamera>();
+        CameraShake = GameObject.FindWithTag("MainCamera").GetComponent<Shake>();
+        
+        DontDestroyOnLoad(_menuEventManager.gameObject);
     }
 
     private void Update()
@@ -152,7 +155,7 @@ public class GameManager : MonoBehaviour
         if (_newConnected)
         {
             Players.UpdatePlayers();
-            _camera.players = new List<Transform>(Players.players.Select(pi => pi.Instance.GetComponent<Transform>())); 
+            _multipleTargetCamera.players = new List<Transform>(Players.players.Select(pi => pi.Instance.GetComponent<Transform>())); 
             _newConnected = false;
         }
     }

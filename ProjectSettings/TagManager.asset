@@ -12,6 +12,7 @@ TagManager:
   - Props
   - Throwable
   - Bullet_Collide_Block
+  - CameraHolder
   layers:
   - Default
   - TransparentFX
