@@ -9,9 +9,7 @@ public class PlayerInputHandler : MonoBehaviour
     private LevelManager _levelManager;
     private GameObject _player;
     private PlayerInput _playerInfo;
-
     
-
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
