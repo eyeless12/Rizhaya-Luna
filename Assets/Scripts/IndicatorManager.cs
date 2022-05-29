@@ -40,8 +40,7 @@ public class IndicatorManager : MonoBehaviour
     
     private GameObject[] ActualPlayers => GameManager.Players.Alive;
     [SerializeField] private List<GameObject> prefabs;
-    private readonly List<Indicator> _attachedIndicators = new();
-    private Dictionary<GameObject, GameObject> _playerComparison = new ();
+    private readonly Dictionary<GameObject, Indicator> _attachedIndicators = new ();
     private Dictionary<Indicators, GameObject> _indicatorComparison;
 
     private void Awake()
@@ -55,7 +54,7 @@ public class IndicatorManager : MonoBehaviour
 
     private void Update()
     {
-        foreach (var indicator in _attachedIndicators)
+        foreach (var indicator in _attachedIndicators.Values)
         {
             indicator.FollowPlayer();
         }
@@ -63,29 +62,30 @@ public class IndicatorManager : MonoBehaviour
 
     public void Attach(Indicators type, GameObject player)
     {
-        var old = _attachedIndicators.FirstOrDefault(at => at.AttachedPlayer == player);
-        if (old != null)
+        if (_attachedIndicators.ContainsKey(player))
         {
-            _attachedIndicators.Remove(old);
-            Destroy(old.Instance);
+            Destroy(_attachedIndicators[player].Instance);
+            _attachedIndicators[player] = new Indicator(
+                _indicatorComparison[type], 
+                player);
         }
-        
-        _attachedIndicators.Add(new Indicator(_indicatorComparison[type], player));
-        if (_playerComparison.ContainsKey(player))
-            _playerComparison[player] = _indicatorComparison[type];
-        else 
-            _playerComparison.Add(player, _indicatorComparison[type]);
+        else
+        {
+            _attachedIndicators.Add(player, new Indicator(
+                _indicatorComparison[type], 
+                player)); 
+        }
     }
 
     public void DisableAll()
     {
-        foreach (var indicator in _attachedIndicators)
+        foreach (var indicator in _attachedIndicators.Values)
             indicator.Instance.SetActive(false);
     }
 
     public void Enable(GameObject player)
     {
-        var attached = _attachedIndicators.FirstOrDefault(at => at.AttachedPlayer == player);
+        _attachedIndicators.TryGetValue(player, out var attached);
         if (attached is null)
         {
             Debug.Log($"No indicators attached to player {player.name}");
