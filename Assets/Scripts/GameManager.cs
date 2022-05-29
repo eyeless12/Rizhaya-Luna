@@ -119,6 +119,7 @@ public class GameManager : MonoBehaviour
     private List<GameObject> _gunsOnSceneLoad;
     private bool _newConnected;
     private MultipleTargetCamera _multipleTargetCamera;
+    [SerializeField] private GameObject popUpMenuAllReady;
 
     public static Shake CameraShake;
     public static bool InProgress { get; private set; }
@@ -150,6 +151,7 @@ public class GameManager : MonoBehaviour
             _indicatorManager.DisableAll();
             StartCoroutine(_levelManager.LoadRandomLevel());
             InProgress = true;
+            popUpMenuAllReady.SetActive(true);
         }
 
         if (_newConnected)
