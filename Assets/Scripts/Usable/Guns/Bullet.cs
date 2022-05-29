@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     
     private Rigidbody2D _rb;
     private Transform _transform;
+    [SerializeField] private ParticleSystem impact;
     private int _ground;
 
     [NonSerialized] public Vector2 direction;
@@ -39,6 +40,9 @@ public class Bullet : MonoBehaviour
             direction = new Vector2(direction.x * -1, direction.y);
             return;
         }
+        
+        if (target.layer == _ground)
+            impact.Play();
         
         Destroy(gameObject);
     }   
