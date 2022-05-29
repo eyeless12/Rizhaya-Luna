@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handsOffset: {x: 0, y: 0, z: 0}
-  timeToAction: 3
+  timeToAction: 2
   needsActivation: 1
   _animator: {fileID: -3096149765915874925}
 --- !u!114 &9101921474930005122
@@ -90,7 +90,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c25ccc04601dde34689791c6ad5cd7e1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
