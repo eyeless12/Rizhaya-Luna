@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -41,6 +42,12 @@ public class GameManager : MonoBehaviour
     {
         public static readonly List<PlayerInfo> players = new();
 
+        private static readonly Dictionary<PlayerOGS, Indicators> StateToIndicator = new()
+        {
+            [PlayerOGS.Unready] = Indicators.Unready,
+            [PlayerOGS.Ready] = Indicators.Ready
+        };
+
         private static void AddPlayer(GameObject instance)
         {
             if (instance == null) return;
@@ -51,7 +58,10 @@ public class GameManager : MonoBehaviour
         {
             var player = players.First(pi => pi.ID == id);
             player.OGS_State = state;
-            Debug.Log(player.OGS_State);
+            if (InProgress) return;
+            
+            _indicatorManager.Attach(StateToIndicator[state], player.Instance);
+            _indicatorManager.Enable(player.Instance);
         }
 
         public static void SetIGS(GameObject player, PlayerIGS state)
@@ -67,6 +77,8 @@ public class GameManager : MonoBehaviour
                 if (!players.Select(pi => pi.Instance).Contains(player))
                 {
                     AddPlayer(player);
+                    _indicatorManager.Attach(Indicators.Unready, player);
+                    _indicatorManager.Enable(player);
                 }
         }
 
@@ -102,19 +114,21 @@ public class GameManager : MonoBehaviour
     
     private PlayerInputManager _playerManager;
     private LevelManager _levelManager;
+    private static IndicatorManager _indicatorManager;
     private GameObject _menuEventManager;
     private List<GameObject> _gunsOnSceneLoad;
     private bool _newConnected;
     private MultipleTargetCamera _camera;
-
-
-    public bool InProgress { get; private set; }
+    
+    public static bool InProgress { get; private set; }
+    
     void Start()
     {
         DontDestroyOnLoad(gameObject);
         InProgress = false;
         _newConnected = false;
         _playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerInputManager>();
+        _indicatorManager = GetComponent<IndicatorManager>();
         _menuEventManager = GameObject.Find("EventSystem");
         DontDestroyOnLoad(_menuEventManager.gameObject);
         _levelManager = GetComponent<LevelManager>();
@@ -130,6 +144,7 @@ public class GameManager : MonoBehaviour
         }
         if (InProgress == false && Players.Count > 0 && Players.IsAllReady)
         {
+            _indicatorManager.DisableAll();
             StartCoroutine(_levelManager.LoadRandomLevel());
             InProgress = true;
         }

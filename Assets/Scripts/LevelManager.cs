@@ -16,7 +16,7 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private List<string> levels;
     [SerializeField] private GameManager gameManager;
-    
+
     private bool LevelFinished => GameManager.Players.AliveCount <= 1 && GameManager.Players.Count > 1;
     private float _timeToNextLevel = 3f;
     private bool _loaded;
@@ -31,7 +31,7 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        if (gameManager.InProgress && LevelFinished && _loaded)
+        if (GameManager.InProgress && LevelFinished && _loaded)
         {
             StartCoroutine(GameManager.Players.UpdateScores());
             StartCoroutine(LoadRandomLevel());
@@ -56,7 +56,7 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForFixedUpdate();
         
         _spawnPoints = new List<GameObject>(SpawnPointsOnScene);
-        
+
         foreach (var player in GameManager.Players.players)
         {
             player.IGS_State = GameManager.PlayerIGS.Alive;
@@ -71,7 +71,7 @@ public class LevelManager : MonoBehaviour
         var point = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
         var position = point.transform.position;
         player.GetComponent<Transform>().position = position;
-        
+
         if (mode == SpawnMode.Default) 
             _spawnPoints.Remove(point);
     }

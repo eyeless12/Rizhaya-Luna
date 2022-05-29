@@ -4906,6 +4906,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1986562320}
   - component: {fileID: 1986562319}
+  - component: {fileID: 1986562322}
   - component: {fileID: 1986562321}
   m_Layer: 0
   m_Name: GameManager
@@ -4956,6 +4957,21 @@ MonoBehaviour:
   levels:
   - level_10
   gameManager: {fileID: 1986562319}
+  indicatorManager: {fileID: 1986562322}
+--- !u!114 &1986562322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986562318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b991be39f487346419dea90e4f1d466a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 4281997479633176168, guid: 43ee1a36119eaf848955c51ba21b523a, type: 3}
 --- !u!1 &2013237650
 GameObject:
   m_ObjectHideFlags: 0
