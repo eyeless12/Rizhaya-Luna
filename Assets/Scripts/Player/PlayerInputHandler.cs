@@ -26,6 +26,7 @@ public class PlayerInputHandler : MonoBehaviour
             Quaternion.identity
         );
 
+        GameManager.GameStarted = true;
         _levelManager.SpawnPlayer(_player, SpawnMode.Default);
         _playerMovement = _player.GetComponent<Player_Movement>();
     }

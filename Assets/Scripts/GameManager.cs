@@ -126,6 +126,7 @@ public class GameManager : MonoBehaviour
 
     public static Shake CameraShake;
     public static bool InProgress { get; private set; }
+    public static bool GameStarted;
     
     void Start()
     {
