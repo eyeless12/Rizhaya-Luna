@@ -7,6 +7,7 @@ public class Explode : MonoBehaviour
     [SerializeField] private float projectilesLifetime;
     [SerializeField] protected int explodeArea;
     [SerializeField] protected GameObject explosion;
+    [SerializeField] protected AudioSource _audioSource;
 
     protected Transform _tf;
     protected bool _exploded;
@@ -25,6 +26,7 @@ public class Explode : MonoBehaviour
         
         _collider.enabled = false;
         _exploded = true;
+        _audioSource.Play();
         Instantiate(explosion, _tf.position, _tf.rotation);
         GameManager.CameraShake.ActivateShake(.5f, .5f);
 

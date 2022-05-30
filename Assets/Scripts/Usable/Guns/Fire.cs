@@ -6,6 +6,7 @@ public class Fire : MonoBehaviour
     [SerializeField] private GameObject pf_bullet;
     [SerializeField] private Transform initialBulletPoint;
     private Weapon _weaponCharacteristics;
+    [SerializeField] private AudioSource shootSound;
     private Transform _gun;
     
     private float _shootTime;
@@ -21,8 +22,12 @@ public class Fire : MonoBehaviour
 
     public void Shoot()
     {
-        if (!_canShoot || _magazine <= 0) return;
+        if (!_canShoot || _magazine <= 0)
+        {
+            return;
+        }
 
+        shootSound.Play();
         foreach (var direction in Utils.GenerateDirections(
             _weaponCharacteristics.Spread,
             _weaponCharacteristics.SpreadWidth,

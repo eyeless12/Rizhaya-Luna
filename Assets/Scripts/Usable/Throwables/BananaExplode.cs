@@ -21,6 +21,7 @@ public class BananaExplode : Explode
         if (_exploded) return;
         
         _exploded = true;
+        _audioSource.Play();
         Instantiate(explosion, _tf.position, _tf.rotation);
 
         if (isCassette)
