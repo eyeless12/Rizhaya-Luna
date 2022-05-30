@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Explode : MonoBehaviour
@@ -7,7 +8,8 @@ public class Explode : MonoBehaviour
     [SerializeField] private float projectilesLifetime;
     [SerializeField] protected int explodeArea;
     [SerializeField] protected GameObject explosion;
-    [SerializeField] protected AudioSource _audioSource;
+    [SerializeField] protected AudioClip explosionSound;
+    [SerializeField] protected GameObject afterDeath;
 
     protected Transform _tf;
     protected bool _exploded;
@@ -26,7 +28,6 @@ public class Explode : MonoBehaviour
         
         _collider.enabled = false;
         _exploded = true;
-        _audioSource.Play();
         Instantiate(explosion, _tf.position, _tf.rotation);
         GameManager.CameraShake.ActivateShake(.5f, .5f);
 
@@ -41,6 +42,15 @@ public class Explode : MonoBehaviour
             bullet.lifetime = projectilesLifetime;
         }
         
+        PerformSound();
         Destroy(gameObject);
+    }
+
+    protected void PerformSound()
+    {
+        var death = Instantiate(afterDeath, transform.position, transform.rotation);
+        var sound = death.GetComponent<AudioSource>();
+        sound.clip = explosionSound;
+        sound.Play();
     }
 }

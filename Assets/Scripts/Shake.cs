@@ -24,7 +24,6 @@ public class Shake : MonoBehaviour
             elapsedTime += Time.deltaTime;
             var strength = curve.Evaluate(elapsedTime / duration);
             _tf.localPosition = startPosition + (Vector3)Random.insideUnitCircle * strength * magnitude;
-            Debug.Log(elapsedTime);
             yield return new WaitForEndOfFrame();
         }
 

@@ -6559,15 +6559,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - level_10
-  - level_09
-  - level_08
-  - level_07
-  - level_06
-  - level_05
-  - level_04
-  - level_03
-  - level_02
-  - level_01
   gameManager: {fileID: 1986562319}
 --- !u!114 &1986562322
 MonoBehaviour:

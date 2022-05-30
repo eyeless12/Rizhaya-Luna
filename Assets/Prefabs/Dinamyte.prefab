@@ -71,7 +71,8 @@ MonoBehaviour:
   projectilesLifetime: 0.08
   explodeArea: 360
   explosion: {fileID: 1706401796092090676, guid: 741f1a365e76a5e47a193f0e82a30e2c, type: 3}
-  _audioSource: {fileID: 175503728281206278}
+  explosionSound: {fileID: 8300000, guid: ae6268917e7e14980aeefe1e6dd1fa19, type: 3}
+  afterDeath: {fileID: 2896145968039527840, guid: bba1ba3ab066c534682b505488b61406, type: 3}
 --- !u!212 &3437703317213878486
 SpriteRenderer:
   m_ObjectHideFlags: 0
