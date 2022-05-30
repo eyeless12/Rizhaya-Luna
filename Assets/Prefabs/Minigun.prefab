@@ -295,7 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pf_bullet: {fileID: 3981763920355673881, guid: a752a8ef1fc4ea04f95940a3e875a666, type: 3}
   initialBulletPoint: {fileID: 7641700992129395022}
-  shootSound: {fileID: 3597332873908381383}
+  _type: 2
 --- !u!114 &7030331837654514766
 MonoBehaviour:
   m_ObjectHideFlags: 0

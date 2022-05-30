@@ -1,12 +1,14 @@
 using UnityEngine;
+using Usable;
 
 
 public class Fire : MonoBehaviour
 {
     [SerializeField] private GameObject pf_bullet;
     [SerializeField] private Transform initialBulletPoint;
+    [SerializeField] private WeaponType _type;
+    private SoundManager _manager;
     private Weapon _weaponCharacteristics;
-    [SerializeField] private AudioSource shootSound;
     private Transform _gun;
     
     private float _shootTime;
@@ -27,7 +29,7 @@ public class Fire : MonoBehaviour
             return;
         }
 
-        shootSound.Play();
+        SoundManager.PlaySound(_type);
         foreach (var direction in Utils.GenerateDirections(
             _weaponCharacteristics.Spread,
             _weaponCharacteristics.SpreadWidth,
