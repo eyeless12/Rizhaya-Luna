@@ -70,6 +70,8 @@ MonoBehaviour:
   projectilesLifetime: 0.05
   explodeArea: 180
   explosion: {fileID: 1706401796092090676, guid: 741f1a365e76a5e47a193f0e82a30e2c, type: 3}
+  explosionSound: {fileID: 8300000, guid: ae6268917e7e14980aeefe1e6dd1fa19, type: 3}
+  afterDeath: {fileID: 2896145968039527840, guid: bba1ba3ab066c534682b505488b61406, type: 3}
   shrapnel: {fileID: 5841460459123071935}
   speed: 250
   isCassette: 0

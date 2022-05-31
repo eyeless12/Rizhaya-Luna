@@ -57,7 +57,7 @@ public class Settings : MonoBehaviour
     
     public void SaveSettings()
     {
-        audioMixer.SetFloat("MasterVolume", volume); 
+        audioMixer.SetFloat("MasterVolume", volume);
         Screen.SetResolution
             (Screen.resolutions[currResolutionIndex].width, Screen.resolutions[currResolutionIndex].height, true); //Изменения разрешения
     }

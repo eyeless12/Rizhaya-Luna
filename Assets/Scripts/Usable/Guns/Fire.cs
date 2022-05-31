@@ -7,6 +7,7 @@ public class Fire : MonoBehaviour
     [SerializeField] private Transform initialBulletPoint;
     private Weapon _weaponCharacteristics;
     private Transform _gun;
+    private AudioSource _audio;
     
     private float _shootTime;
     private bool _canShoot = true;
@@ -17,12 +18,16 @@ public class Fire : MonoBehaviour
         _weaponCharacteristics = GetComponent<Weapon>();
         _gun = GetComponent<Transform>();
         _magazine = _weaponCharacteristics.maxCapacity;
+        _audio = GetComponent<AudioSource>();
     }
 
     public void Shoot()
     {
-        if (!_canShoot || _magazine <= 0) return;
-
+        if (!_canShoot || _magazine <= 0)
+        {
+            return;
+        }
+        
         foreach (var direction in Utils.GenerateDirections(
             _weaponCharacteristics.Spread,
             _weaponCharacteristics.SpreadWidth,
@@ -36,6 +41,8 @@ public class Fire : MonoBehaviour
         }
         
         PerformRecoil();
+        _audio.Play();
+        
         GameManager.CameraShake.ActivateShake(.1f, .1f);
         _canShoot = false;
         _shootTime = _weaponCharacteristics.BulletThresholdTime;
