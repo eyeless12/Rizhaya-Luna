@@ -25,7 +25,8 @@ public class GameManager : MonoBehaviour
     {
         public readonly GameObject Instance;
         public readonly int ID;
-        public int Score;
+        public int CurrentScore;
+        public int BoardScore;
         public PlayerOGS OGS_State;
         public PlayerIGS IGS_State;
 
@@ -33,7 +34,8 @@ public class GameManager : MonoBehaviour
         {
             Instance = instance;
             ID = id;
-            Score = 0;
+            CurrentScore = 0;
+            BoardScore = 0;
             OGS_State = ogs;
             IGS_State = igs;
         }
@@ -90,11 +92,11 @@ public class GameManager : MonoBehaviour
             if (AliveCount != 1) yield break;
             
             var player = GetPlayerByInstance(Alive.First());
-            player.Score += 1;
+            player.CurrentScore += 1;
             _indicatorManager.Attach(Indicators.Winner, player.Instance);
             _indicatorManager.Enable(player.Instance);
             
-            Debug.Log($"Player {player.Instance} has {player.Score} score!");
+            Debug.Log($"Player {player.Instance} has {player.CurrentScore} score!");
         } 
 
         public static PlayerInfo GetPlayerByInstance(GameObject instance)
@@ -128,6 +130,7 @@ public class GameManager : MonoBehaviour
     public static Shake CameraShake;
     public static bool InProgress { get; set; }
     public static bool GameStarted;
+    public static int PassedRound;
 
     [SerializeField] private GameObject readyMenu;
     
@@ -163,7 +166,6 @@ public class GameManager : MonoBehaviour
 
         if (_newConnected)
         {
-            Debug.Log("HERE");
             Players.UpdatePlayers();
             _multipleTargetCamera.players = new List<Transform>(Players.players.Select(pi => pi.Instance.GetComponent<Transform>())); 
             _newConnected = false;
@@ -187,7 +189,6 @@ public class GameManager : MonoBehaviour
 
     public void OnJoin()
     {
-        Debug.Log("jopa");
         _newConnected = true;
     }
 }
