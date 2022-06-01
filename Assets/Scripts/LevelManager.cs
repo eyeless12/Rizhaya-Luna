@@ -18,7 +18,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameManager gameManager;
 
     private bool LevelFinished => GameManager.Players.AliveCount <= 1 && GameManager.Players.Count > 1;
-    private float _timeToNextLevel = 3f;
+    private static float _timeToNextLevel = 3f;
     private static bool _loaded;
     
     private static List<GameObject> _spawnPoints;
@@ -36,10 +36,15 @@ public class LevelManager : MonoBehaviour
         if (GameManager.InProgress && LevelFinished && _loaded)
         {
             StartCoroutine(GameManager.Players.UpdateScores());
-            StartCoroutine(LoadRandomLevel());
+            GameManager.PassedRound += 1;
+
+            StartCoroutine(GameManager.PassedRound % 3 == 0
+                ? LoadLevelWithDelay("Intermission", _timeToNextLevel)
+                : LoadRandomLevel());
+            
             _loaded = false;
         }
-
+        
         if (_spawnPoints.Count == 0)
             _spawnPoints = new List<GameObject>(SpawnPointsOnScene);
     }
@@ -47,7 +52,13 @@ public class LevelManager : MonoBehaviour
     public IEnumerator LoadRandomLevel()
     {
         var level = levels[Random.Range(0, levels.Count)];
-        yield return new WaitForSeconds(_timeToNextLevel);
+        StartCoroutine(LoadLevelWithDelay(level, _timeToNextLevel));
+        yield return null;
+    }
+
+    private IEnumerator LoadLevelWithDelay(string level, float delay)
+    {
+        yield return new WaitForSeconds(delay);
         StartCoroutine(LoadLevel(level));
     }
 
