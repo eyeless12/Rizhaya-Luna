@@ -31,7 +31,7 @@ public class LevelManager : MonoBehaviour
         _indicatorManager = GetComponent<IndicatorManager>();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (GameManager.InProgress && LevelFinished && Loaded)
         {

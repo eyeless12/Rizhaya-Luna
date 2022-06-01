@@ -11,8 +11,6 @@ public class Scores : MonoBehaviour
     private LevelManager _levelManager;
 
     private readonly Func<bool> _loaded = () => LevelManager.Loaded;
-    
-    
 
     private void Start()
     {
