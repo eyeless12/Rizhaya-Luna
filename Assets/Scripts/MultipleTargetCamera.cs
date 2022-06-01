@@ -21,7 +21,17 @@ public class MultipleTargetCamera : MonoBehaviour
         _cam = GetComponentInChildren<Camera>();
         players = new List<Transform>();
         DontDestroyOnLoad(gameObject);
-        SceneManager.sceneLoaded += (arg0, mode) => zoomEnabled = true;
+        SceneManager.sceneLoaded += (arg0, mode) =>
+        {
+            if (arg0.name == "Menu")
+            {
+                zoomEnabled = false;
+                _cam.orthographicSize = 4.538762f;
+                transform.position = new Vector3(0.7f, 4.6f, 0f);
+                return;
+            }
+            zoomEnabled = true;
+        };
     }
 
     private void LateUpdate()

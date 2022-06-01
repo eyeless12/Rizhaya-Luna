@@ -20,5 +20,6 @@ public class PickPlayerVariance : MonoBehaviour
     private void Awake()
     {
         _pfbs = new List<GameObject>(playerVariance);
+        DontDestroyOnLoad(gameObject);
     }
 }
