@@ -167,7 +167,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pf_bullet: {fileID: 3981763920355673881, guid: a752a8ef1fc4ea04f95940a3e875a666, type: 3}
   initialBulletPoint: {fileID: 7641700992129395022}
-  shootSound: {fileID: 0}
 --- !u!61 &6355292756489391978
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -247,7 +246,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -6671094213821941564, guid: 0ab6c49514bd541bdb603ddbb95ccb84, type: 2}
-  m_audioClip: {fileID: 8300000, guid: f568183d9d6a4421e9cacf0f37fff295, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 31ff5ed7b8a5ed9448706431bec2b3bf, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
