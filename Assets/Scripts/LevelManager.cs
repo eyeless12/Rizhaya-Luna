@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour
 
     private bool LevelFinished => GameManager.Players.AliveCount <= 1 && GameManager.Players.Count > 1;
     private static float _timeToNextLevel = 3f;
-    private static bool _loaded;
+    [HideInInspector] public static bool Loaded;
     
     private static List<GameObject> _spawnPoints;
     private static IndicatorManager _indicatorManager;
@@ -33,16 +33,16 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.InProgress && LevelFinished && _loaded)
+        if (GameManager.InProgress && LevelFinished && Loaded)
         {
             StartCoroutine(GameManager.Players.UpdateScores());
             GameManager.PassedRound += 1;
 
-            StartCoroutine(GameManager.PassedRound % 3 == 0
+            StartCoroutine(GameManager.PassedRound % 10 == 0
                 ? LoadLevelWithDelay("Intermission", _timeToNextLevel)
                 : LoadRandomLevel());
             
-            _loaded = false;
+            Loaded = false;
         }
         
         if (_spawnPoints.Count == 0)
@@ -82,7 +82,7 @@ public class LevelManager : MonoBehaviour
             }
         }
 
-        _loaded = true;
+        Loaded = true;
     }
 
     public static void SpawnPlayer(GameObject player, SpawnMode mode)

@@ -131,6 +131,8 @@ public class GameManager : MonoBehaviour
     public static bool InProgress { get; set; }
     public static bool GameStarted;
     public static int PassedRound;
+    
+    public static bool Endgame => Players.players.Any(player => player.BoardScore >= 10);
 
     [SerializeField] private GameObject readyMenu;
     
