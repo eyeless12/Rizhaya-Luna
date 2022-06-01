@@ -19,7 +19,6 @@ public class Menu : MonoBehaviour
             ShowHideMenu();
     }
     
-    
     public void ShowHideMenu()
     {
         if (SceneManager.GetActiveScene().name == "Menu")
@@ -27,14 +26,19 @@ public class Menu : MonoBehaviour
         
         if (GameObject.Find("SettingsCanvas").GetComponent<Canvas>().enabled)
             return;
+        
         isOpened = !isOpened;
         canvas.enabled = isOpened;
     }
     
     public void GoToMain()
     {
-        if (SceneManager.GetActiveScene().name != "Menu") 
-            SceneManager.LoadScene("Menu");
+        if (SceneManager.GetActiveScene().name != "Menu")
+        {
+            StartCoroutine(LevelManager.LoadLevel("Menu"));
+            GameManager.InProgress = false;
+        }
+
         canvas.enabled = false;
     }
 

@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -39,9 +40,10 @@ public class Player_Movement: MonoBehaviour
         _animationsController = GetComponent<Animations>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _playerOnPlatform = GetComponent<PlayerOnPlatform>();
-        _handsObject = gameObject.transform.Find("Hands").gameObject;
+        GameObject o;
+        _handsObject = (o = gameObject).transform.Find("Hands").gameObject;
 
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(o);
     }
 
     private bool isGrounded => _boxCollider.IsTouchingLayers(whatIsGround.value);
@@ -68,6 +70,10 @@ public class Player_Movement: MonoBehaviour
         HandleShoot();
         HandleFlip();
         HandleJump();
+    }
+
+    public void LateUpdate()
+    {
         HandleDead();
     }
 

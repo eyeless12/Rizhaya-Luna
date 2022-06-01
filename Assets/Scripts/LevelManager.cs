@@ -19,14 +19,16 @@ public class LevelManager : MonoBehaviour
 
     private bool LevelFinished => GameManager.Players.AliveCount <= 1 && GameManager.Players.Count > 1;
     private float _timeToNextLevel = 3f;
-    private bool _loaded;
+    private static bool _loaded;
     
-    private List<GameObject> _spawnPoints; 
-    private List<GameObject> SpawnPointsOnScene => GameObject.FindGameObjectsWithTag("Spawnpoint").ToList();
+    private static List<GameObject> _spawnPoints;
+    private static IndicatorManager _indicatorManager;
+    private static List<GameObject> SpawnPointsOnScene => GameObject.FindGameObjectsWithTag("Spawnpoint").ToList();
     
     private void Start()
     {
         _spawnPoints = GameObject.FindGameObjectsWithTag("Spawnpoint").ToList();
+        _indicatorManager = GetComponent<IndicatorManager>();
     }
 
     private void Update()
@@ -49,7 +51,7 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(LoadLevel(level));
     }
 
-    private IEnumerator LoadLevel(string levelName)
+    public static IEnumerator LoadLevel(string levelName)
     {
         yield return new WaitUntil(ClearMisc);
         SceneManager.LoadScene(levelName);
@@ -61,19 +63,28 @@ public class LevelManager : MonoBehaviour
         {
             player.IGS_State = GameManager.PlayerIGS.Alive;
             SpawnPlayer(player.Instance, SpawnMode.Default);
+
+            if (levelName == "Menu")
+            {
+                _indicatorManager.Attach(Indicators.Unready, player.Instance);
+                _indicatorManager.Enable(player.Instance);
+            }
         }
 
         _loaded = true;
     }
 
-    public void SpawnPlayer(GameObject player, SpawnMode mode)
+    public static void SpawnPlayer(GameObject player, SpawnMode mode)
     {
         var point = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
         var position = point.transform.position;
         player.GetComponent<Transform>().position = position;
 
-        if (mode == SpawnMode.Default) 
+        if (mode == SpawnMode.Default)
+        {
             _spawnPoints.Remove(point);
+        }
+            
     }
 
     private static bool ClearMisc()
