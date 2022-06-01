@@ -90,6 +90,9 @@ public class GameManager : MonoBehaviour
             
             var player = GetPlayerByInstance(Alive.First());
             player.Score += 1;
+            _indicatorManager.Attach(Indicators.Winner, player.Instance);
+            _indicatorManager.Enable(player.Instance);
+            
             Debug.Log($"Player {player.Instance} has {player.Score} score!");
         } 
 
@@ -123,6 +126,7 @@ public class GameManager : MonoBehaviour
 
     public static Shake CameraShake;
     public static bool InProgress { get; private set; }
+    public static bool GameStarted;
     
     void Start()
     {

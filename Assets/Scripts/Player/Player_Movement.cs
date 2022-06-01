@@ -86,6 +86,8 @@ public class Player_Movement: MonoBehaviour
     private void HandleDead()
     {
         _animationsController.SetDeadStatus(IsDead);
+        if (IsDead)
+            rb.velocity = Vector2.zero;
     }
 
     public void PerformDeadPhysics(float value)

@@ -7,7 +7,8 @@ using UnityEngine;
 public enum Indicators
 {
    Unready = 0,
-   Ready = 1
+   Ready = 1,
+   Winner = 2
 }
 
 public class IndicatorManager : MonoBehaviour
@@ -23,6 +24,10 @@ public class IndicatorManager : MonoBehaviour
                 instance,
                 player.transform.position,
                 Quaternion.identity);
+            
+            if (GameManager.InProgress)
+                Instance.GetComponent<SpriteRenderer>().material =
+                    player.GetComponent<SpriteRenderer>().material;
             
             Instance.SetActive(false);
         }
@@ -48,7 +53,8 @@ public class IndicatorManager : MonoBehaviour
         _indicatorComparison = new Dictionary<Indicators, GameObject>
         {
             [Indicators.Unready] = prefabs[(int) Indicators.Unready],
-            [Indicators.Ready] = prefabs[(int) Indicators.Ready]
+            [Indicators.Ready] = prefabs[(int) Indicators.Ready],
+            [Indicators.Winner] = prefabs[(int) Indicators.Winner]
         };
     }
 

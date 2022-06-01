@@ -9,9 +9,7 @@ public class PlayerInputHandler : MonoBehaviour
     private LevelManager _levelManager;
     private GameObject _player;
     private PlayerInput _playerInfo;
-
     
-
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -28,6 +26,7 @@ public class PlayerInputHandler : MonoBehaviour
             Quaternion.identity
         );
 
+        GameManager.GameStarted = true;
         _levelManager.SpawnPlayer(_player, SpawnMode.Default);
         _playerMovement = _player.GetComponent<Player_Movement>();
     }
