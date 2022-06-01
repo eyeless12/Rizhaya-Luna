@@ -8,6 +8,11 @@ TagManager:
   - Weapon
   - Platform
   - Usable
+  - Bullet
+  - Props
+  - Throwable
+  - Bullet_Collide_Block
+  - CameraHolder
   layers:
   - Default
   - TransparentFX
@@ -17,11 +22,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Props
+  - Blocks
   - Ground
   - Bullets & Misc
-  - Weapon
+  - Items
   - Player
   - 
   - 
@@ -56,4 +61,7 @@ TagManager:
     locked: 0
   - name: Weapons
     uniqueID: 854997025
+    locked: 0
+  - name: Interface
+    uniqueID: 1559771879
     locked: 0

@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Random = System.Random;
+
 
 public class Fire : MonoBehaviour
 {
@@ -10,6 +7,7 @@ public class Fire : MonoBehaviour
     [SerializeField] private Transform initialBulletPoint;
     private Weapon _weaponCharacteristics;
     private Transform _gun;
+    private AudioSource _audio;
     
     private float _shootTime;
     private bool _canShoot = true;
@@ -20,13 +18,21 @@ public class Fire : MonoBehaviour
         _weaponCharacteristics = GetComponent<Weapon>();
         _gun = GetComponent<Transform>();
         _magazine = _weaponCharacteristics.maxCapacity;
+        _audio = GetComponent<AudioSource>();
     }
 
     public void Shoot()
     {
-        if (!_canShoot || _magazine <= 0) return;
-
-        foreach (var direction in GenerateDirections())
+        if (!_canShoot || _magazine <= 0)
+        {
+            return;
+        }
+        
+        foreach (var direction in Utils.GenerateDirections(
+            _weaponCharacteristics.Spread,
+            _weaponCharacteristics.SpreadWidth,
+            _weaponCharacteristics.accuracy,
+            _weaponCharacteristics.OwnerLookDirection))
         {
             var bullet = Instantiate(pf_bullet, initialBulletPoint.position, initialBulletPoint.rotation)
                 .GetComponent<Bullet>();
@@ -35,6 +41,9 @@ public class Fire : MonoBehaviour
         }
         
         PerformRecoil();
+        _audio.Play();
+        
+        GameManager.CameraShake.ActivateShake(.1f, .1f);
         _canShoot = false;
         _shootTime = _weaponCharacteristics.BulletThresholdTime;
         _magazine -= 1;
@@ -49,37 +58,12 @@ public class Fire : MonoBehaviour
             _canShoot = true;
     }
 
-    private IEnumerable<Vector3> GenerateDirections()
-    {
-        var ways = _weaponCharacteristics.Spread;
-        if (ways % 2 != 0)
-        {
-            yield return _weaponCharacteristics.OwnerLookDirection;
-            ways -= 1;
-        }
-
-        var angle = _weaponCharacteristics.SpreadWidth / ways;
-        for (var i = 1; i <= ways / 2; i++)
-        {
-            var random = new Random();
-            var offset = (float)random.NextDouble() * 10;
-            Debug.Log(offset);
-            yield return Quaternion.Euler(0, 0, angle * i)
-                         * _weaponCharacteristics.OwnerLookDirection;
-            yield return Quaternion.Euler(0, 0, -angle * i)
-                         * _weaponCharacteristics.OwnerLookDirection;
-        }
-            
-        
-    }
-
     private void PerformRecoil()
     {
         var owner = _weaponCharacteristics.Owner;
         var ownerPhysics = owner.GetComponent<Rigidbody2D>();
         var recoilVector = new Vector2(
-             _weaponCharacteristics.recoil * _weaponCharacteristics.OwnerLookDirection.x * -1 , _weaponCharacteristics.recoil / 5);
-        //Debug.Log(recoilVector);
-        ownerPhysics.AddForce(recoilVector, ForceMode2D.Force);
+             _weaponCharacteristics.verticalRecoil * _weaponCharacteristics.OwnerLookDirection.x * -1, _weaponCharacteristics.horizontalRecoil);
+        ownerPhysics.AddForce(recoilVector, ForceMode2D.Impulse);
     }
 }

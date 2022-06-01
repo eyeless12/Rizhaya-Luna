@@ -1,14 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class PlayerInputHandler : MonoBehaviour
 {
     private Player_Movement _playerMovement;
-    [SerializeField] private GameObject playerVariance;
+    private GameObject _playerManager;
     private GameManager _manager;
     private LevelManager _levelManager;
     private GameObject _player;
@@ -17,26 +13,27 @@ public class PlayerInputHandler : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        
         var manager = GameObject.Find("GameManager");
         _manager = manager.GetComponent<GameManager>();
         _levelManager = manager.GetComponent<LevelManager>();
+        _playerManager = GameObject.Find("PlayerManager");
         
         _playerInfo = GetComponent<PlayerInput>();
 
         _player = Instantiate(
-            playerVariance,
+            _playerManager.GetComponent<PickPlayerVariance>().RandomPlayerPrefab,
             transform.position,
             Quaternion.identity
         );
-        
-        _levelManager.SpawnPlayer(_player);
+
+        GameManager.GameStarted = true;
+        _levelManager.SpawnPlayer(_player, SpawnMode.Default);
         _playerMovement = _player.GetComponent<Player_Movement>();
     }
 
     public void Move(InputAction.CallbackContext context)
     {
-        if (_playerMovement)
+        if (_playerMovement && !_playerMovement.IsDead)
         {
             _playerMovement.Move(context.ReadValue<Vector2>());
         }
@@ -45,31 +42,31 @@ public class PlayerInputHandler : MonoBehaviour
     public void GoDownThroughPlatform(InputAction.CallbackContext context)
     {
         
-        if(_playerMovement && context.performed)
+        if(_playerMovement && context.performed && !_playerMovement.IsDead)
             _playerMovement.GoDownThroughPlatform();
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (_playerMovement)
+        if (_playerMovement && !_playerMovement.IsDead)
             _playerMovement.Jump(context);
     }
 
     public void Ready(InputAction.CallbackContext context)
     {
-        if (_playerMovement && context.performed)
+        if (_playerMovement && context.performed && !_playerMovement.IsDead)
         {
             GameManager.Players.SetReady(_playerInfo.playerIndex, GameManager.PlayerOGS.Ready);
         }
             
         
-        if (_playerMovement && context.canceled)
+        if (_playerMovement && context.canceled && !_playerMovement.IsDead)
             GameManager.Players.SetReady(_playerInfo.playerIndex, GameManager.PlayerOGS.Unready); 
     }
     
     public void Pickup_Drop(InputAction.CallbackContext context)
     {
-        if (_playerMovement && context.performed)
+        if (_playerMovement && context.performed && !_playerMovement.IsDead)
         {
             _playerMovement.Pickup_Drop();
         }
@@ -77,11 +74,10 @@ public class PlayerInputHandler : MonoBehaviour
     
     public void Use(InputAction.CallbackContext context)
     {
-        if (_playerMovement && context.performed)
+        if (_playerMovement && !_playerMovement.IsDead)
         {
+            _playerMovement.Shoot(context);
             _playerMovement.Use();
-            _playerMovement.Shoot();
         }
-            
     }
 }

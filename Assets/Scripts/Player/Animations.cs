@@ -10,4 +10,9 @@ public class Animations : MonoBehaviour
     {
         _animator.SetBool("Running", condition != 0);
     }
+
+    public void SetDeadStatus(bool dead)
+    {
+        _animator.SetBool("Dead", dead);
+    }
 }

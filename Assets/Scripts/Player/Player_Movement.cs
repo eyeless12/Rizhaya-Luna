@@ -1,10 +1,5 @@
 #nullable enable
-using System;
-using Unity.VisualScripting;
-using System.Collections.Generic;
 using System.Linq;
-using Unity;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,27 +7,31 @@ public class Player_Movement: MonoBehaviour
 {
     public float speed;
     public float jumpForce;
-    private GameObject _hands;
-    [SerializeField] private Transform handsTransform;
-    [SerializeField] private float pickupRange = 1f;
-    [SerializeField] private GameObject feet;
     
+    private GameObject _itemInHandsObj;
+    private Weapon _weaponInHands = null!;
+    private GameObject _handsObject;
+    [SerializeField] private float pickupRange = 1f;
+
     private Vector2 _moveInput = Vector2.zero;
     private Rigidbody2D rb;
     private bool _facingRight = true;
-
-    public Transform feetPos;
+    
     private BoxCollider2D _boxCollider;
-    public float checkRadius;
+    
     public LayerMask whatIsGround;
     public float jumpTime;
     private float _jumpTimeCounter;
     private bool _isJumping;
 
-    private Fire inHands;
+    private bool _shooting;
+
+    private Item handsAction;
     private Animations _animationsController;
     private PlayerOnPlatform _playerOnPlatform;
     private GameObject _overlapPicking = null!;
+
+    public bool IsDead => !GameManager.Players.Alive.Contains(gameObject);
 
     public void Start()
     {
@@ -40,6 +39,8 @@ public class Player_Movement: MonoBehaviour
         _animationsController = GetComponent<Animations>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _playerOnPlatform = GetComponent<PlayerOnPlatform>();
+        _handsObject = gameObject.transform.Find("Hands").gameObject;
+
         DontDestroyOnLoad(gameObject);
     }
 
@@ -64,14 +65,43 @@ public class Player_Movement: MonoBehaviour
     public void FixedUpdate()
     {
         HandleRun();
+        HandleShoot();
         HandleFlip();
         HandleJump();
+        HandleDead();
     }
 
     private void HandleRun()
     {
-        rb.velocity = new Vector2(_moveInput.x * speed, rb.velocity.y);
+        var velocity = rb.velocity;
+        var velocityX = velocity.x / 2;
+        
+        velocityX = velocityX + _moveInput.x * speed; //FIX
+        velocity = new Vector2(velocityX, velocity.y);
+        
+        rb.velocity = velocity;
         _animationsController.SetRunAnimation(_moveInput.x);
+    }
+
+    private void HandleDead()
+    {
+        _animationsController.SetDeadStatus(IsDead);
+        if (IsDead)
+            rb.velocity = Vector2.zero;
+    }
+
+    public void PerformDeadPhysics(float value)
+    {
+        Drop();
+    }
+
+    private void HandleShoot()
+    {
+        if (!_shooting || handsAction == null) return;
+        
+        handsAction.Use();
+        if (_weaponInHands && !_weaponInHands.canBeHold)
+            _shooting = false;
     }
 
     private void HandleJump()
@@ -105,19 +135,21 @@ public class Player_Movement: MonoBehaviour
         _playerOnPlatform.Perform();
     }
 
-    public void Shoot()
+    public void Shoot(InputAction.CallbackContext context)
     {
-        if (inHands)
+        if (handsAction && context.performed)
         {
-            inHands.Shoot();
+            _shooting = true;
         }
-            
+
+        if (context.canceled)
+            _shooting = false;
     }
 
     public void Pickup_Drop()
     {
-        var inRange = Physics2D.OverlapCircle(transform.position, pickupRange, LayerMask.GetMask("Weapon"));
-        switch ((bool) _hands)
+        var inRange = Physics2D.OverlapCircle(transform.position, pickupRange, LayerMask.GetMask("Items", "Props"));
+        switch ((bool) _itemInHandsObj)
         {
             case false:
                 if (inRange != null) Pickup(inRange.gameObject);
@@ -128,25 +160,32 @@ public class Player_Movement: MonoBehaviour
         }
     }
 
-    private void Pickup(GameObject item)
+    private void Pickup(GameObject candidate)
     {
-        var weapon = item.GetComponent<Weapon>();
-        if (weapon.isTaken) return;
+        var item = candidate.GetComponent<Item>();
+        if (item.IsTaken) return;
         
-        var weaponTransform = item.GetComponent<Transform>();
-        var owner = gameObject.transform.Find("Hands").gameObject;
-        weaponTransform.SetParent(owner.GetComponent<Transform>(), true);
-        weapon.SetOwner(owner, this);    
-        _hands = item;
-        inHands = weapon.GetComponent<Fire>();
+        var itemTransform = item.GetComponent<Transform>();
+        itemTransform.SetParent(_handsObject.GetComponent<Transform>(), true);
+        item.SetOwner(_handsObject);
+        _itemInHandsObj = candidate;
+
+        candidate.TryGetComponent(out _weaponInHands);
+        
+        handsAction = item;
     }
 
     private void Drop()
     {
-        var weapon = _hands.GetComponent<Weapon>();
-        inHands = null!;
-        _hands = null!;
-        weapon.DiscardOwner(_moveInput.x != 0 || rb.velocity.y != 0);
+        if (_itemInHandsObj == null) return;
+        
+        _itemInHandsObj.TryGetComponent<Item>(out var item);
+        if (item is null) return;
+        
+        handsAction = null!;
+        _itemInHandsObj = null!;
+        _weaponInHands = null!;
+        item.DiscardOwner(_moveInput.x != 0 || rb.velocity.y != 0);
     }
 
     private void OnDrawGizmosSelected()
@@ -157,11 +196,9 @@ public class Player_Movement: MonoBehaviour
     
     public void Use()
     {
-        if (_overlapPicking != null)
-        {
-            var menu = _overlapPicking.GetComponent<ContextMenu>();
-            menu.OnUse();
-        }
+        if (_overlapPicking == null) return;
+        var menu = _overlapPicking.GetComponent<ContextMenu>();
+        menu.OnUse();
     }
 
     public void OnTriggerEnter2D(Collider2D other)

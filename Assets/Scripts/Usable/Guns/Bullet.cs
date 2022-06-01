@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -9,6 +7,8 @@ public class Bullet : MonoBehaviour
     
     private Rigidbody2D _rb;
     private Transform _transform;
+    [SerializeField] private ParticleSystem impact;
+    private int _ground;
 
     [NonSerialized] public Vector2 direction;
     [NonSerialized] public float lifetime;
@@ -16,26 +16,34 @@ public class Bullet : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _transform = GetComponent<Transform>();
-        
-        _rb.velocity = direction * speed ;
+
+        _ground = LayerMask.NameToLayer("Ground");
         _transform.rotation = Quaternion.Euler(direction);
     }
 
     private void Update()
     {
+        _rb.velocity = direction * speed;
         if (lifetime < 0) Destroy(gameObject);
         lifetime -= Time.deltaTime;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            var target = other.gameObject;
+        var target = other.gameObject;
+        
+        if (target.CompareTag("Player"))
             GameManager.Players.SetIGS(target, GameManager.PlayerIGS.Dead);
-            Debug.Log($"{target.name} is dead!");
+
+        if (target.CompareTag("Bullet_Collide_Block"))
+        {
+            direction = new Vector2(direction.x * -1, direction.y);
+            return;
         }
         
+        if (target.layer == _ground)
+            impact.Play();
+        
         Destroy(gameObject);
-    }
+    }   
 }
