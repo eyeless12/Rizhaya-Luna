@@ -3,23 +3,36 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using Usable.ContextMenu;
 
 public class ContextMenu : MonoBehaviour, IUsable
 {
     private Animator _animator;
     private Player_Movement _player;
-    [SerializeField] private GameObject canvas;
+    private GameObject canvas;
     private Canvas objCanvas;
+    [SerializeField] private UsableType _type;
     private static readonly int Inside = Animator.StringToHash("inside");
 
-    private void Start()
+    private void Awake()
     {
-        objCanvas = canvas.GetComponent<Canvas>();
         _animator = GetComponent<Animator>();
+
+        if (_type is UsableType.Grm)
+            canvas = GameObject.Find("SettingsCanvas");
+
+        if (_type is UsableType.Listic)
+        {
+            canvas = GameObject.Find("Ctrl_canvas");
+            canvas.GetComponent<Canvas>().worldCamera = Camera.current;
+        }
+
+        objCanvas = canvas.GetComponent<Canvas>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             objCanvas.enabled = false;

@@ -4,6 +4,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -122,18 +123,19 @@ public class GameManager : MonoBehaviour
     private List<GameObject> _gunsOnSceneLoad;
     private bool _newConnected;
     private MultipleTargetCamera _multipleTargetCamera;
-    [SerializeField] private GameObject popUpMenuAllReady;
+    private GameObject popUpMenuAllReady;
 
     public static Shake CameraShake;
-    public static bool InProgress { get; private set; }
+    public static bool InProgress { get; set; }
     public static bool GameStarted;
+
+    [SerializeField] private GameObject readyMenu;
     
     void Start()
     {
         DontDestroyOnLoad(gameObject);
         InProgress = false;
         _newConnected = false;
-        
         _playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerInputManager>();
         _indicatorManager = GetComponent<IndicatorManager>();
         _menuEventManager = GameObject.Find("EventSystem");
@@ -150,16 +152,18 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(ForceSpawnDeadPlayers());
         }
+        
         if (InProgress == false && Players.Count > 0 && Players.IsAllReady)
         {
             _indicatorManager.DisableAll();
             StartCoroutine(_levelManager.LoadRandomLevel());
             InProgress = true;
-            popUpMenuAllReady.SetActive(true);
+            Instantiate(readyMenu, Vector3.zero, Quaternion.identity);
         }
 
         if (_newConnected)
         {
+            Debug.Log("HERE");
             Players.UpdatePlayers();
             _multipleTargetCamera.players = new List<Transform>(Players.players.Select(pi => pi.Instance.GetComponent<Transform>())); 
             _newConnected = false;
@@ -176,13 +180,14 @@ public class GameManager : MonoBehaviour
         foreach (var candidate in Players.Dead)
         {
             Players.GetPlayerByInstance(candidate).IGS_State = PlayerIGS.Alive;
-            _levelManager.SpawnPlayer(candidate, SpawnMode.ForceSpawn); 
+            LevelManager.SpawnPlayer(candidate, SpawnMode.ForceSpawn); 
             Debug.Log($"{candidate.name} force spawned");
         }
     }
 
     public void OnJoin()
     {
+        Debug.Log("jopa");
         _newConnected = true;
     }
 }

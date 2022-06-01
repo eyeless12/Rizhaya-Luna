@@ -62,6 +62,11 @@ public class Settings : MonoBehaviour
             (Screen.resolutions[currResolutionIndex].width, Screen.resolutions[currResolutionIndex].height, true); //Изменения разрешения
     }
 
+    public void Exit()
+    {
+        Application.Quit(0);
+    }
+
     public void AddResolutions()
     {
         resolutionDropdown.ClearOptions();
