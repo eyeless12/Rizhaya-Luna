@@ -21,7 +21,7 @@ public class LevelManager : MonoBehaviour
 
     private bool LevelFinished => GameManager.Players.AliveCount <= 1 && GameManager.Players.Count > 1;
     private static float _timeToNextLevel = 3f;
-    [HideInInspector] public static bool Loaded;
+    public static bool Loaded;
     public static bool Ended;
     public static bool EveryoneSpawned;
     
