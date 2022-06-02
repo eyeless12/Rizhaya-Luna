@@ -55,6 +55,8 @@ public class Player_Movement: MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
+        if (IsDead) return;
+        
         if (isGrounded && context.performed)
         {
             _isJumping = true;
@@ -79,6 +81,9 @@ public class Player_Movement: MonoBehaviour
 
     private void HandleRun()
     {
+        if (IsDead)
+            return;
+        
         var velocity = rb.velocity;
         var velocityX = velocity.x / 2;
         
@@ -202,7 +207,7 @@ public class Player_Movement: MonoBehaviour
     
     public void Use()
     {
-        if (_overlapPicking == null) return;
+        if (_overlapPicking == null || IsDead) return;
         var menu = _overlapPicking.GetComponent<ContextMenu>();
         menu.OnUse();
     }

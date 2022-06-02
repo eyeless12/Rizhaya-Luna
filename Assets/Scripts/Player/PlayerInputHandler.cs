@@ -33,7 +33,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        if (_playerMovement && !_playerMovement.IsDead)
+        if (_playerMovement)
         {
             _playerMovement.Move(context.ReadValue<Vector2>());
         }
@@ -48,7 +48,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (_playerMovement && !_playerMovement.IsDead)
+        if (_playerMovement)
             _playerMovement.Jump(context);
     }
 
@@ -74,7 +74,7 @@ public class PlayerInputHandler : MonoBehaviour
     
     public void Use(InputAction.CallbackContext context)
     {
-        if (_playerMovement && !_playerMovement.IsDead)
+        if (_playerMovement)
         {
             _playerMovement.Shoot(context);
             _playerMovement.Use();

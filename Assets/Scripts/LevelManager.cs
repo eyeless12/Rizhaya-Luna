@@ -20,6 +20,7 @@ public class LevelManager : MonoBehaviour
     private bool LevelFinished => GameManager.Players.AliveCount <= 1 && GameManager.Players.Count > 1;
     private static float _timeToNextLevel = 3f;
     [HideInInspector] public static bool Loaded;
+    public static bool Ended;
     
     private static List<GameObject> _spawnPoints;
     private static IndicatorManager _indicatorManager;
@@ -44,12 +45,19 @@ public class LevelManager : MonoBehaviour
             StartCoroutine(GameManager.Players.UpdateScores());
             GameManager.PassedRound += 1;
 
-            StartCoroutine(GameManager.PassedRound % 10 == 0
+            StartCoroutine(GameManager.PassedRound % GameManager.IntermissionFreq == 0
                 ? LoadLevelWithDelay("Intermission", _timeToNextLevel)
                 : LoadRandomLevel());
             
             Loaded = false;
         }
+
+        if (GameManager.Endgame && Ended)
+        {
+            StartCoroutine(EndGame());
+            Ended = false;
+        }
+              
         
         if (_spawnPoints.Count == 0)
             _spawnPoints = new List<GameObject>(SpawnPointsOnScene);
@@ -96,12 +104,28 @@ public class LevelManager : MonoBehaviour
 
             if (levelName == "Menu")
             {
+                GameManager.InProgress = false;
                 _indicatorManager.Attach(Indicators.Unready, player.Instance);
                 _indicatorManager.Enable(player.Instance);
+                Debug.Log("In menu loading");
             }
         }
 
         Loaded = true;
+    }
+    
+    private IEnumerator EndGame()
+    {
+        yield return new WaitForSeconds(7f);
+        GameManager.InProgress = false;
+        foreach (var player in GameManager.Players.players)
+        {
+            player.CurrentScore = 0;
+            player.BoardScore = 0;
+        }
+
+        yield return new WaitForEndOfFrame();
+        StartCoroutine(LoadLevel("Menu"));
     }
 
     public static void SpawnPlayer(GameObject player, SpawnMode mode)

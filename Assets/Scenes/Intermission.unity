@@ -402,6 +402,7 @@ MonoBehaviour:
   - {fileID: 480266065}
   - {fileID: 649178357}
   - {fileID: 151113288}
+  crown: {fileID: 6370035173531376459, guid: 838f9d7eb0145f1429e6cc5fe8be304c, type: 3}
 --- !u!1 &400647223
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,6 +580,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pollPrefab: {fileID: 0}
   points: []
+  crown: {fileID: 0}
 --- !u!114 &511584885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1354,7 +1356,7 @@ GameObject:
   - component: {fileID: 2020348296}
   - component: {fileID: 2020348295}
   - component: {fileID: 2020348294}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Edges
   m_TagString: Untagged
   m_Icon: {fileID: 0}
