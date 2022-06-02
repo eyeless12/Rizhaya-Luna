@@ -231,7 +231,7 @@ MonoBehaviour:
   SpreadWidth: 0
   BulletThresholdTime: 0.1
   horizontalRecoil: 50
-  verticalRecoil: 25
+  verticalRecoil: 40
   bulletLifetime: 0.35
   maxCapacity: 12
   canBeHold: 0
