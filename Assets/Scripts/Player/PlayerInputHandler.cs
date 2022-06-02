@@ -29,8 +29,6 @@ public class PlayerInputHandler : MonoBehaviour
         GameManager.GameStarted = true;
         LevelManager.SpawnPlayer(_player, SpawnMode.Default);
         _playerMovement = _player.GetComponent<Player_Movement>();
-        
-        Debug.Log(_playerMovement.IsDead);
     }
 
     public void Move(InputAction.CallbackContext context)

@@ -24,11 +24,17 @@ public class LevelManager : MonoBehaviour
     private static List<GameObject> _spawnPoints;
     private static IndicatorManager _indicatorManager;
     private static List<GameObject> SpawnPointsOnScene => GameObject.FindGameObjectsWithTag("Spawnpoint").ToList();
-    
+
+    [SerializeField] private List<AudioSource> _music;
+    private AudioSource playingNow;
+
+    private AudioSource RandomMusic() => _music[Random.Range(0, _music.Count)];
+
     private void Start()
     {
         _spawnPoints = GameObject.FindGameObjectsWithTag("Spawnpoint").ToList();
         _indicatorManager = GetComponent<IndicatorManager>();
+        playingNow = RandomMusic();
     }
 
     private void LateUpdate()
@@ -47,6 +53,19 @@ public class LevelManager : MonoBehaviour
         
         if (_spawnPoints.Count == 0)
             _spawnPoints = new List<GameObject>(SpawnPointsOnScene);
+        var currentScene = SceneManager.GetActiveScene().name;
+
+        if (!playingNow.isPlaying && currentScene != "Menu"
+                                  && currentScene != "Start")
+        {
+            playingNow = RandomMusic();
+            playingNow.Play();
+        }
+
+        if (playingNow.isPlaying && currentScene == "Menu")
+        {
+            playingNow.Stop();
+        }
     }
 
     public IEnumerator LoadRandomLevel()

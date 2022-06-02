@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -57,13 +58,19 @@ public class Settings : MonoBehaviour
     
     public void SaveSettings()
     {
-        audioMixer.SetFloat("MasterVolume", volume);
+        if (!canvas.enabled)
+            return;
+        
+        audioMixer.SetFloat("Volume", volume);
         Screen.SetResolution
             (Screen.resolutions[currResolutionIndex].width, Screen.resolutions[currResolutionIndex].height, true); //Изменения разрешения
     }
 
     public void Exit()
     {
+        if (!canvas.enabled)
+            return;
+        
         Application.Quit(0);
     }
 
