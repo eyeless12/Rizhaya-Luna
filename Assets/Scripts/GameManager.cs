@@ -136,6 +136,7 @@ public class GameManager : MonoBehaviour
     public const int IntermissionFreq = 10;
 
     public static bool Endgame => Players.players.Any(player => player.BoardScore >= MaxRounds);
+    public static bool CanPlayersMove => !InProgress || (LevelManager.EveryoneSpawned && InProgress);
 
     [SerializeField] private GameObject readyMenu;
     
