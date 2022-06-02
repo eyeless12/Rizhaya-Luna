@@ -92,12 +92,14 @@ public class Scores : MonoBehaviour
         }
 
         _winner = GameManager.Players.players.OrderByDescending(pl => pl.BoardScore).FirstOrDefault(pi => pi.BoardScore >= GameManager.MaxRounds)?.Instance;
+        Debug.Log(_winner);
+        
         yield return new WaitForSeconds(1f);
+        LevelManager.Ended = true;
 
         if (!GameManager.Endgame)
         {
             StartCoroutine(_levelManager.LoadRandomLevel());
-            LevelManager.Ended = true;
         }
     }
 }

@@ -3,22 +3,21 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private float speed = 40f;
+    [SerializeField] protected float speed = 40f;
     
-    private Rigidbody2D _rb;
-    private Transform _transform;
+    protected Rigidbody2D _rb;
+    protected Transform _transform;
     [SerializeField] private ParticleSystem impact;
-    private int _ground;
+    protected int _ground;
 
     [NonSerialized] public Vector2 direction;
     [NonSerialized] public float lifetime;
-    void Start()
+    protected virtual void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _transform = GetComponent<Transform>();
 
         _ground = LayerMask.NameToLayer("Ground");
-        _transform.rotation = Quaternion.Euler(direction);
     }
 
     private void Update()
@@ -28,7 +27,7 @@ public class Bullet : MonoBehaviour
         lifetime -= Time.deltaTime;
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    protected virtual void OnCollisionEnter2D(Collision2D other)
     {
         var target = other.gameObject;
         
