@@ -57,7 +57,7 @@ public class Item : MonoBehaviour, IItem
     {
         var velocity = Owner.GetComponent<Rigidbody2D>().velocity;
         var ownerTransform = Owner.GetComponent<Transform>();
-        Debug.Log(ownerTransform.rotation.y);
+        //Debug.Log(ownerTransform.rotation.y);
         var throwVector = new Vector2(30 * velocity.x, 20 * Math.Abs(velocity.x));
         
         _itemPhysics.AddTorque(-5f * Math.Sign(OwnerLookDirection.x), ForceMode2D.Impulse);
@@ -66,7 +66,7 @@ public class Item : MonoBehaviour, IItem
     
     public virtual void Use()
     {
-        Debug.Log($"USED {gameObject.name}");
+        //Debug.Log($"USED {gameObject.name}");
     }
 
     public void Delete()

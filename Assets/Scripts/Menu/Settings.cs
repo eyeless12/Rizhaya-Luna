@@ -48,7 +48,7 @@ public class Settings : MonoBehaviour
 
     public void ChangeVolume(float val)
     {
-        volume = val;
+        volume = val / 2;
     }
 
     public void ChangeResolution(int index)
@@ -60,7 +60,9 @@ public class Settings : MonoBehaviour
     {
         if (!canvas.enabled)
             return;
-        
+
+        if (Math.Abs(volume - (-40)) < 1e-3)
+            volume = -80f;
         audioMixer.SetFloat("Volume", volume);
         Screen.SetResolution
             (Screen.resolutions[currResolutionIndex].width, Screen.resolutions[currResolutionIndex].height, true); //Изменения разрешения

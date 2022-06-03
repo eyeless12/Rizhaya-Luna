@@ -70,6 +70,7 @@ public class LevelManager : MonoBehaviour
         if (!playingNow.isPlaying && currentScene != "Menu"
                                   && currentScene != "Start")
         {
+            playingNow.Stop();
             playingNow = RandomMusic();
             playingNow.Play();
         }

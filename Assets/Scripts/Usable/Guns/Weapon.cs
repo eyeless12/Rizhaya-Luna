@@ -29,6 +29,6 @@ public class Weapon : Item
     public override void Use()
     {
         _weaponAction.Shoot();
-        Debug.Log("Shoot!");
+        //Debug.Log("Shoot!");
     }
 }
