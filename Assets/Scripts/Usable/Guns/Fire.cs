@@ -34,7 +34,10 @@ public class Fire : MonoBehaviour
             _weaponCharacteristics.accuracy,
             _weaponCharacteristics.OwnerLookDirection))
         {
-            var bullet = Instantiate(pf_bullet, initialBulletPoint.position, initialBulletPoint.rotation)
+            var bullet = Instantiate(
+                    pf_bullet, 
+                    initialBulletPoint.position, 
+                    Quaternion.Euler(1, 1, direction.x > 0 ? 0 : 180))
                 .GetComponent<Bullet>();
             bullet.direction = direction;
             bullet.lifetime = _weaponCharacteristics.bulletLifetime;

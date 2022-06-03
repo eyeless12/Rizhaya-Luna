@@ -75,14 +75,13 @@ public class Scores : MonoBehaviour
     {
         foreach (var player in GameManager.Players.players)
         {
-            // Vector2 position = new Vector2(player.Instance.GetComponent<Transform>().position.x, 4.5f);
-            // var poll = Instantiate(pollPrefab, position, Quaternion.identity);
-            // poll.GetComponent<SpriteRenderer>().material = player.Instance.GetComponent<SpriteRenderer>().material;
-            // var tf = poll.GetComponent<Transform>();
             var position = new Vector2(_polls[player.ID].transform.position.x, 4.5f);
             var poll = Instantiate(pollPrefab, position, Quaternion.identity);
             var tf = poll.GetComponent<Transform>();
 
+            if (player.CurrentScore > 10)
+                Camera.main.orthographicSize = 10;
+            
             yield return new WaitForSeconds(1f);
             
             tf.localScale = new Vector3(tf.localScale.x, player.CurrentScore);
@@ -92,12 +91,13 @@ public class Scores : MonoBehaviour
         }
 
         _winner = GameManager.Players.players.OrderByDescending(pl => pl.BoardScore).FirstOrDefault(pi => pi.BoardScore >= GameManager.MaxRounds)?.Instance;
+
         yield return new WaitForSeconds(1f);
+        LevelManager.Ended = true;
 
         if (!GameManager.Endgame)
         {
             StartCoroutine(_levelManager.LoadRandomLevel());
-            LevelManager.Ended = true;
         }
     }
 }

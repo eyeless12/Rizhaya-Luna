@@ -1,5 +1,4 @@
 #nullable enable
-using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -55,7 +54,7 @@ public class Player_Movement: MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (IsDead) return;
+        if (IsDead || !GameManager.CanPlayersMove) return;
         
         if (isGrounded && context.performed)
         {
@@ -81,7 +80,7 @@ public class Player_Movement: MonoBehaviour
 
     private void HandleRun()
     {
-        if (IsDead)
+        if (IsDead || !GameManager.CanPlayersMove)
             return;
         
         var velocity = rb.velocity;
@@ -159,6 +158,8 @@ public class Player_Movement: MonoBehaviour
 
     public void Pickup_Drop()
     {
+        if (!GameManager.CanPlayersMove) return;
+        
         var inRange = Physics2D.OverlapCircle(transform.position, pickupRange, LayerMask.GetMask("Items", "Props"));
         switch ((bool) _itemInHandsObj)
         {

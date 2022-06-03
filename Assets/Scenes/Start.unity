@@ -4692,6 +4692,7 @@ MonoBehaviour:
   levels:
   - level_17
   gameManager: {fileID: 1986562319}
+  levelAnnouncement: {fileID: 6210054820837676238, guid: 31503681b1bb8f94ea2dcde2bf7c3582, type: 3}
   _music:
   - {fileID: 1769585709}
   - {fileID: 1230784036}

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7476398141246324293}
-  - component: {fileID: 7635010861053034}
+  - component: {fileID: 526616927744616123}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 7741846280929128142}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7635010861053034
+--- !u!212 &526616927744616123
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,13 +72,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 854997025
   m_SortingLayer: 4
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 1798946080, guid: 7b2be5ec375616f40b60181d1e1cd047, type: 3}
+  m_SortingOrder: 10
+  m_Sprite: {fileID: -1764782564, guid: 7b2be5ec375616f40b60181d1e1cd047, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 0.34375}
+  m_Size: {x: 2, y: 0.5833333}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -108,7 +108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8553413815784113393}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.724, y: 0.083, z: 0}
+  m_LocalPosition: {x: 0.86, y: 0.045, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -125,12 +125,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7741846280929128142}
   - component: {fileID: 5212990463681894787}
-  - component: {fileID: 7030331837654514766}
-  - component: {fileID: -5315391368911426316}
-  - component: {fileID: 2440821904332524607}
-  - component: {fileID: 2812456820613842505}
+  - component: {fileID: 265012030130289924}
+  - component: {fileID: 5398204701159717033}
+  - component: {fileID: 7132498764929522518}
+  - component: {fileID: 6185414304751591795}
   m_Layer: 12
-  m_Name: Kalash
+  m_Name: Rocket Launcher
   m_TagString: Weapon
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -165,9 +165,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449a9246cf1f8d344b24d767895e74e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pf_bullet: {fileID: 3981763920355673881, guid: a752a8ef1fc4ea04f95940a3e875a666, type: 3}
+  pf_bullet: {fileID: 6776757348452822102, guid: 7366b0142d0fd544081e5bfa0eef351a, type: 3}
   initialBulletPoint: {fileID: 7641700992129395022}
---- !u!114 &7030331837654514766
+--- !u!114 &265012030130289924
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,14 +182,14 @@ MonoBehaviour:
   handsOffset: {x: 0, y: 0, z: 0}
   Spread: 1
   SpreadWidth: 0
-  BulletThresholdTime: 0.2
-  horizontalRecoil: 75
-  verticalRecoil: 100
-  bulletLifetime: 0.25
-  maxCapacity: 30
-  canBeHold: 1
-  accuracy: 0.226
---- !u!61 &-5315391368911426316
+  BulletThresholdTime: 1
+  horizontalRecoil: 0
+  verticalRecoil: 0
+  bulletLifetime: 10
+  maxCapacity: 3
+  canBeHold: 0
+  accuracy: 1
+--- !u!61 &5398204701159717033
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,11 +198,11 @@ BoxCollider2D:
   m_GameObject: {fileID: 8983518630064104557}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 4abf41e5e4b276b4ca3da446bea0da96, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.024414979, y: -0.0011388361}
+  m_Offset: {x: -0.02058053, y: 0.0226385}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -213,9 +213,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.42816693, y: 0.2368452}
+  m_Size: {x: 1.3704481, y: 0.36200595}
   m_EdgeRadius: 0
---- !u!50 &2440821904332524607
+--- !u!50 &7132498764929522518
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -227,7 +227,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 13
   m_LinearDrag: 0
   m_AngularDrag: 1
   m_GravityScale: 5
@@ -236,7 +236,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!82 &2812456820613842505
+--- !u!82 &6185414304751591795
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,7 +246,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -6671094213821941564, guid: 0ab6c49514bd541bdb603ddbb95ccb84, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 6c40dff51a9ef194082c7b39029a0f7f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 40004218b4a4ace44aa97aa924627bd9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
