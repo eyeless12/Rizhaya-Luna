@@ -30,9 +30,12 @@ public class Bullet : MonoBehaviour
     protected virtual void OnCollisionEnter2D(Collision2D other)
     {
         var target = other.gameObject;
-        
+
         if (target.CompareTag("Player"))
+        {
             GameManager.Players.SetIGS(target, GameManager.PlayerIGS.Dead);
+        }
+            
 
         if (target.CompareTag("Bullet_Collide_Block"))
         {
