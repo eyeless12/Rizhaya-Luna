@@ -42,10 +42,13 @@ public class Bullet : MonoBehaviour
             direction = new Vector2(direction.x * -1, direction.y);
             return;
         }
-        
+
         if (target.layer == _ground)
-            impact.Play();
-        
+        {
+            Instantiate(impact, transform.position, Quaternion.Euler(1, 1, direction.x > 0 ? 180 : 0));
+            Debug.Log("Impact");
+        }
+
         Destroy(gameObject);
     }   
 }

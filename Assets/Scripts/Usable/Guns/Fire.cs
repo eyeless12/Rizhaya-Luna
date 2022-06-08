@@ -5,6 +5,7 @@ public class Fire : MonoBehaviour
 {
     [SerializeField] private GameObject pf_bullet;
     [SerializeField] private Transform initialBulletPoint;
+    [SerializeField] private GameObject bulletCasing;
     private Weapon _weaponCharacteristics;
     private Transform _gun;
     private AudioSource _audio;
@@ -39,6 +40,8 @@ public class Fire : MonoBehaviour
                     initialBulletPoint.position, 
                     Quaternion.Euler(1, 1, direction.x > 0 ? 0 : 180))
                 .GetComponent<Bullet>();
+            if (bulletCasing)
+                Instantiate(bulletCasing, transform.position, Quaternion.Euler(1, 1, direction.x > 0 ? 90 : 0));
             bullet.direction = direction;
             bullet.lifetime = _weaponCharacteristics.bulletLifetime;
         }

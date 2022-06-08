@@ -167,6 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pf_bullet: {fileID: 3981763920355673881, guid: a752a8ef1fc4ea04f95940a3e875a666, type: 3}
   initialBulletPoint: {fileID: 7641700992129395022}
+  bulletCasing: {fileID: 7035142008552808824, guid: d79716c5b0e776b4e850bb2650b3e22d, type: 3}
 --- !u!61 &6355292756489391978
 BoxCollider2D:
   m_ObjectHideFlags: 0
