@@ -1558,8 +1558,8 @@ TextureImporter:
         serializedVersion: 2
         x: 96
         y: 0
-        width: 42
-        height: 11
+        width: 16
+        height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1648,7 +1648,7 @@ TextureImporter:
       guns_19: -1762086007
       guns_66: -500234559
       guns_17: -1828460501
-      guns_3: -1360042507
+      guns_16: -814108033
       guns_5: 564651260
       guns_68: -1976297146
       guns_4: 2137874930
@@ -1697,7 +1697,7 @@ TextureImporter:
       guns_9: 1262260577
       guns_37: 795893492
       guns_63: -1471589301
-      guns_16: -814108033
+      guns_3: -1360042507
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
