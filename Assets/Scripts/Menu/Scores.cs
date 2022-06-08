@@ -62,6 +62,7 @@ public class Scores : MonoBehaviour
             Vector2 position = new Vector2(player.Instance.GetComponent<Transform>().position.x, 4.5f);
             var poll = Instantiate(pollPrefab, position, Quaternion.identity);
             poll.GetComponent<SpriteRenderer>().material = player.Instance.GetComponent<SpriteRenderer>().material;
+            poll.GetComponent<SpriteRenderer>().sortingOrder = 10;
             var tf = poll.GetComponent<Transform>();
 
             tf.localScale = new Vector3(tf.localScale.x, player.BoardScore);
@@ -77,6 +78,7 @@ public class Scores : MonoBehaviour
         {
             var position = new Vector2(_polls[player.ID].transform.position.x, 4.5f);
             var poll = Instantiate(pollPrefab, position, Quaternion.identity);
+            poll.GetComponent<SpriteRenderer>().sortingOrder = 8;
             var tf = poll.GetComponent<Transform>();
 
             if (player.CurrentScore > 10)

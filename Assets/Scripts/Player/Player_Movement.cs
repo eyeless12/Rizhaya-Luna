@@ -97,7 +97,10 @@ public class Player_Movement: MonoBehaviour
     {
         _animationsController.SetDeadStatus(IsDead);
         if (IsDead)
+        {
             rb.velocity = new Vector2(0f, rb.velocity.y);
+        }
+            
     }
 
     public void PerformDeadPhysics(float value)
