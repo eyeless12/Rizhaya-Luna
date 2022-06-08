@@ -14,9 +14,9 @@ public class Explode : MonoBehaviour
     protected Transform _tf;
     protected bool _exploded;
     protected Collider2D _collider;
-    private Throwable _throwableCharacteristics;
+    protected Throwable _throwableCharacteristics;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _tf = GetComponent<Transform>();
         _collider = GetComponent<Collider2D>();
@@ -45,6 +45,8 @@ public class Explode : MonoBehaviour
         PerformSound();
         Destroy(gameObject);
     }
+
+    public virtual void Activate() => Debug.Log("Not Implemented");
 
     protected void PerformSound()
     {

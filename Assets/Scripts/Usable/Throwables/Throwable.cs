@@ -30,7 +30,11 @@ public class Throwable : Item
         base.Update();
         if (!_activated) return;
         
-        _animator.SetTrigger(Activated);
+        if (_animator)
+            _animator.SetTrigger(Activated);
+        
+        _throwableAction.Activate();
+        
         _time += Time.deltaTime;
         if (_time < timeToAction) return;
         

@@ -9,10 +9,9 @@ public class BananaExplode : Explode
 
     private LayerMask _ground;
 
-    private void Awake()
+    protected override void Awake()
     {
-        _tf = GetComponent<Transform>();
-        _collider = GetComponent<Collider2D>();
+        base.Awake();
         _ground = LayerMask.NameToLayer("Ground");
     }
     
@@ -43,6 +42,11 @@ public class BananaExplode : Explode
         }
         
         Destroy(gameObject);
+    }
+
+    public override void Activate()
+    {
+        Debug.Log("Not Implemented");
     }
 
     public void OnCollisionEnter2D(Collision2D other)
